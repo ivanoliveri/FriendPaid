@@ -20,7 +20,7 @@ namespace Domain
 
         #region Methods
 
-        public void createPurchaseNotifications(List<Member> debtors, Purchase purchase)
+        public void createPurchaseNotifications(Purchase purchase)
         {
     
         }

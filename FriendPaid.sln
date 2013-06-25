@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.MongoDB", "Domain.Mo
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Web", "Web\Web.vbproj", "{5EBD4A54-1D2E-44F8-BF05-4A44323CA919}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{6B3C0E28-2935-4408-8149-79E6DE6CBE30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{5EBD4A54-1D2E-44F8-BF05-4A44323CA919}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5EBD4A54-1D2E-44F8-BF05-4A44323CA919}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5EBD4A54-1D2E-44F8-BF05-4A44323CA919}.Release|x86.ActiveCfg = Release|Any CPU
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Debug|x86.ActiveCfg = Debug|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Debug|x86.Build.0 = Debug|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Release|Any CPU.ActiveCfg = Release|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Release|Mixed Platforms.Build.0 = Release|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Release|x86.ActiveCfg = Release|x86
+		{6B3C0E28-2935-4408-8149-79E6DE6CBE30}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

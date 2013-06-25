@@ -19,7 +19,7 @@ namespace Domain
 
 	    public Member debtor { set; get; }
 
-	    public Member collectorName { set; get; }
+	    public Member collector { set; get; }
 
         public PaymentStatus status { set; get; }
 

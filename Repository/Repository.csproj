@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1E99DE3B-0532-4DAF-8664-E2D1A29BC521}</ProjectGuid>
+    <ProjectGuid>{6B3C0E28-2935-4408-8149-79E6DE6CBE30}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain.MongoDB</RootNamespace>
-    <AssemblyName>Domain.MongoDB</AssemblyName>
+    <RootNamespace>Repository</RootNamespace>
+    <AssemblyName>Repository</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,18 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Facebook\FacebookContact.cs" />
-    <Compile Include="MongoGroup.cs" />
-    <Compile Include="MongoMember.cs" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoRepository">
+      <HintPath>..\packages\MongoRepository.1.5.0\lib\MongoRepository.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{4DEBC548-6F26-4C57-8F46-A32FA1263740}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
+    <None Include="app.config" />
+    <None Include="Documentation.chm" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

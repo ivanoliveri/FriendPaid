@@ -30,18 +30,18 @@ namespace Test
         }
 
         [Test]
-        public void test_one_member_creates_a_group()
+        public void test_one_member_creates_one_group()
         {
 
-            var memberOne = new Member(){name = "Irene",lastName = "Smith"};
+            var administrator = new Member() { name = "Irene", lastName = "Smith" };
 
-            var newGroup =memberOne.createGroup("GroupOne");
+            var newGroup = administrator.createGroup("GroupOne");
 
-            Assert.AreEqual(1,memberOne.groups.Count);
+            Assert.AreEqual(1, administrator.groups.Count);
 
-            Assert.AreEqual("GroupOne",memberOne.groups.ElementAt(0).name);
+            Assert.AreEqual("GroupOne", administrator.groups.ElementAt(0).name);
 
-            Assert.AreEqual("Irene",newGroup.administrator.name);
+            Assert.AreEqual("Irene", newGroup.administrator.name);
 
             Assert.AreEqual("Smith", newGroup.administrator.lastName);
 
@@ -51,21 +51,21 @@ namespace Test
         public void test_one_member_creates_two_groups()
         {
 
-            var memberOne = new Member() { name = "Irene", lastName = "Smith" };
+            var administrator = new Member() { name = "Irene", lastName = "Smith" };
 
-            var newGroupOne = memberOne.createGroup("GroupOne");
+            var newGroupOne = administrator.createGroup("GroupOne");
 
-            var newGroupTwo = memberOne.createGroup("GroupTwo");
+            var newGroupTwo = administrator.createGroup("GroupTwo");
 
-            Assert.AreEqual(2, memberOne.groups.Count);
+            Assert.AreEqual(2, administrator.groups.Count);
 
-            Assert.AreEqual("GroupOne", memberOne.groups.ElementAt(0).name);
+            Assert.AreEqual("GroupOne", administrator.groups.ElementAt(0).name);
 
             Assert.AreEqual("Irene", newGroupOne.administrator.name);
 
             Assert.AreEqual("Smith", newGroupOne.administrator.lastName);
 
-            Assert.AreEqual("GroupTwo", memberOne.groups.ElementAt(1).name);
+            Assert.AreEqual("GroupTwo", administrator.groups.ElementAt(1).name);
 
             Assert.AreEqual("Irene", newGroupTwo.administrator.name);
 
@@ -77,19 +77,19 @@ namespace Test
         public void test_one_member_joins_a_group()
         {
 
-            var memberOne = new Member();
+            var administrator = new Member();
 
-            var memberTwo = new Member(){name="Walter",lastName = "Placona"};
+            var memberOne = new Member() { name = "Walter", lastName = "Placona" };
 
-            var newGroup = memberOne.createGroup("GroupOne");
+            var newGroup = administrator.createGroup("GroupOne");
 
-            memberTwo.joinGroup(newGroup);
+            memberOne.joinGroup(newGroup);
 
-            Assert.AreEqual(1,memberTwo.groups.Count);
+            Assert.AreEqual(1, memberOne.groups.Count);
 
-            Assert.AreEqual("GroupOne",memberTwo.groups.ElementAt(0).name);
+            Assert.AreEqual("GroupOne", memberOne.groups.ElementAt(0).name);
 
-            Assert.AreEqual(1,newGroup.members.Count);
+            Assert.AreEqual(1, newGroup.members.Count);
 
         }
 
@@ -97,23 +97,23 @@ namespace Test
         public void test_one_member_joins_two_groups()
         {
 
-            var memberOne = new Member();
+            var administrator = new Member();
 
-            var memberTwo = new Member() { name = "Walter", lastName = "Placona" };
+            var memberOne = new Member() { name = "Walter", lastName = "Placona" };
 
-            var newGroupOne = memberOne.createGroup("GroupOne");
+            var newGroupOne = administrator.createGroup("GroupOne");
 
-            var newGroupTwo = memberOne.createGroup("GroupTwo");
+            var newGroupTwo = administrator.createGroup("GroupTwo");
 
-            memberTwo.joinGroup(newGroupOne);
+            memberOne.joinGroup(newGroupOne);
 
-            memberTwo.joinGroup(newGroupTwo);
+            memberOne.joinGroup(newGroupTwo);
 
-            Assert.AreEqual(2, memberTwo.groups.Count);
+            Assert.AreEqual(2, memberOne.groups.Count);
 
-            Assert.AreEqual("GroupOne", memberTwo.groups.ElementAt(0).name);
+            Assert.AreEqual("GroupOne", memberOne.groups.ElementAt(0).name);
 
-            Assert.AreEqual("GroupTwo", memberTwo.groups.ElementAt(0).name);
+            Assert.AreEqual("GroupTwo", memberOne.groups.ElementAt(0).name);
 
             Assert.AreEqual(1, newGroupOne.members.Count);
 
@@ -122,15 +122,15 @@ namespace Test
         }
 
         [Test]
-        [ExpectedException(typeof (AlreadyJoinedException))]
+        [ExpectedException(typeof(AlreadyJoinedException))]
         public void test_one_member_tries_to_join_twice_one_group()
         {
 
+            var administrator = new Member();
+
             var memberOne = new Member();
 
-            var memberTwo = new Member();
-
-            var newGroup = memberTwo.createGroup("GroupOne");
+            var newGroup = administrator.createGroup("GroupOne");
 
             memberOne.joinGroup(newGroup);
 
@@ -143,11 +143,11 @@ namespace Test
         public void test_one_administrator_tries_to_join_group()
         {
 
-            var memberOne = new Member();
+            var administrator = new Member();
 
-            var newGroup = memberOne.createGroup("GroupOne");
+            var newGroup = administrator.createGroup("GroupOne");
 
-            memberOne.joinGroup(newGroup);
+            administrator.joinGroup(newGroup);
 
         }
 
@@ -155,19 +155,19 @@ namespace Test
         public void test_one_member_leaves_group()
         {
 
+            var administrator = new Member();
+
             var memberOne = new Member();
 
-            var memberTwo = new Member();
+            var newGroup = administrator.createGroup("GroupOne");
 
-            var newGroup = memberOne.createGroup("GroupOne");
+            memberOne.joinGroup(newGroup);
 
-            memberTwo.joinGroup(newGroup);
+            memberOne.leaveGroup(newGroup);
 
-            memberTwo.leaveGroup(newGroup);
+            Assert.AreEqual(0, memberOne.groups.Count);
 
-            Assert.AreEqual(0,memberTwo.groups.Count);
-
-            Assert.AreEqual(0,newGroup.members.Count);
+            Assert.AreEqual(0, newGroup.members.Count);
 
         }
 
@@ -176,13 +176,13 @@ namespace Test
         public void test_one_unjoined_member_tries_to_leave_group()
         {
 
+            var administrator = new Member();
+
             var memberOne = new Member();
 
-            var memberTwo = new Member();
+            var newGroup = administrator.createGroup("GroupOne");
 
-            var newGroup = memberOne.createGroup("GroupOne");
-
-            memberTwo.leaveGroup(newGroup);
+            memberOne.leaveGroup(newGroup);
 
         }
 
@@ -190,38 +190,38 @@ namespace Test
         public void test_one_member_register_purchase()
         {
 
+            var administrator = new Member();
+
             var memberOne = new Member();
 
             var memberTwo = new Member();
 
-            var memberThree = new Member();
+            var newGroup = administrator.createGroup("GroupOne");
 
-            var newGroup = memberOne.createGroup("GroupOne");
+            memberOne.joinGroup(newGroup);
 
             memberTwo.joinGroup(newGroup);
 
-            memberThree.joinGroup(newGroup);
-
             var newPurchase = new Purchase()
             {
-                buyer = memberOne,
+                buyer = administrator,
                 debtors = newGroup.members,
                 description = "Pelota",
                 group = newGroup,
                 totalAmount = 120f
             };
 
-            memberOne.registerPurchase(newPurchase);
+            administrator.registerPurchase(newPurchase);
+
+            Assert.AreEqual(40f, memberOne.payments.ElementAt(0).amount);
 
             Assert.AreEqual(40f, memberTwo.payments.ElementAt(0).amount);
 
-            Assert.AreEqual(40f, memberThree.payments.ElementAt(0).amount);
+            Assert.AreEqual(PaymentStatus.Paid, administrator.payments.ElementAt(0).status);
 
-            Assert.AreEqual(PaymentStatus.Paid, memberOne.payments.ElementAt(0).status);
+            Assert.AreEqual(PaymentStatus.Unpaid, memberOne.payments.ElementAt(0).status);
 
             Assert.AreEqual(PaymentStatus.Unpaid, memberTwo.payments.ElementAt(0).status);
-
-            Assert.AreEqual(PaymentStatus.Unpaid, memberThree.payments.ElementAt(0).status);
 
         }
 
