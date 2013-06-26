@@ -29,11 +29,11 @@ namespace Domain
 
         public void registerPayment()
         {
-        
+            throw new NotImplementedException();
         }
 	    public void createPurchaseNotification(Purchase purchase,Member debtor)
 	    {
-	    
+            throw new NotImplementedException();
 	    }
 
         #endregion

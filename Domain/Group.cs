@@ -22,12 +22,12 @@ namespace Domain
 
         public void createPurchaseNotifications(Purchase purchase)
         {
-    
+            throw new NotImplementedException();
         }
 
         public void createPaymentNotification(Payment payment)
         {
-
+            throw new NotImplementedException();
         }
 
         #endregion

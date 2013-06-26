@@ -40,42 +40,42 @@ namespace Domain
 
         public float getOwedAmount()
         {
-            
+            throw new NotImplementedException();
         }
 
         public void invite(Member member)
         {
-            
+            throw new NotImplementedException();
         }
 
         public bool hasDebts()
         {
-            
+            throw new NotImplementedException();
         }
 
         public void joinGroup(Group group)
         {
-            
+            throw new NotImplementedException();
         }
 
         public Group createGroup(string name)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void leaveGroup(Group group)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void registerPurchase(Purchase purchase)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void registerDebtPayment(Payment payment,Group group)
         {
-
+            throw new NotImplementedException();
         }
 
         #endregion

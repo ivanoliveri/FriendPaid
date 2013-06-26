@@ -26,7 +26,7 @@ namespace Domain
 
         public float calculateAmountPerMember()
         {
-            
+            throw new NotImplementedException();
         }
 
         #endregion
