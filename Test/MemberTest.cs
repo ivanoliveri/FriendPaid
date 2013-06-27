@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Domain;
 using Domain.Exceptions;
 using Domain.Utils;
@@ -207,7 +204,7 @@ namespace Test
                 buyer = administrator,
                 debtors = newGroup.members,
                 description = "Pelota",
-                group = newGroup,
+                @group = newGroup,
                 totalAmount = 120f
             };
 

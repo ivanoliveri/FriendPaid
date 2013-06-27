@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Domain;
 using Domain.Utils;
 using NUnit.Framework;
@@ -50,7 +47,7 @@ namespace Test
 
             memberTwo.joinGroup(newGroup);
 
-            var newPurchase = new Purchase() { buyer = administrator, debtors = newGroup.members, description = "Glass", totalAmount = 30f, group = newGroup };
+            var newPurchase = new Purchase() { buyer = administrator, debtors = newGroup.members, description = "Glass", totalAmount = 30f, @group = newGroup };
 
             newGroup.createPurchaseNotifications(newPurchase);
 
