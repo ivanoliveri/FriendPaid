@@ -21,7 +21,7 @@ namespace Test
 
             memberOne.joinGroup(newGroup);
 
-            var newPayment = new Payment() { amount = 120f, collector = administrator, debtor = memberOne };
+            var newPayment = new Payment() { amount = 120f, buyer = administrator, debtor = memberOne };
 
             newGroup.createPaymentNotification(newPayment);
 

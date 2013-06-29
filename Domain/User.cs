@@ -93,12 +93,22 @@ namespace Domain
 
         public void leaveGroup(Group group)
         {
-            throw new NotImplementedException();
+            if (group.administrator.Equals(this))
+                throw new AdministratorCantLeaveGroupException();
+
+            this.groups.Remove(group);
+
+            group.members.Remove(this);
+
         }
 
         public void registerPurchase(Purchase purchase)
         {
-            throw new NotImplementedException();
+
+            purchase.group.createPurchaseNotifications(purchase);
+
+            
+
         }
 
         public void registerDebtPayment(Payment payment,Group group)

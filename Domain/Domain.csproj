@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\AlreadyJoinedException.cs" />
+    <Compile Include="Exceptions\AdministratorCantLeaveGroupException.cs" />
     <Compile Include="Exceptions\NotJoinedException.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="User.cs" />

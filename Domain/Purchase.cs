@@ -24,7 +24,7 @@ namespace Domain
 
         public float calculateAmountPerMember()
         {
-            throw new NotImplementedException();
+            return totalAmount/(debtors.Count + 1);
         }
 
         #endregion

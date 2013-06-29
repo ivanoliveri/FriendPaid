@@ -111,7 +111,7 @@ namespace Test
 
             Assert.AreEqual("GroupOne", memberOne.groups.ElementAt(0).name);
 
-            Assert.AreEqual("GroupTwo", memberOne.groups.ElementAt(0).name);
+            Assert.AreEqual("GroupTwo", memberOne.groups.ElementAt(1).name);
 
             Assert.AreEqual(1, newGroupOne.members.Count);
 
@@ -205,7 +205,7 @@ namespace Test
                 buyer = administrator,
                 debtors = newGroup.members,
                 description = "Pelota",
-                @group = newGroup,
+                group = newGroup,
                 totalAmount = 120f
             };
 

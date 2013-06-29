@@ -16,7 +16,7 @@ namespace Domain
 
 	    public User debtor { set; get; }
 
-	    public User collector { set; get; }
+	    public User buyer { set; get; }
 
         public PaymentStatus status { set; get; }
 
