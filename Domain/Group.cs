@@ -10,13 +10,18 @@ namespace Domain
 
         public string name { set; get; }
 
-        public Member administrator { set; get; }
+        public User administrator { set; get; }
 
-        public List<Member> members { set; get; }
+        public List<User> members { set; get; }
 
         #endregion
 
         #region Methods
+
+        public Group()
+        {
+            members = new List<User>();
+        }
 
         public void createPurchaseNotifications(Purchase purchase)
         {

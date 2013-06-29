@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Facebook\FacebookContact.cs" />
     <Compile Include="MongoGroup.cs" />
-    <Compile Include="MongoMember.cs" />
+    <Compile Include="MongoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

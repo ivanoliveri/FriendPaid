@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Exceptions;
 using Domain.Notifications;
 using Domain.Requests;
 using Domain.Utils;
 
 namespace Domain
 {
-    public class Member
+    public class User
     {
 
         #region Attributes
 
         public string username { set; get; }
 
-        public List<Member> contacts { set; get; }
+        public string name { set; get; }
+
+        public string lastName { set; get; }
+
+        public List<User> contacts { set; get; }
 
         public List<Notification> notifications { set; get; }
 
@@ -29,9 +34,9 @@ namespace Domain
 
         #region Methods
        
-        public Member()
+        public User()
         {
-            contacts = new List<Member>();
+            contacts = new List<User>();
 
             notifications = new List<Notification>();
 
@@ -57,7 +62,7 @@ namespace Domain
             return total;
         }
 
-        public void invite(Member member)
+        public void invite(User user)
         {
             throw new NotImplementedException();
         }
@@ -69,12 +74,17 @@ namespace Domain
 
         public void joinGroup(Group group)
         {
-            throw new NotImplementedException();
+            if (this.groups.Contains(group))
+                throw new AlreadyJoinedException();
+
+            group.members.Add(this);
+
+            this.groups.Add(group);
         }
 
         public Group createGroup(string groupName)
         {
-            var newGroup = new Group() { administrator = this, members = null, name = groupName };
+            var newGroup = new Group() { administrator = this, name = groupName };
             
             this.groups.Add(newGroup);
 

@@ -14,7 +14,8 @@ namespace Test
         public void test_new_member_calculate_owed_amounts()
         {
 
-            Assert.AreEqual(0f, new Member().getOwedAmount());
+            Assert.AreEqual(0f, new User().getOwedAmount());
+            var newUser = new User();
 
         }
 
@@ -22,7 +23,7 @@ namespace Test
         public void test_if_new_member_has_debts()
         {
 
-            Assert.IsFalse(new Member().hasDebts());
+            Assert.IsFalse(new User().hasDebts());
 
         }
 
@@ -30,7 +31,7 @@ namespace Test
         public void test_one_member_creates_one_group()
         {
 
-            var administrator = new Member() { name = "Irene", lastName = "Smith" };
+            var administrator = new User() { name = "Irene", lastName = "Smith" };
 
             var newGroup = administrator.createGroup("GroupOne");
 
@@ -48,7 +49,7 @@ namespace Test
         public void test_one_member_creates_two_groups()
         {
 
-            var administrator = new Member() { name = "Irene", lastName = "Smith" };
+            var administrator = new User() { name = "Irene", lastName = "Smith" };
 
             var newGroupOne = administrator.createGroup("GroupOne");
 
@@ -74,9 +75,9 @@ namespace Test
         public void test_one_member_joins_a_group()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member() { name = "Walter", lastName = "Placona" };
+            var memberOne = new User() { name = "Walter", lastName = "Placona" };
 
             var newGroup = administrator.createGroup("GroupOne");
 
@@ -94,9 +95,9 @@ namespace Test
         public void test_one_member_joins_two_groups()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member() { name = "Walter", lastName = "Placona" };
+            var memberOne = new User() { name = "Walter", lastName = "Placona" };
 
             var newGroupOne = administrator.createGroup("GroupOne");
 
@@ -123,9 +124,9 @@ namespace Test
         public void test_one_member_tries_to_join_twice_one_group()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member();
+            var memberOne = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
 
@@ -140,7 +141,7 @@ namespace Test
         public void test_one_administrator_tries_to_join_group()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
 
@@ -152,9 +153,9 @@ namespace Test
         public void test_one_member_leaves_group()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member();
+            var memberOne = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
 
@@ -173,9 +174,9 @@ namespace Test
         public void test_one_unjoined_member_tries_to_leave_group()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member();
+            var memberOne = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
 
@@ -187,11 +188,11 @@ namespace Test
         public void test_one_member_register_purchase()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member();
+            var memberOne = new User();
 
-            var memberTwo = new Member();
+            var memberTwo = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
 
