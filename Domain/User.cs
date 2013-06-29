@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Domain.Notifications;
 using Domain.Requests;
+using Domain.Utils;
 
 namespace Domain
 {
@@ -11,14 +12,6 @@ namespace Domain
         #region Attributes
 
         public string username { set; get; }
-
-        public string password { set; get; }
-
-        public string name { set; get; }
-
-        public string lastName { set; get; }
-
-        public string email { set; get; }
 
         public List<Member> contacts { set; get; }
 
@@ -35,10 +28,33 @@ namespace Domain
         #endregion
 
         #region Methods
+       
+        public Member()
+        {
+            contacts = new List<Member>();
+
+            notifications = new List<Notification>();
+
+            contactRequests = new List<ContactRequest>();
+
+            groups = new List<Group>();
+
+            payments = new List<Payment>();
+
+            purchases = new List<Purchase>();
+        }
 
         public float getOwedAmount()
         {
-            throw new NotImplementedException();
+            float total=0f;
+
+            foreach(var payment in payments)
+            {
+                if (payment.status.Equals(PaymentStatus.Unpaid))
+                    total += payment.amount;
+            }
+
+            return total;
         }
 
         public void invite(Member member)
@@ -48,7 +64,7 @@ namespace Domain
 
         public bool hasDebts()
         {
-            throw new NotImplementedException();
+            return this.getOwedAmount() > 0f;
         }
 
         public void joinGroup(Group group)
@@ -56,9 +72,13 @@ namespace Domain
             throw new NotImplementedException();
         }
 
-        public Group createGroup(string name)
+        public Group createGroup(string groupName)
         {
-            throw new NotImplementedException();
+            var newGroup = new Group() { administrator = this, members = null, name = groupName };
+            
+            this.groups.Add(newGroup);
+
+            return newGroup;
         }
 
         public void leaveGroup(Group group)

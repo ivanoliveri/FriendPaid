@@ -13,9 +13,9 @@ namespace Test
         public void test_create_payment_notifications()
         {
 
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member();
+            var memberOne = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
 
@@ -35,11 +35,11 @@ namespace Test
         [Test]
         public void test_create_purchase_notifications()
         {
-            var administrator = new Member();
+            var administrator = new User();
 
-            var memberOne = new Member();
+            var memberOne = new User();
 
-            var memberTwo = new Member();
+            var memberTwo = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
 

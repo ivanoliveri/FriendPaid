@@ -8,7 +8,7 @@ namespace Domain
 
         #region Attributes
 
-        public Member buyer { set; get; }
+        public User buyer { set; get; }
 
         public float totalAmount { set; get; }
 
@@ -16,7 +16,7 @@ namespace Domain
 
         public Group group { set; get; }
 
-        public List<Member> debtors { set; get; }
+        public List<User> debtors { set; get; }
 
         #endregion
 

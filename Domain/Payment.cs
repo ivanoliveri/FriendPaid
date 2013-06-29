@@ -14,9 +14,9 @@ namespace Domain
 
 	    public Group group { set; get; }
 
-	    public Member debtor { set; get; }
+	    public User debtor { set; get; }
 
-	    public Member collector { set; get; }
+	    public User collector { set; get; }
 
         public PaymentStatus status { set; get; }
 
@@ -28,7 +28,7 @@ namespace Domain
         {
             throw new NotImplementedException();
         }
-	    public void createPurchaseNotification(Purchase purchase,Member debtor)
+	    public void createPurchaseNotification(Purchase purchase,User debtor)
 	    {
             throw new NotImplementedException();
 	    }

@@ -11,9 +11,9 @@ namespace Domain.Requests
 
         public string message { set; get; }
 
-        public Member sender { get; set; }
+        public User sender { get; set; }
 
-        public Member receiver { get; set; }
+        public User receiver { get; set; }
 
         #endregion
 

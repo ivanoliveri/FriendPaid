@@ -5,7 +5,7 @@ using Domain.Requests;
 
 namespace Domain.MongoDB
 {
-    public class MongoMember
+    public class MongoUser
     {
 
         #region Attributes
