@@ -8,6 +8,8 @@ namespace Domain
     public class Group
     {
 
+
+        //Cometnario
         #region Attributes
 
         public string name { set; get; }
