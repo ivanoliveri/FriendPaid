@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Domain.Notifications;
 using Domain.Utils;
 
@@ -8,8 +9,6 @@ namespace Domain
     public class Group
     {
 
-
-        //Cometnario
         #region Attributes
 
         public string name { set; get; }
@@ -44,7 +43,14 @@ namespace Domain
 
         public void createPaymentsAfterPurchase(Purchase purchase)
         {
-            foreach(var member in members)
+
+            var debtorsAndBuyer = new List<User>();
+
+            purchase.debtors.ForEach(user=> debtorsAndBuyer.Add(user));
+           
+            debtorsAndBuyer.Add(purchase.buyer);
+
+            foreach (var member in debtorsAndBuyer)
             {
                 var newPayment = new Payment()
                                      {
@@ -57,7 +63,11 @@ namespace Domain
                                      };
 
                 member.payments.Add(newPayment);
+
             }
+
+            debtorsAndBuyer.Find(member => member.Equals(purchase.buyer)).payments.ElementAt(0).status= PaymentStatus.Paid;
+       
         }
 
         #endregion

@@ -96,6 +96,9 @@ namespace Domain
             if (group.administrator.Equals(this))
                 throw new AdministratorCantLeaveGroupException();
 
+            if (!group.members.Contains(this))
+                throw new NotJoinedException();
+
             this.groups.Remove(group);
 
             group.members.Remove(this);
@@ -107,7 +110,7 @@ namespace Domain
 
             purchase.group.createPurchaseNotifications(purchase);
 
-            
+            purchase.group.createPaymentsAfterPurchase(purchase);
 
         }
 
