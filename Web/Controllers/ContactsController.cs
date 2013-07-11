@@ -9,8 +9,6 @@ namespace Web.Controllers
 {
     public class ContactsController : Controller
     {
-        //
-        // GET: /Contacts/
 
         public ActionResult Index(string username)
         {
