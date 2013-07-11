@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Domain.Exceptions;
+using Domain.Facebook;
 using Domain.Notifications;
 using Domain.Requests;
 using Domain.Utils;
@@ -28,6 +29,8 @@ namespace Domain
 
         public List<ContactRequest> contactRequests { set; get; }
 
+        public List<FacebookContact> facebookContacts { set; get; }
+
         public List<Group> groups { set; get; }
 
         public List<Payment> payments { set; get; }
@@ -51,6 +54,8 @@ namespace Domain
             payments = new List<Payment>();
 
             purchases = new List<Purchase>();
+
+            facebookContacts = new List<FacebookContact>();
         }
 
         public float getOwedAmount()

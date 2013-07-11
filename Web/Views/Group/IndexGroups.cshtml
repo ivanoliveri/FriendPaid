@@ -1,17 +1,17 @@
-﻿@using friendpaid_web.Models
-@model friendpaid_web.ViewModels.GruposViewModel
+﻿@using Domain
+@model Web.ViewModels.GroupsViewModel
 
 <div id="gruposContainer">
     <div class="page-header" style="padding-top: 100px">
         <h1>Grupos</h1>
     </div>
-    @foreach (Grupo grupo in Model.grupos)
+    @foreach (Group @group in Model.groups)
     {
 
         <div id="grupoContainer" class="portlet span3">
-            <div class="portlet-header">@grupo.nombre</div>
+            <div class="portlet-header">@group.name</div>
             <div class="portlet-content">
-                Administrador: @grupo.nombreDeAdministrador
+                Administrador: @group.administrator.username
                 <div class="btn-group">
                     <button class="btn span1">Ver</button>
                     <button class="btn span2">Abandonar</button>

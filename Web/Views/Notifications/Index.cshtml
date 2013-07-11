@@ -1,7 +1,7 @@
-﻿@using friendpaid_web.Models
-@using friendpaid_web.Models.Notificaciones
-@using friendpaid_web.Models.Solicitudes
-@model friendpaid_web.ViewModels.NotificacionesViewModel
+﻿@using Domain
+@using Domain.Notifications
+@using Domain.Requests
+@model Web.ViewModels.NotificationsViewModel
 
 <div class="page-header" style="padding-top: 100px">
     <h1>Inicio</h1>
@@ -11,10 +11,10 @@
         <h3>SolicitudesDeContacto</h3>
         <div>
             <ul>
-                @foreach (SolicitudDeContacto solicitudDeContacto in Model.solicitudesDeContactoPendientes)
+                @foreach (ContactRequest @contactRequest in Model.pendingContactRequest)
                 {
-                    <li id="@solicitudDeContacto.nombreDeUsuarioEmisor">
-                        @solicitudDeContacto.mensaje 
+                    <li id="@contactRequest.sender.username">
+                        @contactRequest.message 
                         <div class="btn-group">
                             <button id="AceptarSolicitudContacto" class="btn btn-success">Aceptar</button>
                             <button id="RechazarSolicitudDeContacto" class="btn btn-danger">Cancelar</button>
@@ -26,10 +26,10 @@
         <h3>PagosPendientes</h3>
         <div>
             <ul>
-                @foreach (Pago @pago in @Model.pagosPendientes)
+                @foreach (Payment @payment in @Model.unpaidPayments)
                 {
                     <li>
-                        <span>@pago.descripcion</span>
+                        <span>@payment.description</span>
                         <div class="btn-group">
                             <button id="PagarPagoPendiente" class="btn btn-success">Pagar</button>
                         </div>
@@ -40,10 +40,10 @@
         <h3>PagosRealizados</h3>
         <div>
             <ul>
-                @foreach (Pago @pago in @Model.pagosRealizados)
+                @foreach (Payment @payment in @Model.paidPayments)
                 {
                         <li>
-                            @pago.descripcion
+                            @payment.description
                         </li>
                 }
             </ul>
@@ -51,12 +51,12 @@
     </div>
     <div class="span7">
         
-        @foreach (Notificacion @notificacion in @Model.notificacionesSinLeer)
+        @foreach (Notification @notification in @Model.unreadNotifications)
         {
             <div class="alert alert-block alert-error fade in">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4>@notificacion.fecha</h4>
-                <p>@notificacion.mensaje</p>
+                <h4>@notification.date</h4>
+                <p>@notification.message</p>
             </div>
         }
     </div>
@@ -72,16 +72,13 @@
             });
         });
         $("#AceptarSolicitudContacto").click(function () {
-            $.post("/Home/ConfirmarSolicitudDeContacto/", { unNombreDeReceptor: '@Model.nombreDeUsuario', unNombreDeEmisor: $(this).parent().parent().attr('id').toString() });
-            $(this).parent().parent().fadeOut(2000);
+             $(this).parent().parent().fadeOut(2000);
         });
         $("#RechazarSolicitudDeContacto").click(function () {
-            $.post("/Home/RechazarSolicitudDeContacto/", { unNombreDeReceptor: '@Model.nombreDeUsuario', unNombreDeEmisor: $(this).parent().parent().attr('id').toString() });
-            $(this).parent().parent().fadeOut(2000);
+              $(this).parent().parent().fadeOut(2000);
         });
         $("#PagarPagoPendiente").click(function () {
-            $.post("/Home/RegistrarPagoDePagoPendiente/", { unNombreDeMiembroDeudor: '@Model.nombreDeUsuario', unaDescripcion: $(this).parent().parent().find('span').text() });
-            $(this).parent().parent().fadeOut(2000);
+             $(this).parent().parent().fadeOut(2000);
         });
     });
 

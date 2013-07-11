@@ -1,15 +1,15 @@
 ﻿@using FluentValidation.Results
-@model friendpaid_web.ViewModels.RegistrarCompraViewModel
+@model Web.ViewModels.PurchaseViewModel
 
 
 <div class="page-header" style="padding-top: 100px">
     <h1>RegistrarCompra</h1>
 </div>
 
-@if(@Model.errores!=null)
+@if(@Model.errors!=null)
 {
     <div class="alert alert-block alert-error fade in">
-    @foreach (ValidationFailure @error in @Model.errores)
+    @foreach (ValidationFailure @error in @Model.errors)
     {
         <p>@error.ErrorMessage</p>
     }
@@ -18,25 +18,25 @@
 
 <div class="row-fluid metro">
     <div class="span2 offset5">
-        @using (Html.BeginForm("RegistrarCompra", "Home", FormMethod.Post))
+        @using (Html.BeginForm("Create", "Purchase", FormMethod.Post))
         {
-            @Html.HiddenFor(model => model.nombreDeComprador)
+            @Html.HiddenFor(model => model.username)
             <div class="control-group">
                 <label class="control-label">Descripcion</label>
                 <div class="controls">
-                    @Html.EditorFor(model => model.descripcion)
+                    @Html.EditorFor(model => model.description)
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Monto</label>
                 <div class="controls">
-                    @Html.EditorFor(model => model.montoTotal)
+                    @Html.EditorFor(model => model.totalAmount)
                 </div>    
             </div>
             <div class="control-group">
                 <label class="control-label">NombreDeGrupo</label>
                 <div class="controls">
-                    @Html.TextBoxFor(model => model.nombreDeGrupo, new { @id = "nombreDeGrupoContainer",@autocomplete ="off" })
+                    @Html.TextBoxFor(model => model.groupName, new { @id = "nombreDeGrupoContainer",@autocomplete ="off" })
                 </div>
             </div>
             <button class="btn" type="submit">RegistrarCompra</button>

@@ -7,22 +7,18 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
-    public class GroupController : Controller
+    public class PurchaseController : Controller
     {
-
-        public ActionResult IndexGroups()
+        
+        public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult IndexCreateGroup()
-        {
-            return View();
-        }
-
-        public ActionResult Create(CreateGroupViewModel viewModel)
+        public ActionResult Create(PurchaseViewModel viewModel)
         {
             throw new NotImplementedException();
         }
+
     }
 }
