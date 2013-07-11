@@ -37,7 +37,7 @@
                     <a href="@Url.Action("Index", "Notifications", new { username = @Model.username }, null)">      
                         <div id="inicioContainer" class="top-info-block" style="padding-right: 15px">
                             <b class="icon-home" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6>Inicio</h6>
+                            <h6 style="text-align:center">Inicio</h6>
                         </div>
                     </a>
                     <a href="@Url.Action("Index", "Purchase", new { username = @Model.username }, null)">      
@@ -49,23 +49,23 @@
                     <a href="@Url.Action("IndexCreateGroup", "Group", new { username = @Model.username }, null)">       
                         <div id="crearGrupoContainer" class="top-info-block" style="padding-right: 15px">
                             <b class="icon-user-add" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6>CrearGrupo</h6>
+                            <h6 style="text-align:center">CrearGrupo</h6>
                         </div>
                     </a>
                     <a href="@Url.Action("IndexGroups", "Group", new { username = @Model.username }, null)">       
                         <div id="verGruposContainer" class="top-info-block" style="padding-right: 15px">
                             <b class="icon-users" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6>Grupos</h6>
+                            <h6 style="text-align:center">Grupos</h6>
                         </div>    
                     </a>
                     <a href="@Url.Action("Index", "Contacts", new { username = @Model.username }, null)">       
                         <div id="verContactosContainer" class="top-info-block" style="padding-right: 15px">
                             <b class="icon-book" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6>Contactos</h6>
+                            <h6 style="text-align:center">Contactos</h6>
                         </div>
                     </a>  
                 </div>
-                <div class="pull-right" style="padding-top: 7px">
+                <div class="span4" style="padding-top: 7px; float:right">
                     <div class="top-info-block" style="padding-top: 6px">
                         <input class="search-input" type="text" id="buscadorDeGrupos" placeholder="BuscarGrupos" autocomplete="off" style="direction: ltr; text-align: left;-webkit-border-radius: 15px"> 
                     </div>
@@ -75,9 +75,9 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <b class="icon-cog-3"></b>
                             </a>
-       
                         </div>
-                    </div>                        
+
+                    </div>            
                     <div class="top-info-block">
                         <hr class="separator"/>
                     </div>

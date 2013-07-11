@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="page-header" style="padding-top: 100px">
+<div class="page-header" style="padding-top: 20px">
     <h1>RegistrarCompra</h1>
 </div>
 
@@ -27,19 +27,19 @@
             <div class="control-group">
                 <label class="control-label">Descripcion</label>
                 <div class="controls">
-                    @Html.EditorFor(model => model.description)
+                    @Html.TextBoxFor(model => model.description, new { @placeholder = "Descripcion", @autocomplete = "off" })
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Monto</label>
                 <div class="controls">
-                    @Html.EditorFor(model => model.totalAmount)
+                    @Html.TextBoxFor(model => model.totalAmount)
                 </div>    
             </div>
             <div class="control-group">
                 <label class="control-label">NombreDeGrupo</label>
                 <div class="controls">
-                    @Html.TextBoxFor(model => model.groupName, new { @id = "nombreDeGrupoContainer",@autocomplete ="off" })
+                    @Html.TextBoxFor(model => model.groupName, new { @id = "nombreDeGrupoContainer",@autocomplete ="off", @placeholder="Nombre de Grupo" })
                 </div>
             </div>
             <button class="btn" type="submit">RegistrarCompra</button>
