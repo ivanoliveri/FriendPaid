@@ -38,7 +38,9 @@ namespace Domain
 
         public void createPaymentNotification(Payment payment)
         {
-            throw new NotImplementedException();
+            var buyer = payment.buyer;
+            var newPaymentNotification = new PaymentNotification(payment);
+            buyer.notifications.Add(newPaymentNotification);
         }
 
         public void createPaymentsAfterPurchase(Purchase purchase)
