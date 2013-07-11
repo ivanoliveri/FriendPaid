@@ -14,6 +14,10 @@ namespace Domain
 
         public string username { set; get; }
 
+        public string password { set; get; }
+
+        public string email { set; get; }
+
         public string name { set; get; }
 
         public string lastName { set; get; }
