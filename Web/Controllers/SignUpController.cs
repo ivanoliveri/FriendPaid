@@ -41,9 +41,7 @@ namespace Web.Controllers
                 loginViewModel.errors = validationResult.Errors;
             }
 
-            ModelState.Clear();
-
-            return RedirectToAction("IndexWithError", "LogIn", new { viewModel = loginViewModel });
+            return View("~/Views/Login/Index.cshtml", loginViewModel);
         }
     }
 }
