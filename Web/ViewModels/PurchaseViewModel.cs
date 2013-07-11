@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using FluentValidation.Results;
-using friendpaid_web.ViewModels;
 
 namespace Web.ViewModels
 {
@@ -20,5 +19,10 @@ namespace Web.ViewModels
         public string groupName { get; set; }
 
         public List<string> groups { get; set; }
+
+        public PurchaseViewModel()
+        {
+            groups = new List<string>();
+        }
     }
 }

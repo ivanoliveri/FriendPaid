@@ -7,7 +7,7 @@ using System.Web.Routing;
 using Domain;
 using FluentValidation.Results;
 using Web.Validators;
-using friendpaid_web.ViewModels;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {

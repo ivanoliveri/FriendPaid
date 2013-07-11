@@ -3,6 +3,10 @@
 @using Domain.Requests
 @model Web.ViewModels.NotificationsViewModel
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <div class="page-header" style="padding-top: 100px">
     <h1>Inicio</h1>
 </div>
@@ -61,25 +65,3 @@
         }
     </div>
 </div>
-
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(function () {
-            $("#accordion").accordion({
-                collapsible: true
-            });
-        });
-        $("#AceptarSolicitudContacto").click(function () {
-             $(this).parent().parent().fadeOut(2000);
-        });
-        $("#RechazarSolicitudDeContacto").click(function () {
-              $(this).parent().parent().fadeOut(2000);
-        });
-        $("#PagarPagoPendiente").click(function () {
-             $(this).parent().parent().fadeOut(2000);
-        });
-    });
-
-</script>

@@ -5,7 +5,6 @@ using System.Web;
 using Domain;
 using Domain.Requests;
 using FluentValidation.Results;
-using friendpaid_web.ViewModels;
 using Domain.Notifications;
 
 namespace Web.ViewModels
@@ -23,6 +22,14 @@ namespace Web.ViewModels
         public IEnumerable<Payment> unpaidPayments { get; set; }
 
         public IEnumerable<Payment> paidPayments { get; set; }
+
+        public NotificationsViewModel()
+        {
+            unreadNotifications = new List<Notification>();
+            pendingContactRequest= new List<ContactRequest>();
+            unpaidPayments = new List<Payment>();
+            paidPayments = new List<Payment>();
+        }
 
     }
 }

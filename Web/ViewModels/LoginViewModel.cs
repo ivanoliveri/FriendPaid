@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using FluentValidation.Results;
 
-namespace friendpaid_web.ViewModels
+namespace Web.ViewModels
 {
     public class LoginViewModel:BaseViewModel
     {

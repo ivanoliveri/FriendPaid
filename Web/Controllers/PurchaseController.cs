@@ -9,8 +9,8 @@ namespace Web.Controllers
 {
     public class PurchaseController : Controller
     {
-        
-        public ActionResult Index()
+
+        public ActionResult Index(string username)
         {
             return View();
         }

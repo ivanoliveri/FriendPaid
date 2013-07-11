@@ -10,12 +10,12 @@ namespace Web.Controllers
     public class GroupController : Controller
     {
 
-        public ActionResult IndexGroups()
+        public ActionResult IndexGroups(string username)
         {
             return View();
         }
 
-        public ActionResult IndexCreateGroup()
+        public ActionResult IndexCreateGroup(string username)
         {
             return View();
         }

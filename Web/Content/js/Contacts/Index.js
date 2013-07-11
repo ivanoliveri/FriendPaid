@@ -1,0 +1,4 @@
+﻿
+    $("#sortable").sortable();
+    
+    $("#sortable").disableSelection();

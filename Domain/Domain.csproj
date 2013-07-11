@@ -43,6 +43,7 @@
     <Compile Include="Exceptions\AlreadyJoinedException.cs" />
     <Compile Include="Exceptions\AdministratorCantLeaveGroupException.cs" />
     <Compile Include="Exceptions\NotJoinedException.cs" />
+    <Compile Include="Facebook\FacebookContact.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Notifications\Notification.cs" />

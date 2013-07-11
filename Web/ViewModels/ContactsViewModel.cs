@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using Domain.Facebook;
 using FluentValidation.Results;
-using friendpaid_web.ViewModels;
 
 namespace Web.ViewModels
 {
@@ -18,5 +17,10 @@ namespace Web.ViewModels
 
         public List<string> contacts { get; set; }
 
+        public ContactsViewModel()
+        {
+            contacts = new List<string>();
+            facebookContacts = new List<FacebookContact>();
+        }
     }
 }

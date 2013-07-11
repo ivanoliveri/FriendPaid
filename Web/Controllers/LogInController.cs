@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Facebook;
 using Newtonsoft.Json.Linq;
-using friendpaid_web.ViewModels;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -105,7 +105,7 @@ namespace Web.Controllers
 //                MiembroRepositorio.Instance.agregar(miembro);
   //          }
 
-            return RedirectToAction("Index", "Notifications", new { unNombreDeMiembro = me.username });
+            return RedirectToAction("Index", "Notifications", new { username = me.username });
         }
 
         public ActionResult Index()
@@ -113,9 +113,9 @@ namespace Web.Controllers
             return View(new LoginViewModel());
         }
         
-        public ActionResult SignIn()
+        public ActionResult SignIn(LoginViewModel viewModel)
         {
-            throw new NotImplementedException();
+            return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
         }
 
 
