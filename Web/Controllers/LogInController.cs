@@ -112,12 +112,7 @@ namespace Web.Controllers
         {
             return View(new LoginViewModel());
         }
-
-        public ActionResult IndexWithError(LoginViewModel viewModel)
-        {
-            return View("Index",viewModel);
-        }
-
+        
         public ActionResult SignIn()
         {
             throw new NotImplementedException();

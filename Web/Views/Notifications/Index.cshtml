@@ -1,0 +1,88 @@
+﻿@using friendpaid_web.Models
+@using friendpaid_web.Models.Notificaciones
+@using friendpaid_web.Models.Solicitudes
+@model friendpaid_web.ViewModels.NotificacionesViewModel
+
+<div class="page-header" style="padding-top: 100px">
+    <h1>Inicio</h1>
+</div>
+<div class="span12">
+    <div class="span3" id="accordion">
+        <h3>SolicitudesDeContacto</h3>
+        <div>
+            <ul>
+                @foreach (SolicitudDeContacto solicitudDeContacto in Model.solicitudesDeContactoPendientes)
+                {
+                    <li id="@solicitudDeContacto.nombreDeUsuarioEmisor">
+                        @solicitudDeContacto.mensaje 
+                        <div class="btn-group">
+                            <button id="AceptarSolicitudContacto" class="btn btn-success">Aceptar</button>
+                            <button id="RechazarSolicitudDeContacto" class="btn btn-danger">Cancelar</button>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <h3>PagosPendientes</h3>
+        <div>
+            <ul>
+                @foreach (Pago @pago in @Model.pagosPendientes)
+                {
+                    <li>
+                        <span>@pago.descripcion</span>
+                        <div class="btn-group">
+                            <button id="PagarPagoPendiente" class="btn btn-success">Pagar</button>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <h3>PagosRealizados</h3>
+        <div>
+            <ul>
+                @foreach (Pago @pago in @Model.pagosRealizados)
+                {
+                        <li>
+                            @pago.descripcion
+                        </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="span7">
+        
+        @foreach (Notificacion @notificacion in @Model.notificacionesSinLeer)
+        {
+            <div class="alert alert-block alert-error fade in">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>@notificacion.fecha</h4>
+                <p>@notificacion.mensaje</p>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $("#accordion").accordion({
+                collapsible: true
+            });
+        });
+        $("#AceptarSolicitudContacto").click(function () {
+            $.post("/Home/ConfirmarSolicitudDeContacto/", { unNombreDeReceptor: '@Model.nombreDeUsuario', unNombreDeEmisor: $(this).parent().parent().attr('id').toString() });
+            $(this).parent().parent().fadeOut(2000);
+        });
+        $("#RechazarSolicitudDeContacto").click(function () {
+            $.post("/Home/RechazarSolicitudDeContacto/", { unNombreDeReceptor: '@Model.nombreDeUsuario', unNombreDeEmisor: $(this).parent().parent().attr('id').toString() });
+            $(this).parent().parent().fadeOut(2000);
+        });
+        $("#PagarPagoPendiente").click(function () {
+            $.post("/Home/RegistrarPagoDePagoPendiente/", { unNombreDeMiembroDeudor: '@Model.nombreDeUsuario', unaDescripcion: $(this).parent().parent().find('span').text() });
+            $(this).parent().parent().fadeOut(2000);
+        });
+    });
+
+</script>

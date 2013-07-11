@@ -1,0 +1,28 @@
+﻿@using FluentValidation.Results
+@model friendpaid_web.ViewModels.CrearGrupoViewModel
+
+
+<div class="page-header" style="padding-top: 100px">
+    <h1>CrearGrupo</h1>
+</div>
+@if(@Model.errors!=null)
+{
+    <div class="alert alert-block alert-error fade in">
+    @foreach (ValidationFailure @error in @Model.errors)
+    {
+        <p>@error.ErrorMessage</p>
+    }
+    </div>
+}
+<div class="row-fluid metro">
+    <div class="span2 offset5">
+        @using (Html.BeginForm("Create", "Group", FormMethod.Post))
+        {     
+            @Html.HiddenFor(model => model.nombreDeUsuario)           
+            @Html.HiddenFor(model => model.nombreDeAdministrador)
+            <label class="control-label">NombreDeGrupo</label>
+            @Html.TextBoxFor(model => model.nombreDeGrupo, new { @placeholder = "NombreDeGrupo" })
+            <button class="btn" type="submit">CrearGrupo</button>
+        }  
+    </div>
+</div>

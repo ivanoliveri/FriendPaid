@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4B26D2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B3A53BAE-A8CA-42A3-BC88-94CB281CC93E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.MongoDB", "Domain.MongoDB\Domain.MongoDB.csproj", "{8EF64CB9-1734-420B-8321-1DC86B245CB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.NH", "Domain.MongoDB\Domain.NH.csproj", "{8EF64CB9-1734-420B-8321-1DC86B245CB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{E681FDAE-5C02-4348-90EF-D51FFABB8D7D}"
 EndProject
