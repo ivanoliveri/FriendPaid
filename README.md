@@ -1,8 +1,4 @@
-
-<!-- saved from url=(0067)https://raw.github.com/ivanoliveri/FriendPaidViejo/master/README.md -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">FriendPaid
-==========
-
+﻿
 Resumen
 -------
 
@@ -15,12 +11,14 @@ OAuth: Sería recomendable que los usuarios se puedan loguear con sus cuentas de
 Data
 ----
 
-Se usa mongoDB (NoSQL) hosteada en mongolab ( https://mongolab.com ).
+Se usa SQL Server R2008 hosteada en somee( https://mongolab.com ).
+
+ConnectionString: workstation id=FriendPaid.mssql.somee.com;packet size=4096;user id=ivanoliveri_SQLLogin_1;pwd=b2bjjelrth;data source=FriendPaid.mssql.somee.com;persist security info=False;initial catalog=FriendPaid
 
 User:ivanoliveri
-Password:tongas123
+Password:TONGAS123
 
-Se cuenta con 2 colecciones: Miembro y Grupo.
+Contamos con 15MB Gratis
 
 
 Escenarios De Uso
