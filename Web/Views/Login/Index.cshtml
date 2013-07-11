@@ -10,6 +10,8 @@
         <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-responsive.css">
         <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-icons.css">
         <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-ui-light.css">
+        <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-tiles.css">
+        <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-charms.css">
         
         <style type="text/css">
             @@font-face {
@@ -82,40 +84,10 @@
         }
         <div class="row-fluid">
             <div class="span6 offset1">
-                
-                <div id="myCarousel" class="carousel slide">
-
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        <div class="active item">
-                            <img src="../../Content/img/bootstrap-mdo-sfmoma-01.jpg" />
-                            <div class="carousel-caption">
-                                <h4>Imágen1</h4>
-                                <p>Un párrafo que hable sobre la imágen 1.</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="../../Content/img/bootstrap-mdo-sfmoma-02.jpg" />
-                            <div class="carousel-caption">
-                                <h4>Imágen2</h4>
-                                <p>Un párrafo que hable sobre la imágen 2.</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="../../Content/img/bootstrap-mdo-sfmoma-03.jpg" />
-                            <div class="carousel-caption">
-                                <h4>Imágen3</h4>
-                                <p>Un párrafo que hable sobre la imágen 3.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carousel nav -->
-                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-                </div>
+                <!-- CAROUSEL -->
             </div>
             <div class="offset1 span3">
-                <span style="font-family: facebook;font-size: 35px">O entrar con:<p></p>@Html.ActionLink("facebook", "Facebook","LogIn")
+                <span style="font-family: facebook;font-size: 35px">O entrar con:<br/><br/>@Html.ActionLink("facebook", "Facebook","LogIn")
                 </span>
                 <h3>Registrar</h3>
                 @using (Html.BeginForm("SignUp", "SignUp", FormMethod.Post, new { @class = "form-inline" }))
