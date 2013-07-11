@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -13,7 +14,9 @@ namespace Web.Controllers
 
         public ActionResult Index(string username)
         {
-            throw new NotImplementedException();
+            var newViewModel = new ContactsViewModel();
+            newViewModel.username = username;
+            return View(newViewModel);
         }
 
     }

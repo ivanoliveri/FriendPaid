@@ -12,7 +12,9 @@ namespace Web.Controllers
 
         public ActionResult Index(string username)
         {
-            return View();
+            var newViewModel = new PurchaseViewModel();
+            newViewModel.username = username;
+            return View(newViewModel);
         }
 
         public ActionResult Create(PurchaseViewModel viewModel)

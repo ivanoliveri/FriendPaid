@@ -12,12 +12,16 @@ namespace Web.Controllers
 
         public ActionResult IndexGroups(string username)
         {
-            return View();
+            var newViewModel = new GroupsViewModel();
+            newViewModel.username = username;
+            return View(newViewModel);
         }
 
         public ActionResult IndexCreateGroup(string username)
         {
-            return View();
+            var newViewModel = new CreateGroupViewModel();
+            newViewModel.username = username;
+            return View(newViewModel);
         }
 
         public ActionResult Create(CreateGroupViewModel viewModel)
