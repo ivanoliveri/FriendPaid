@@ -1,28 +1,32 @@
-﻿using System;
-using System.Configuration;
-using Domain.NH.Mappings;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using NHibernate;
-using NHibernate.Proxy.DynamicProxy;
-using NHibernate.Tool.hbm2ddl;
-
-using Configuration = NHibernate.Cfg.Configuration;
-namespace Repository
+﻿namespace Repository
 {
+    using System;
+    using System.Configuration;
+
+    using Domain.NH.Mappings;
+
+    using FluentNHibernate.Cfg;
+    using FluentNHibernate.Cfg.Db;
+
+    using NHibernate;
+    using NHibernate.Proxy.DynamicProxy;
+    using NHibernate.Tool.hbm2ddl;
+
+    using Configuration = NHibernate.Cfg.Configuration;
 
     public class HibernateSessionFactory : IHibernateSessionFactory
     {
 
         private ISessionFactory sessionFactory;
 
-
         private ISession session;
+
 
         public static HibernateSessionFactory GetHibernateSessionFactory()
         {
             return null;
         }
+
 
         public HibernateSessionFactory()
         {
@@ -33,6 +37,7 @@ namespace Repository
                                 .ExposeConfiguration(BuildSchema)
                                 .BuildSessionFactory();
         }
+
 
         public ISession GetSession()
         {
@@ -71,7 +76,7 @@ namespace Repository
 
             // This NHibernate tool takes a configuration (with mapping info in) and exports a database schema from it
             var schemaExport = new SchemaExport(config);
-
+            
             schemaExport.Drop(false, generateSchema);
             schemaExport.Create(false, generateSchema);
         }

@@ -1,17 +1,19 @@
-﻿using System;
-using NHibernate;
-
-namespace Repository
+﻿namespace Repository
 {
+    using System;
+
+    using NHibernate;
+
 
     public interface IHibernateSessionFactory : IDisposable
     {
 
         ISession GetSession();
 
+
         void TransactionalInterceptor(Action action);
 
-        void SessionInterceptor(Action action);
 
+        void SessionInterceptor(Action action);
     }
 }

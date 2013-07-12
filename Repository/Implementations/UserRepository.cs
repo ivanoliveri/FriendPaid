@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Domain;
+using Repository.Interfaces;
 
 namespace Repository.Implementations
 {
-    public class UserRepository : BaseRepository<User>
+    public class UserRepository : BaseRepository<User>,IUserRepository
     {
 
         public UserRepository(IHibernateSessionFactory hibernateSessionFactory)
@@ -15,10 +16,6 @@ namespace Repository.Implementations
         }
         public User GetByUsernameAndPassword(string username, string password)
         {
-            //GetSessionFactory().SessionInterceptor(()=>
-                                                       //{
-                                                        //   result = this.GetByUsernameAndPassword(username, password);
-                                                      // });
             return (User) this.GetSessionFactory().GetSession().QueryOver<User>()
                               .Where(user => user.username.Equals(username) &&
                                              user.password.Equals(password));

@@ -117,9 +117,7 @@ namespace Web.Controllers
         
         public ActionResult SignIn(LoginViewModel viewModel)
         {
-            var sessionFactory = new HibernateSessionFactory();
-            var repository = new UserRepository(sessionFactory);
-            repository.GetByUsernameAndPassword(viewModel.username, viewModel.password);
+          //  repository.GetByUsernameAndPassword(viewModel.username, viewModel.password);
             return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
         }
 

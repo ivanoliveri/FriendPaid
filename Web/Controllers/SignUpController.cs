@@ -8,6 +8,7 @@ using Domain;
 using FluentValidation.Results;
 using Repository;
 using Repository.Implementations;
+using Repository.Interfaces;
 using Web.Validators;
 using Web.ViewModels;
 
@@ -15,6 +16,14 @@ namespace Web.Controllers
 {
     public class SignUpController : Controller
     {
+
+
+        private readonly IUserRepository userRepository;
+
+        public SignUpController(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
 
         public ActionResult SignUp(LoginViewModel loginViewModel)
         {
@@ -35,9 +44,7 @@ namespace Web.Controllers
 
             if (validationResult.IsValid)
             {
-                var sessionFactory = new HibernateSessionFactory();
-                var repository = new UserRepository(sessionFactory);
-                repository.Add(newUser);
+                userRepository.Add(newUser);
             }
             else
             {
