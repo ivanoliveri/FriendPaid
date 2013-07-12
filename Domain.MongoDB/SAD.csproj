@@ -51,6 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Domain.NH\Mappings\GroupMapping.cs">
+      <Link>Mappings\GroupMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\Domain.NH\Mappings\PaymentMapping.cs">
+      <Link>Mappings\PaymentMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\Domain.NH\Mappings\PurchaseMapping.cs">
+      <Link>Mappings\PurchaseMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\Domain.NH\Mappings\UserMapping.cs">
+      <Link>Mappings\UserMapping.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +74,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

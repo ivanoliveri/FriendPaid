@@ -8,21 +8,28 @@ namespace Domain
 
         #region Attributes
 
-        public User buyer { set; get; }
+        public virtual int id { set; get; }
+        
+        public virtual User buyer { set; get; }
 
-        public float totalAmount { set; get; }
+        public virtual float totalAmount { set; get; }
 
-        public string description { set; get; }
+        public virtual string description { set; get; }
 
-        public Group group { set; get; }
+        public virtual Group group { set; get; }
 
-        public List<User> debtors { set; get; }
+        public virtual List<User> debtors { set; get; }
 
         #endregion
 
         #region Methods
 
-        public float calculateAmountPerMember()
+        public Purchase()
+        {
+            debtors = new List<User>();
+        }
+        
+        public virtual float calculateAmountPerMember()
         {
             return totalAmount/(debtors.Count + 1);
         }

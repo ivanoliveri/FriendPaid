@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E681FDAE-5C02-4348-90EF-D51FFABB8D7D}</ProjectGuid>
+    <ProjectGuid>{6C2FFB0B-8014-4574-B831-4492516E9FA4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Repository</RootNamespace>
-    <AssemblyName>Repository</AssemblyName>
+    <RootNamespace>Domain.NH</RootNamespace>
+    <AssemblyName>Domain.NH</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -43,7 +43,6 @@
       <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,21 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HibernateSessionFactory.cs" />
-    <Compile Include="IHibernateSessionFactory.cs" />
-    <Compile Include="Implementations\BaseRepository.cs" />
-    <Compile Include="Implementations\GroupRepository.cs" />
-    <Compile Include="Implementations\UserRepository.cs" />
+    <Compile Include="Mappings\GroupMapping.cs" />
+    <Compile Include="Mappings\PaymentMapping.cs" />
+    <Compile Include="Mappings\PurchaseMapping.cs" />
+    <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain.NH\Domain.NH.csproj">
-      <Project>{6C2FFB0B-8014-4574-B831-4492516E9FA4}</Project>
-      <Name>Domain.NH</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{B3A53BAE-A8CA-42A3-BC88-94CB281CC93E}</Project>
       <Name>Domain</Name>

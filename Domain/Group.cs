@@ -11,11 +11,13 @@ namespace Domain
 
         #region Attributes
 
-        public string name { set; get; }
+        public virtual int id { set; get; }
 
-        public User administrator { set; get; }
+        public virtual string name { set; get; }
 
-        public List<User> members { set; get; }
+        public virtual User administrator { set; get; }
+
+        public virtual List<User> members { set; get; }
 
         #endregion
 
@@ -26,7 +28,7 @@ namespace Domain
             members = new List<User>();
         }
 
-        public void createPurchaseNotifications(Purchase purchase)
+        public virtual void createPurchaseNotifications(Purchase purchase)
         {
             foreach (var debtor in purchase.debtors)
             {
@@ -36,14 +38,14 @@ namespace Domain
             }
         }
 
-        public void createPaymentNotification(Payment payment)
+        public virtual void createPaymentNotification(Payment payment)
         {
             var buyer = payment.buyer;
             var newPaymentNotification = new PaymentNotification(payment);
             buyer.notifications.Add(newPaymentNotification);
         }
 
-        public void createPaymentsAfterPurchase(Purchase purchase)
+        public virtual void createPaymentsAfterPurchase(Purchase purchase)
         {
 
             var debtorsAndBuyer = new List<User>();

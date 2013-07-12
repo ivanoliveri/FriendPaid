@@ -13,29 +13,31 @@ namespace Domain
 
         #region Attributes
 
-        public string username { set; get; }
+        public virtual int id { set; get; }
 
-        public string password { set; get; }
+        public virtual string username { set; get; }
 
-        public string email { set; get; }
+        public virtual string password { set; get; }
 
-        public string name { set; get; }
+        public virtual string email { set; get; }
 
-        public string lastName { set; get; }
+        public virtual string name { set; get; }
 
-        public List<User> contacts { set; get; }
+        public virtual string lastName { set; get; }
 
-        public List<Notification> notifications { set; get; }
+        public virtual List<User> contacts { set; get; }
 
-        public List<ContactRequest> contactRequests { set; get; }
+        public virtual List<Notification> notifications { set; get; }
 
-        public List<FacebookContact> facebookContacts { set; get; }
+        public virtual List<ContactRequest> contactRequests { set; get; }
 
-        public List<Group> groups { set; get; }
+        public virtual List<FacebookContact> facebookContacts { set; get; }
 
-        public List<Payment> payments { set; get; }
+        public virtual List<Group> groups { set; get; }
 
-        public List<Purchase> purchases { set; get; }
+        public virtual List<Payment> payments { set; get; }
+
+        public virtual List<Purchase> purchases { set; get; }
 
         #endregion
 
@@ -58,7 +60,7 @@ namespace Domain
             facebookContacts = new List<FacebookContact>();
         }
 
-        public float getOwedAmount()
+        public virtual float getOwedAmount()
         {
             float total=0f;
 
@@ -71,17 +73,17 @@ namespace Domain
             return total;
         }
 
-        public void invite(User user)
+        public virtual void invite(User user)
         {
             throw new NotImplementedException();
         }
 
-        public bool hasDebts()
+        public virtual bool hasDebts()
         {
             return this.getOwedAmount() > 0f;
         }
 
-        public void joinGroup(Group group)
+        public virtual void joinGroup(Group group)
         {
             if (this.groups.Contains(group))
                 throw new AlreadyJoinedException();
@@ -91,7 +93,7 @@ namespace Domain
             this.groups.Add(group);
         }
 
-        public Group createGroup(string groupName)
+        public virtual Group createGroup(string groupName)
         {
             var newGroup = new Group() { administrator = this, name = groupName };
             
@@ -100,7 +102,7 @@ namespace Domain
             return newGroup;
         }
 
-        public void leaveGroup(Group group)
+        public virtual void leaveGroup(Group group)
         {
             if (group.administrator.Equals(this))
                 throw new AdministratorCantLeaveGroupException();
@@ -114,7 +116,7 @@ namespace Domain
 
         }
 
-        public void registerPurchase(Purchase purchase)
+        public virtual void registerPurchase(Purchase purchase)
         {
 
             purchase.group.createPurchaseNotifications(purchase);
@@ -123,7 +125,7 @@ namespace Domain
 
         }
 
-        public void registerDebtPayment(Payment payment,Group group)
+        public virtual void registerDebtPayment(Payment payment, Group group)
         {
             throw new NotImplementedException();
         }

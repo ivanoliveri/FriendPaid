@@ -8,27 +8,34 @@ namespace Domain
 
         #region Attributes
 
-        public float amount { set; get; }
+        public virtual int id { set; get; }
 
-	    public string description { set; get; }
+        public virtual float amount { set; get; }
 
-	    public Group group { set; get; }
+        public virtual string description { set; get; }
 
-	    public User debtor { set; get; }
+        public virtual Group group { set; get; }
 
-	    public User buyer { set; get; }
+        public virtual User debtor { set; get; }
 
-        public PaymentStatus status { set; get; }
+        public virtual User buyer { set; get; }
+
+        public virtual PaymentStatus status { set; get; }
 
         #endregion
 
         #region Methods
 
-        public void registerPayment()
+        public Payment()
+        {
+            
+        }
+
+        public virtual void registerPayment()
         {
             throw new NotImplementedException();
         }
-	    public void createPurchaseNotification(Purchase purchase,User debtor)
+        public virtual void createPurchaseNotification(Purchase purchase, User debtor)
 	    {
             throw new NotImplementedException();
 	    }
