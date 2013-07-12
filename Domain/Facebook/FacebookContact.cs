@@ -2,7 +2,13 @@
 {
     public class FacebookContact
     {
-        public int id { set; get; }
-        public string name { set; get; }
+        public virtual int id { set; get; }
+        public virtual int facebookId { set; get; }
+        public virtual string name { set; get; }
+
+        public FacebookContact()
+        {
+            
+        }
     }
 }

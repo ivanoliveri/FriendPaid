@@ -2,26 +2,33 @@
 
 namespace Domain.Requests
 {
-    public abstract class Request
+    public class Request
     {
 
         #region Attributes
 
-        public RequestStatus status { get; set; }
+        public virtual int id { set; get; }
 
-        public string message { set; get; }
+        public virtual RequestStatus status { get; set; }
 
-        public User sender { get; set; }
+        public virtual string message { set; get; }
 
-        public User receiver { get; set; }
+        public virtual User sender { get; set; }
+
+        public virtual User receiver { get; set; }
 
         #endregion
 
         #region Methods
 
-        public abstract void accept();
+        public Request()
+        {
+            
+        }
 
-        public abstract void reject();
+        public virtual void accept(){}
+
+        public virtual void reject(){}
 
         #endregion
 

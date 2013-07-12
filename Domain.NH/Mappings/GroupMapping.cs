@@ -13,7 +13,7 @@ namespace Domain.NH.Mappings
             this.Id(group => group.id).GeneratedBy.Identity();
             this.Map(group => group.name).Not.Nullable().Length(50).Not.LazyLoad();
             this.References(group => group.administrator).Not.Nullable().Not.LazyLoad();
-            this.HasManyToMany(group => group.members).Cascade.All().Table("MembersPerGroup");
+            this.HasManyToMany(group => group.members).Table("MemberPerGroup").ParentKeyColumn("id_group").ChildKeyColumn("id_user").Not.LazyLoad();
         }
     }
 }

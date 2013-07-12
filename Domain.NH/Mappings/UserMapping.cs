@@ -16,13 +16,14 @@ namespace Domain.NH.Mappings
             this.Map(user => user.email).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(user => user.name).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(user => user.lastName).Not.Nullable().Length(50).Not.LazyLoad();
-            this.HasManyToMany(user => user.contacts).Table("ContactsPerUser").AsBag();
+            this.HasManyToMany(user => user.contacts).Table("ContactsPerUser").ParentKeyColumn("id_user").ChildKeyColumn("id_user_contact").AsBag();
             this.HasMany(user => user.notifications).KeyColumn("id");
             this.HasMany(user => user.contactRequests).KeyColumn("id");
             this.HasMany(user => user.facebookContacts).KeyColumn("id");
-            this.HasManyToMany(user => user.groups).Cascade.All().Inverse().Table("MembersPerGroup");
-            this.HasMany(user => user.payments).KeyColumn("id");     
-            this.HasMany(user => user.purchases).KeyColumn("id"); 
+            this.HasManyToMany(user => user.groups).Table("MemberPerGroup").ParentKeyColumn("id_user").ChildKeyColumn("id_group").Not.LazyLoad();
+            this.HasMany(user => user.payments).KeyColumn("id");   
+            this.HasManyToMany(user => user.purchases).Table("MemberPerPurchase").ParentKeyColumn("id_user").ChildKeyColumn("id_purchase").Not.LazyLoad();    
+           
         }
     }
 }

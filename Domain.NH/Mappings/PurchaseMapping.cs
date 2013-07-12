@@ -15,7 +15,7 @@ namespace Domain.NH.Mappings
             this.Map(purchase => purchase.totalAmount).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(purchase => purchase.description).Not.Nullable().Length(50).Not.LazyLoad();
             this.References(purchase => purchase.group).Not.Nullable().Not.LazyLoad();
-            this.HasMany(purchase => purchase.debtors).KeyColumn("id");
+            this.HasManyToMany(purchase => purchase.debtors).Table("MemberPerPurchase").ParentKeyColumn("id_purchase").ChildKeyColumn("id_user").Not.LazyLoad();    
         }
     }
 }

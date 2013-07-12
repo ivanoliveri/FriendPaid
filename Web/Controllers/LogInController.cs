@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Facebook;
 using Newtonsoft.Json.Linq;
+using Repository;
+using Repository.Implementations;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -115,6 +117,9 @@ namespace Web.Controllers
         
         public ActionResult SignIn(LoginViewModel viewModel)
         {
+            var sessionFactory = new HibernateSessionFactory();
+            var repository = new UserRepository(sessionFactory);
+            repository.GetByUsernameAndPassword(viewModel.username, viewModel.password);
             return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
         }
 

@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Domain;
 using FluentValidation.Results;
+using Repository;
+using Repository.Implementations;
 using Web.Validators;
 using Web.ViewModels;
 
@@ -33,7 +35,9 @@ namespace Web.Controllers
 
             if (validationResult.IsValid)
             {
-                //Agregar a la DB
+                var sessionFactory = new HibernateSessionFactory();
+                var repository = new UserRepository(sessionFactory);
+                repository.Add(newUser);
             }
             else
             {

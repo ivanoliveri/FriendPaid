@@ -8,17 +8,24 @@ namespace Domain.Notifications
 
         #region Attributes
 
-        public string message { get; set; }
+        public virtual int id { set; get; }
 
-        public NotificationStatus status { get; set; }
+        public virtual string message { get; set; }
 
-        public DateTime date { get; set; }
+        public virtual NotificationStatus status { get; set; }
+
+        public virtual DateTime date { get; set; }
 
         #endregion
 
         #region Methods
 
-        public string leer()
+        public Notification()
+        {
+            
+        }
+
+        public virtual string leer()
         {
             if (status.Equals(NotificationStatus.Unread))
                 status = NotificationStatus.Read;

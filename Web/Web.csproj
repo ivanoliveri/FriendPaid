@@ -196,6 +196,10 @@
       <Project>{B3A53BAE-A8CA-42A3-BC88-94CB281CC93E}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{E681FDAE-5C02-4348-90EF-D51FFABB8D7D}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
