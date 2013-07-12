@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Responsive v2.2.1
+ * Bootstrap Responsive v2.3.2
  *
  * Copyright 2012 Twitter, Inc
  * Licensed under the Apache License v2.0
@@ -458,10 +458,6 @@
   }
 }
 
-@media (min-width: 1200px) {
-  
-}
-
 @media (min-width: 768px) and (max-width: 979px) {
   .row {
     margin-left: -20px;
@@ -803,43 +799,6 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
-  .toast .close,
-  .modal .close,
-  .alert .close {
-    display: inline-block !important;
-  }
-}
-
-@media (min-width: 321px) and (max-width: 1023px) {
-  hr.win-command {
-    margin-right: 9px;
-    margin-left: 10px;
-  }
-}
-
-/* Narrow buttons and no labels when < 1024px. */
-
-@media (max-width: 1023px) {
-  a.win-command .win-label,
-  button.win-command .win-label {
-    display: none;
-  }
-  a.win-command .win-commandicon,
-  button.win-command .win-commandicon {
-    margin: 0 8px;
-    /* 2px margin for focus */
-  
-  }
-  .win-commandlayout {
-    min-height: 68px;
-  }
-  hr.win-command {
-    margin-top: 14px;
-    margin-bottom: 14px;
-  }
-}
-
 @media (max-width: 767px) {
   body {
     padding-right: 20px;
@@ -990,27 +949,6 @@
   }
 }
 
-@media (max-width: 767px) {
-  .toast .close,
-  .modal .close,
-  .alert .close {
-    display: inline-block !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .container-fluid {
-    padding: 0;
-  }
-  .panorama {
-    margin: 0;
-  }
-  #panorama-scroll-prev,
-  #panorama-scroll-next {
-    top: 0;
-  }
-}
-
 @media (max-width: 979px) {
   body {
     padding-top: 0;
@@ -1070,9 +1008,9 @@
   .nav-collapse .btn {
     padding: 4px 10px 4px;
     font-weight: normal;
-    -webkit-border-radius: 0;
-       -moz-border-radius: 0;
-            border-radius: 0;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
   }
   .nav-collapse .dropdown-menu li + li a {
     margin-bottom: 2px;

@@ -7,10 +7,8 @@
         <title>Inicio | FriendPaid</title>
 
 
-        <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro.css">
-        <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-responsive.css">
-        <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-icons.css">
-        <link rel="stylesheet" type="text/css" href="~/Content/css/bootmetro-ui-light.css">
+        <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-responsive.css">
      
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"/>
         
@@ -24,70 +22,60 @@
     </head>
 <body>
     
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <div id="top-info" class="container">
-                <div class="span7">
-                    <div class="top-info-block" style="padding-top:20px;">
-                        <span style="font-family: Prime;font-size:25px;font-weight:bold">Friend<span style="font-weight: normal;color:yellowgreen">Paid</span></span>
-                    </div>
-                    <div class="top-info-block" style="padding-top:7px;">
-                        <hr class="separator"/>
-                    </div>
-                    <a href="@Url.Action("Index", "Notifications", new { username = @Model.username }, null)">      
-                        <div id="inicioContainer" class="top-info-block" style="padding-right: 15px">
-                            <b class="icon-home" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6 style="text-align:center">Inicio</h6>
-                        </div>
-                    </a>
-                    <a href="@Url.Action("Index", "Purchase", new { username = @Model.username }, null)">      
-                        <div id="registrarCompraContainer" class="top-info-block" style="padding-right: 15px">
-                            <b class="icon-pencil" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6>RegistrarCompra</h6>
-                        </div>
-                    </a>
-                    <a href="@Url.Action("IndexCreateGroup", "Group", new { username = @Model.username }, null)">       
-                        <div id="crearGrupoContainer" class="top-info-block" style="padding-right: 15px">
-                            <b class="icon-user-add" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6 style="text-align:center">CrearGrupo</h6>
-                        </div>
-                    </a>
-                    <a href="@Url.Action("IndexGroups", "Group", new { username = @Model.username }, null)">       
-                        <div id="verGruposContainer" class="top-info-block" style="padding-right: 15px">
-                            <b class="icon-users" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6 style="text-align:center">Grupos</h6>
-                        </div>    
-                    </a>
-                    <a href="@Url.Action("Index", "Contacts", new { username = @Model.username }, null)">       
-                        <div id="verContactosContainer" class="top-info-block" style="padding-right: 15px">
-                            <b class="icon-book" style="margin-left: auto;margin-right: auto;display: block;border:none;"></b>
-                            <h6 style="text-align:center">Contactos</h6>
-                        </div>
-                    </a>  
-                </div>
-                <div class="span4" style="padding-top: 7px; float:right">
-                    <div class="top-info-block" style="padding-top: 6px">
-                        <input class="search-input" type="text" id="buscadorDeGrupos" placeholder="BuscarGrupos" autocomplete="off" style="direction: ltr; text-align: left;-webkit-border-radius: 15px"> 
-                    </div>
-                    <div class="top-info-block">
-                            
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <b class="icon-cog-3"></b>
+                <a class="brand" href="#" style="padding-top:20px;">
+                    <span style="font-family: Prime;font-size:35px;font-weight:bold">Friend<span style="font-weight: normal;color:yellowgreen">Paid</span></span>
+                </a>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li>
+                            <a href="@Url.Action("Index", "Notifications", new { username = @Model.username }, null)">      
+                                <h6 style="text-align:center">Inicio</h6>
                             </a>
-                        </div>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Purchase", new { username = @Model.username }, null)">     
+                                <h6>RegistrarCompra</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("IndexCreateGroup", "Group", new { username = @Model.username }, null)">       
+                                <h6 style="text-align:center">CrearGrupo</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("IndexGroups", "Group", new { username = @Model.username }, null)">       
+                                <h6 style="text-align:center">Grupos</h6>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Contacts", new { username = @Model.username }, null)">   
+                                <h6 style="text-align:center">Contactos</h6>
+                            </a>  
+                        </li>
+                    </ul>
 
-                    </div>            
-                    <div class="top-info-block">
-                        <hr class="separator"/>
-                    </div>
-                    <div class="top-info-block">
-                        <b class="icon-user"></b>
-                    </div>
-                    <div class="top-info-block">
-                        <h2> @Model.username </h2>
-                    </div>
+                    <ul class="nav pull-right">
+                        <li>
+                            <form class="navbar-search pull-left" action="" style="padding-top:15px;">
+                                <input type="text" class="search-query span2" placeholder="Buscar Grupos">
+                            </form>
+                        </li>
+                        <li>
+                            <a href="">
+                                <h6>Configuración</h6>
+                            </a>
+                        </li>
+                        <li class="divider-vertical" style="margin-top:10px;"></li>
+                        <li>
+                            <h2> @Model.username </h2>
+                        </li>
+                    </ul>
+
                 </div>
+
             </div>
         </div>
     </div>
