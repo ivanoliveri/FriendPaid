@@ -6,9 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Domain;
 using FluentValidation.Results;
-using Repository;
-using Repository.Implementations;
-using Repository.Interfaces;
+using Services;
 using Web.Validators;
 using Web.ViewModels;
 
@@ -18,11 +16,11 @@ namespace Web.Controllers
     {
 
 
-        private readonly IUserRepository userRepository;
+        private readonly IUserService userService;
 
-        public SignUpController(IUserRepository userRepository)
+        public SignUpController(IUserService userService)
         {
-            this.userRepository = userRepository;
+            this.userService = userService;
         }
 
         public ActionResult SignUp(LoginViewModel loginViewModel)
@@ -44,7 +42,7 @@ namespace Web.Controllers
 
             if (validationResult.IsValid)
             {
-                userRepository.Add(newUser);
+                userService.Create(newUser);
             }
             else
             {

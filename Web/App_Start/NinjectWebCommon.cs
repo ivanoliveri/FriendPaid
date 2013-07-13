@@ -1,6 +1,7 @@
 using Repository;
 using Repository.Implementations;
 using Repository.Interfaces;
+using Services;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Web.App_Start.NinjectWebCommon), "Stop")]
@@ -58,8 +59,10 @@ namespace Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IHibernateSessionFactory>().To<HibernateSessionFactory>().InSingletonScope();
-            kernel.Bind<IUserRepository>().To<UserRepository>().InSingletonScope().WithConstructorArgument("IUserRepository", kernel.GetService(typeof(IUserRepository)));
-           
+            kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IGroupRepository>().To<GroupRepository>();
+            kernel.Bind<IUserService>().To<UserService>();
+            
         }        
     }
 }
