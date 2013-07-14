@@ -8,5 +8,6 @@ namespace Repository.Interfaces
 {
     public interface IUserRepository:IRepository<User>
     {
+        User GetByUsernameAndPassword(string username, string password);
     }
 }

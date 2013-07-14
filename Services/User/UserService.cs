@@ -48,6 +48,11 @@ namespace Services
             });
         }
 
+        public User GetByUsernameAndPassword(string username, string password)
+        {
+            return this.userRepository.GetByUsernameAndPassword(username, password);
+        }
+
       //  void Update(int id, Realty realty, string addres, string details);
 
       //  void Delete(int id);

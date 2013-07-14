@@ -8,12 +8,20 @@ using Facebook;
 using Newtonsoft.Json.Linq;
 using Repository;
 using Repository.Implementations;
+using Services;
 using Web.ViewModels;
 
 namespace Web.Controllers
 {
     public class LogInController : Controller
-    {
+    {        
+        private readonly IUserService userService;
+
+        public LogInController(IUserService userService)
+        {
+            this.userService = userService;
+        }
+
         private Uri RedirectUri
         {
             get
@@ -117,7 +125,7 @@ namespace Web.Controllers
         
         public ActionResult SignIn(LoginViewModel viewModel)
         {
-          //  repository.GetByUsernameAndPassword(viewModel.username, viewModel.password);
+            userService.GetByUsernameAndPassword(viewModel.username, viewModel.password);
             return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
         }
 

@@ -14,6 +14,8 @@ namespace Services
 
         void Create(User user);
 
+        User GetByUsernameAndPassword(string username, string password);
+
         //  void Update(int id, Realty realty, string addres, string details);
 
         //  void Delete(int id);

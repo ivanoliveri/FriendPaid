@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Domain;
+using NHibernate.Criterion;
 using Repository.Interfaces;
 
 namespace Repository.Implementations
@@ -16,9 +17,10 @@ namespace Repository.Implementations
         }
         public User GetByUsernameAndPassword(string username, string password)
         {
-            return (User) this.GetSessionFactory().GetSession().QueryOver<User>()
-                              .Where(user => user.username.Equals(username) &&
-                                             user.password.Equals(password));
+            var result = this.GetSessionFactory().GetSession().CreateCriteria<User>()
+                            .Add(Restrictions.Eq("username", username))
+                            .Add(Restrictions.Eq("password", password)).List<User>();
+            return result.ElementAt(0);
         }
 
     }
