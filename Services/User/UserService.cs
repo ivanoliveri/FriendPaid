@@ -11,7 +11,7 @@ namespace Services
     {
          private readonly IUserRepository userRepository;
 
-         public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }

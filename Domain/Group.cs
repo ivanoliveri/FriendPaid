@@ -17,7 +17,7 @@ namespace Domain
 
         public virtual User administrator { set; get; }
 
-        public virtual List<User> members { set; get; }
+        public virtual IList<User> members { set; get; }
 
         #endregion
 
@@ -50,7 +50,7 @@ namespace Domain
 
             var debtorsAndBuyer = new List<User>();
 
-            purchase.debtors.ForEach(user=> debtorsAndBuyer.Add(user));
+            purchase.debtors.ToList().ForEach(user=> debtorsAndBuyer.Add(user));
            
             debtorsAndBuyer.Add(purchase.buyer);
 

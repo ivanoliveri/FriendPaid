@@ -59,9 +59,8 @@ namespace Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IHibernateSessionFactory>().To<HibernateSessionFactory>().InSingletonScope();
-            kernel.Bind<IUserRepository>().To<UserRepository>();
-            kernel.Bind<IGroupRepository>().To<GroupRepository>();
-            kernel.Bind<IUserService>().To<UserService>();
+            kernel.Bind<IUserRepository>().To<UserRepository>().InSingletonScope().WithConstructorArgument("userRepository", kernel.GetService(typeof(IUserRepository)));
+            kernel.Bind<IUserService>().To<UserService>().InSingletonScope().WithConstructorArgument("userService", kernel.GetService(typeof(IUserService)));
             
         }        
     }

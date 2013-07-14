@@ -25,19 +25,19 @@ namespace Domain
 
         public virtual string lastName { set; get; }
 
-        public virtual List<User> contacts { set; get; }
+        public virtual IList<User> contacts { set; get; }
 
-        public virtual List<Notification> notifications { set; get; }
+        public virtual IList<Notification> notifications { set; get; }
 
-        public virtual List<ContactRequest> contactRequests { set; get; }
+        public virtual IList<ContactRequest> contactRequests { set; get; }
 
-        public virtual List<FacebookContact> facebookContacts { set; get; }
+        public virtual IList<FacebookContact> facebookContacts { set; get; }
 
-        public virtual List<Group> groups { set; get; }
+        public virtual IList<Group> groups { set; get; }
 
-        public virtual List<Payment> payments { set; get; }
+        public virtual IList<Payment> payments { set; get; }
 
-        public virtual List<Purchase> purchases { set; get; }
+        public virtual IList<Purchase> purchases { set; get; }
 
         #endregion
 

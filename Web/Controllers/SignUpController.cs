@@ -15,7 +15,6 @@ namespace Web.Controllers
     public class SignUpController : Controller
     {
 
-
         private readonly IUserService userService;
 
         public SignUpController(IUserService userService)

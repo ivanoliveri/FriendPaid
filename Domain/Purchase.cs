@@ -18,7 +18,7 @@ namespace Domain
 
         public virtual Group group { set; get; }
 
-        public virtual List<User> debtors { set; get; }
+        public virtual IList<User> debtors { set; get; }
 
         #endregion
 
