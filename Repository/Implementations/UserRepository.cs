@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Domain;
+using Domain.Exceptions;
 using NHibernate.Criterion;
 using Repository.Interfaces;
 
@@ -20,6 +21,17 @@ namespace Repository.Implementations
             var result = this.GetSessionFactory().GetSession().CreateCriteria<User>()
                             .Add(Restrictions.Eq("username", username))
                             .Add(Restrictions.Eq("password", password)).List<User>();
+            return result.ElementAt(0);
+        }
+
+        public User GetByUsername(string username)
+        {
+            var result = this.GetSessionFactory().GetSession().CreateCriteria<User>()
+                            .Add(Restrictions.Eq("username", username)).List<User>();
+
+            if (result.Count.Equals(0))
+                throw new UserNotFoundException();
+
             return result.ElementAt(0);
         }
 

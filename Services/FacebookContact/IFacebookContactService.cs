@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Domain;
+using Domain.Facebook;
 
 namespace Services
 {
-    public interface IUserService
+    public interface IFacebookContactService
     {
-        IList<User> GetAll();
+        IList<FacebookContact> GetAll();
 
-        User Get(int id);
+        FacebookContact Get(int id);
 
-        void Create(User user);
-
-        User GetByUsernameAndPassword(string username, string password);
-
-        User GetByUsername(string username);
+        void Create(FacebookContact user);
 
         //  void Update(int id, Realty realty, string addres, string details);
 

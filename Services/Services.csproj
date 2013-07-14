@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacebookContact\IFacebookContactService.cs" />
+    <Compile Include="FacebookContact\FacebookContactService.cs" />
     <Compile Include="Group\GroupService.cs" />
     <Compile Include="User\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

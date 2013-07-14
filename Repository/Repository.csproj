@@ -58,8 +58,10 @@
     <Compile Include="HibernateSessionFactory.cs" />
     <Compile Include="IHibernateSessionFactory.cs" />
     <Compile Include="Implementations\BaseRepository.cs" />
+    <Compile Include="Implementations\FacebookContactRepository.cs" />
     <Compile Include="Implementations\GroupRepository.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
+    <Compile Include="Interfaces\IFacebookContactRepository.cs" />
     <Compile Include="Interfaces\IGroupRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />

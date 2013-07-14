@@ -11,7 +11,8 @@ namespace Domain.NH.Mappings
     {
         public FacebookContactMapping()
         {
-            this.Id(facebookContact => facebookContact.id).GeneratedBy.Identity(); 
+            this.Id(facebookContact => facebookContact.id).GeneratedBy.Identity();
+            this.Map(facebookContact => facebookContact.facebookId).CustomType("System.Int64").Not.Nullable().Not.LazyLoad();
             this.Map(facebookContact => facebookContact.name).Not.Nullable().Length(50).Not.LazyLoad();
         }
     }

@@ -61,7 +61,8 @@ namespace Web.App_Start
             kernel.Bind<IHibernateSessionFactory>().To<HibernateSessionFactory>().InSingletonScope();
             kernel.Bind<IUserRepository>().To<UserRepository>().InSingletonScope().WithConstructorArgument("userRepository", kernel.GetService(typeof(IUserRepository)));
             kernel.Bind<IUserService>().To<UserService>().InSingletonScope().WithConstructorArgument("userService", kernel.GetService(typeof(IUserService)));
-            
+            kernel.Bind<IFacebookContactRepository>().To<FacebookContactRepository>().InSingletonScope().WithConstructorArgument("facebookContactRepository", kernel.GetService(typeof(IFacebookContactRepository)));
+            kernel.Bind<IFacebookContactService>().To<FacebookContactService>().InSingletonScope().WithConstructorArgument("facebookContactService", kernel.GetService(typeof(IFacebookContactService)));
         }        
     }
 }

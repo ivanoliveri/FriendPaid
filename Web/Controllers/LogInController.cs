@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Domain;
+using Domain.Exceptions;
+using Domain.Facebook;
 using Facebook;
 using Newtonsoft.Json.Linq;
 using Repository;
@@ -16,10 +19,12 @@ namespace Web.Controllers
     public class LogInController : Controller
     {        
         private readonly IUserService userService;
+        private readonly IFacebookContactService facebookContactService;
 
-        public LogInController(IUserService userService)
+        public LogInController(IUserService userService,FacebookContactService facebookContactService)
         {
             this.userService = userService;
+            this.facebookContactService = facebookContactService;
         }
 
         private Uri RedirectUri
@@ -70,7 +75,8 @@ namespace Web.Controllers
                 clientSecret = "cb51bda21a82a578c944524b5438e71b";    
             #endif
 
-                var fb = new FacebookClient();
+            var fb = new FacebookClient();
+
             dynamic result = fb.Post("oauth/access_token", new
             {
                 client_id = clientID,
@@ -94,26 +100,37 @@ namespace Web.Controllers
             // Set the auth cookie
             FormsAuthentication.SetAuthCookie(me.email, false);
 
-   //         try{
-   //             MiembroRepositorio.Instance.buscar(me.username);
-   //         }catch(NoEncontroMiembroException){
-   //             var miembro = new User();
-   //             miembro.apellido = me.last_name;
-    //            miembro.nombre = me.first_name;
-    //            miembro.nombreDeUsuario = me.username;
-    //            miembro.email = me.email;
+            try{
+
+                userService.GetByUsername(me.username);
+
+            }catch(UserNotFoundException){
+
+                var newUser = new User();
+                newUser.lastName = me.last_name;
+                newUser.name = me.first_name;
+                newUser.username = me.username;
+                newUser.email = me.email;
                 
-     //           JObject unosAmigosDeFacebook = JObject.Parse(me.friends.ToString()); 
+                JObject facebookContacts = JObject.Parse(me.friends.ToString());
 
-      //          foreach (var unAmigoDeFacebook in unosAmigosDeFacebook["data"].Children())
-       //         {
-         //           string unId = unAmigoDeFacebook["id"].ToString().Replace("\"", "");
-           //         string unNombre=unAmigoDeFacebook["name"].ToString().Replace("\"", "");
-             //       miembro.addContactoDeFacebook(ContactoDeFacebook.Crear(unId, unNombre));
-               // }
+                foreach (var facebookContact in facebookContacts["data"].Children())
+                {
+                    Int64 facebookContactId = Int64.Parse(facebookContact["id"].ToString().Replace("\"", ""));
+                
+                    string facebookContacName = facebookContact["name"].ToString().Replace("\"", "");
+                
+                    var newFacebookContact = new FacebookContact()
+                                                 {
+                                                     name = facebookContacName,
+                                                     facebookId = facebookContactId
+                                                 };
 
-//                MiembroRepositorio.Instance.agregar(miembro);
-  //          }
+                    //facebookContactService.Create(newFacebookContact);
+                }
+
+                userService.Create(newUser);
+            }
 
             return RedirectToAction("Index", "Notifications", new { username = me.username });
         }

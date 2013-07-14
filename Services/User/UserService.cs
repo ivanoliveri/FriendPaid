@@ -60,6 +60,18 @@ namespace Services
             return result;
         }
 
+        public User GetByUsername(string username)
+        {
+            User result = null;
+
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                result = this.userRepository.GetByUsername(username);
+            });
+
+            return result;
+        }
+
       //  void Update(int id, Realty realty, string addres, string details);
 
       //  void Delete(int id);
