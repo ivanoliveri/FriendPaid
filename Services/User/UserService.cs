@@ -50,7 +50,14 @@ namespace Services
 
         public User GetByUsernameAndPassword(string username, string password)
         {
-            return this.userRepository.GetByUsernameAndPassword(username, password);
+            User result = null;
+            
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                result =this.userRepository.GetByUsernameAndPassword(username, password);
+            });
+
+            return result;
         }
 
       //  void Update(int id, Realty realty, string addres, string details);
