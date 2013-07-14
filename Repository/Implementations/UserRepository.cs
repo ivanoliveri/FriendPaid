@@ -21,6 +21,10 @@ namespace Repository.Implementations
             var result = this.GetSessionFactory().GetSession().CreateCriteria<User>()
                             .Add(Restrictions.Eq("username", username))
                             .Add(Restrictions.Eq("password", password)).List<User>();
+
+            if (result.Count.Equals(0))
+                throw new UserNotFoundException();
+
             return result.ElementAt(0);
         }
 

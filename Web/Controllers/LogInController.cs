@@ -8,6 +8,7 @@ using Domain;
 using Domain.Exceptions;
 using Domain.Facebook;
 using Facebook;
+using FluentValidation.Results;
 using Newtonsoft.Json.Linq;
 using Repository;
 using Repository.Implementations;
@@ -142,7 +143,14 @@ namespace Web.Controllers
         
         public ActionResult SignIn(LoginViewModel viewModel)
         {
-            userService.GetByUsernameAndPassword(viewModel.username, viewModel.password);
+            try
+            {
+                userService.GetByUsernameAndPassword(viewModel.username, viewModel.password);
+            }catch(UserNotFoundException)
+            {
+                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure(null, "Combinación incorrecta de usuario/contraseña") };
+                return View("Index", viewModel);
+            }
             return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
         }
 
