@@ -39,5 +39,10 @@ namespace Repository.Implementations
             return result.ElementAt(0);
         }
 
+        public string GetHashPasswordFromUser(string username)
+        {
+            return GetByUsername(username).password;
+        }
+
     }
 }

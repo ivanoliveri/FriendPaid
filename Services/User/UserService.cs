@@ -72,6 +72,18 @@ namespace Services
             return result;
         }
 
+        public string GetHashPasswordFromUser(string username)
+        {
+            string result = null;
+
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                result = this.userRepository.GetHashPasswordFromUser(username);
+            });
+
+            return result;
+        }
+
       //  void Update(int id, Realty realty, string addres, string details);
 
       //  void Delete(int id);

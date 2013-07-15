@@ -11,5 +11,7 @@ namespace Repository.Interfaces
         User GetByUsernameAndPassword(string username, string password);
 
         User GetByUsername(string username);
+
+        string GetHashPasswordFromUser(string username);
     }
 }

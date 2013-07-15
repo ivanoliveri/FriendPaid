@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Domain;
 using FluentValidation.Results;
 using Services;
+using Web.Encryption;
 using Web.Validators;
 using Web.ViewModels;
 
@@ -41,6 +42,8 @@ namespace Web.Controllers
 
             if (validationResult.IsValid)
             {
+                newUser.password = PasswordHash.CreateHash(newUser.password);
+                var num = newUser.password.Length;
                 userService.Create(newUser);
             }
             else

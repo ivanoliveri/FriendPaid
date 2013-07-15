@@ -131,6 +131,7 @@
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Encryption\PasswordHash.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

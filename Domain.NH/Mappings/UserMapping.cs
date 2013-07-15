@@ -12,7 +12,7 @@ namespace Domain.NH.Mappings
         {
             this.Id(user => user.id).GeneratedBy.Identity();
             this.Map(user => user.username).Not.Nullable().Length(50).Not.LazyLoad();
-            this.Map(user => user.password).Length(50).Not.LazyLoad();
+            this.Map(user => user.password).Length(70).Not.LazyLoad();
             this.Map(user => user.email).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(user => user.name).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(user => user.lastName).Not.Nullable().Length(50).Not.LazyLoad();

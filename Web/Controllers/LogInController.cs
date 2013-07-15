@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using Repository;
 using Repository.Implementations;
 using Services;
+using Web.Encryption;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -145,7 +146,11 @@ namespace Web.Controllers
         {
             try
             {
-                userService.GetByUsernameAndPassword(viewModel.username, viewModel.password);
+                string hashPass = userService.GetHashPasswordFromUser(viewModel.username); //trae de la db la pass original(si no la encuentra es porque no existe user, tira excepcion)
+
+                if(! PasswordHash.ValidatePassword(viewModel.password, hashPass)) throw new UserNotFoundException();
+
+                
             }catch(UserNotFoundException)
             {
                 viewModel.errors = new List<ValidationFailure>() { new ValidationFailure(null, "Combinación incorrecta de usuario/contraseña") };

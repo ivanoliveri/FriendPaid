@@ -18,6 +18,8 @@ namespace Services
 
         User GetByUsername(string username);
 
+        string GetHashPasswordFromUser(string username);
+
         //  void Update(int id, Realty realty, string addres, string details);
 
         //  void Delete(int id);
