@@ -31,7 +31,7 @@ namespace Web.App_Start
         }
         
         /// <summary>
-        /// Stops the application.
+        /// Stops the application..
         /// </summary>
         public static void Stop()
         {
