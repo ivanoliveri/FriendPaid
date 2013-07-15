@@ -41,7 +41,13 @@ namespace Services
             return result;
         }
 
-       // void Create( realty, string addres, string details);
+       public void Create(Group group)
+       {
+           this.groupRepository.GetSessionFactory().TransactionalInterceptor(() =>
+           {
+               this.groupRepository.Add(group);
+           });
+       }
 
       //  void Update(int id, Realty realty, string addres, string details);
 

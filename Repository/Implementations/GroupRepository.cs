@@ -14,6 +14,6 @@ namespace Repository.Implementations
             : base(hibernateSessionFactory)
         {
         }
-
+    
     }
 }

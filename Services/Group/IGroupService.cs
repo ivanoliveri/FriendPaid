@@ -11,5 +11,7 @@ namespace Services
         IList<Group> GetAll();
 
         Group Get(int id);
+
+        void Create(Group group);
     }
 }
