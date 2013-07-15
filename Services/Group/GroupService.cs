@@ -49,6 +49,19 @@ namespace Services
            });
        }
 
+       public Group GetByName(string groupName)
+       {
+           Group result = null;
+
+           this.groupRepository.GetSessionFactory().SessionInterceptor(() =>
+           {
+               result = this.groupRepository.GetByName(groupName);
+           });
+
+           return result;
+       }
+
+
       //  void Update(int id, Realty realty, string addres, string details);
 
       //  void Delete(int id);

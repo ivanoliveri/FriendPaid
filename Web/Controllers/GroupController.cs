@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FluentValidation.Results;
 using Services;
+using Web.Validators;
 using Web.ViewModels;
 using Web.ViewModelsBuilders;
 
@@ -25,6 +27,7 @@ namespace Web.Controllers
         {
             var newViewModel = new GroupsViewModel();
             newViewModel.username = username;
+            newViewModel.groups = groupService.GetAll().ToList();
             return View(newViewModel);
         }
 
@@ -38,9 +41,23 @@ namespace Web.Controllers
         public ActionResult Create(CreateGroupViewModel viewModel)
         {
             var newGroup = CreateGroupViewModelBuilder.Convert(viewModel);
+
             newGroup.administrator = userService.GetByUsername(viewModel.username);
-            groupService.Create(newGroup);
-            return View("IndexCreateGroup",new CreateGroupViewModel());
+
+            CreateGroupValidator createGroupValidator = new CreateGroupValidator();
+
+            ValidationResult validationResult = createGroupValidator.Validate(newGroup);
+
+            if (validationResult.IsValid)
+            {
+                groupService.Create(newGroup);
+
+            }else{
+
+                viewModel.errors = validationResult.Errors;
+
+            }
+            return View("IndexCreateGroup", viewModel);
         }
     }
 }

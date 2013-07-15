@@ -13,5 +13,8 @@ namespace Services
         Group Get(int id);
 
         void Create(Group group);
+
+
+        Group GetByName(string name);
     }
 }

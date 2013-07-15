@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\AlreadyJoinedException.cs" />
     <Compile Include="Exceptions\AdministratorCantLeaveGroupException.cs" />
+    <Compile Include="Exceptions\GroupNotFoundException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Exceptions\NotJoinedException.cs" />
     <Compile Include="Facebook\FacebookContact.cs" />
