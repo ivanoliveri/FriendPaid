@@ -10,6 +10,8 @@ namespace Web.ViewModels
     {
         public override string username { get; set; }
 
+        public override string groupName { get; set; }
+
         public override IList<ValidationFailure> errors { get; set; }
 
         public string password { get; set; }

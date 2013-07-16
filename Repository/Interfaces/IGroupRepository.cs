@@ -9,5 +9,7 @@ namespace Repository.Interfaces
     public interface IGroupRepository:IRepository<Group>
     {
         Group GetByName(string groupName);
+
+        IList<Group> GetGroupsWhichNamesBeginWith(string groupName);
     }
 }

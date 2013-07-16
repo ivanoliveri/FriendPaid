@@ -62,6 +62,18 @@ namespace Services
        }
 
 
+       public IList<Group> GetGroupsWhichNamesBeginWith(string groupName)
+       {
+           IList<Group> result = null;
+
+           this.groupRepository.GetSessionFactory().SessionInterceptor(() =>
+           {
+               result = this.groupRepository.GetGroupsWhichNamesBeginWith(groupName);
+           });
+
+           return result;
+       }
+
       //  void Update(int id, Realty realty, string addres, string details);
 
       //  void Delete(int id);

@@ -12,7 +12,7 @@ namespace Web.ViewModels
 
         public override IList<ValidationFailure> errors { get; set; }
 
-        public string groupName { get; set; }
+        public override string groupName { get; set; }
 
     }
 }

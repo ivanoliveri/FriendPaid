@@ -16,7 +16,7 @@ namespace Web.ViewModels
 
         public float totalAmount { get; set; }
 
-        public string groupName { get; set; }
+        public override string groupName { get; set; }
 
         public List<string> groups { get; set; }
 

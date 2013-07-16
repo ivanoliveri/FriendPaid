@@ -28,5 +28,16 @@ namespace Repository.Implementations
             return result.ElementAt(0);
         }
 
+        public IList<Group> GetGroupsWhichNamesBeginWith(string groupName)
+        {
+            var result = this.GetSessionFactory().GetSession().CreateCriteria<Group>()
+                .Add(Restrictions.Like("name", groupName, MatchMode.Start)).List<Group>();
+
+            if (result.Count.Equals(0))
+                throw new GroupNotFoundException();
+
+            return result;
+        }
+
     }
 }

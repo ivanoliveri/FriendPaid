@@ -15,6 +15,8 @@ namespace Services
         void Create(Group group);
 
 
-        Group GetByName(string name);
+        Group GetByName(string groupName);
+
+        IList<Group> GetGroupsWhichNamesBeginWith(string groupName);
     }
 }

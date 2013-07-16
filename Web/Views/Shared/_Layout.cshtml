@@ -59,9 +59,11 @@
 
                     <ul class="nav pull-right">
                         <li>
-                            <form class="navbar-search pull-left" action="" style="padding-top:15px;">
-                                <input type="text" class="search-query span2" placeholder="Buscar Grupos">
-                            </form>
+                            @using (Html.BeginForm("SearchByName", "Group", FormMethod.Post, new { @class = "navbar-search pull-left", @style = "padding-top:15px;" }))
+                            {
+                                @Html.HiddenFor(model => model.username)
+                                @Html.TextBoxFor(model => model.groupName, new { @class = "search-query span2", @placeholder = "Buscar Grupos" })
+                            }    
                         </li>
                         <li>
                             <a href="">
@@ -90,7 +92,7 @@
     <script type="text/javascript"  src="../../Content/js/Group/IndexGroups.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
             $('#registrarCompraContainer').css('cursor', 'pointer');
             $('#verGruposContainer').css('cursor', 'pointer');
             $('#crearGrupoContainer').css('cursor', 'pointer');

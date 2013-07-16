@@ -59,5 +59,13 @@ namespace Web.Controllers
             }
             return View("IndexCreateGroup", viewModel);
         }
+
+        public ActionResult SearchByName(string groupName, string username)
+        {
+            var viewModel = new GroupsViewModel();
+            viewModel.username = username;
+            viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(groupName).ToList();
+            return View("IndexSearchGroups", viewModel);
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace Web.ViewModels
 
         public abstract string username { get; set; }
 
+        public abstract string groupName { get; set; }
+
         public abstract IList<ValidationFailure> errors { get; set; }
 
     }
