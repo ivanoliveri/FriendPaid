@@ -27,7 +27,7 @@ namespace Web.Controllers
         {
             var newViewModel = new GroupsViewModel();
             newViewModel.username = username;
-            newViewModel.groups = groupService.GetAll().ToList();
+            newViewModel.groups = groupService.GetAll().Where( group =>group.administrator.username.Equals(username)).ToList();
             return View(newViewModel);
         }
 
