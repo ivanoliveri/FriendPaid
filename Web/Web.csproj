@@ -197,8 +197,8 @@
     <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\font\facebook.otf" />
-    <None Include="Content\font\PrimeRegular.otf" />
+    <Content Include="Content\font\facebook.otf" />
+    <Content Include="Content\font\PrimeRegular.otf" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
