@@ -44,7 +44,7 @@ namespace Web.Controllers
                 totalAmount = viewModel.totalAmount
             };
 
-            currentBuyer.registerPurchase(newPurchase);
+            userService.RegisterPurchase(currentBuyer, newPurchase);
 
             return View("Index",new PurchaseViewModel(){username=viewModel.username});
         }

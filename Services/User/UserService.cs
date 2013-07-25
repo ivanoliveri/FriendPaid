@@ -57,6 +57,15 @@ namespace Services
             }); 
         }
 
+        public void RegisterPurchase(User user, Purchase purchase)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                user.registerPurchase(purchase);
+                this.userRepository.Update(user);
+            });
+        }
+
         public User GetByUsernameAndPassword(string username, string password)
         {
             User result = null;
