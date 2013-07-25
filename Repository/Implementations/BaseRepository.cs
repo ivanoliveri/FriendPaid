@@ -32,6 +32,11 @@ namespace Repository.Implementations
             this.GetSessionFactory().GetSession().Save(o);
         }
 
+        public void Update(T o)
+        {
+            this.GetSessionFactory().GetSession().Update(o);
+        }
+
         public void Delete(T o)
         {
             this.GetSessionFactory().GetSession().Delete(o);

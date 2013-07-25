@@ -7,7 +7,7 @@
 
 <div id="gruposContainer">
     <div class="page-header" style="padding-top: 20px">
-        <h1>Grupos</h1>
+        <h1>Buscar de Grupos</h1>
     </div>
     @foreach (Group @group in Model.groups)
     {
@@ -18,7 +18,7 @@
                 Administrador: @group.administrator.username
                 <div class="btn-group">
                     <button class="btn span1">Ver</button>
-                    <button class="btn span2">Unirse</button>
+                    <button class="btn span2" onclick='location.href="@Url.Action("Join", "Group", new { username = @Model.username , groupname = @group.name})"'>Unirse</button>
                 </div>
             </div>
         </div>

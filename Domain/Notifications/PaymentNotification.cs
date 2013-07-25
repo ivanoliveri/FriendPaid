@@ -9,6 +9,11 @@ namespace Domain.Notifications
 
         #region Methods
 
+         public PaymentNotification()
+         {
+             
+         }
+
         public PaymentNotification(Payment payment)
         {
             StringBuilder unMensaje = new StringBuilder("El miembro ");

@@ -26,8 +26,17 @@ namespace Web.Controllers
         public ActionResult IndexGroups(string username)
         {
             var newViewModel = new GroupsViewModel();
+
             newViewModel.username = username;
-            newViewModel.groups = groupService.GetAll().Where( group =>group.administrator.username.Equals(username)).ToList();
+
+            var currentUser = userService.GetByUsername(username);
+
+            var groupsNamesJoined = new List<string>();
+
+            currentUser.groups.ToList().ForEach(group => groupsNamesJoined.Add(group.name));
+
+            newViewModel.groups = groupService.GetAll().Where(group => group.administrator.username.Equals(username) || groupsNamesJoined.Contains(group.name) ).ToList();
+            
             return View(newViewModel);
         }
 
@@ -66,6 +75,17 @@ namespace Web.Controllers
             viewModel.username = username;
             viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(groupName).ToList();
             return View("IndexSearchGroups", viewModel);
+        }
+
+        public ActionResult Join(string username,string groupname)
+        {
+            var currentUser = userService.GetByUsername(username);
+
+            var currentGroup = groupService.GetByName(groupname);
+
+            userService.JoinGroup(currentUser, currentGroup);
+
+            return View("IndexGroups", new GroupsViewModel(){username = username});
         }
     }
 }

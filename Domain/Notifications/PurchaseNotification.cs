@@ -6,6 +6,10 @@ namespace Domain.Notifications
 {
     public class PurchaseNotification : Notification
     {
+        public PurchaseNotification()
+        {
+             
+        }
 
         #region Methods
 

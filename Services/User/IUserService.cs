@@ -14,6 +14,8 @@ namespace Services
 
         void Create(User user);
 
+        void JoinGroup(User user,Group group);
+
         User GetByUsernameAndPassword(string username, string password);
 
         User GetByUsername(string username);

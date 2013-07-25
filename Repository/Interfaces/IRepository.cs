@@ -11,6 +11,8 @@ namespace Repository.Interfaces
 
         void Add(T t);
 
+        void Update(T t);
+
         void Delete(T t);
 
         IList<T> GetAll();

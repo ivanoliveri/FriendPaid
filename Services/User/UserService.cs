@@ -48,6 +48,15 @@ namespace Services
             });
         }
 
+
+        public void JoinGroup(User user,Group group){
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                user.joinGroup(group);
+                this.userRepository.Update(user);
+            }); 
+        }
+
         public User GetByUsernameAndPassword(string username, string password)
         {
             User result = null;

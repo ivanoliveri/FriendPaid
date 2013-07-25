@@ -15,6 +15,8 @@ namespace Domain.NH.Mappings
             this.Map(notification => notification.message).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(notification => notification.status).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(notification => notification.date).Not.Nullable().Length(50).Not.LazyLoad();
+            this.JoinedSubClass<PurchaseNotification>("PurchaseNotificationID", purchaseNotification => purchaseNotification.Map(notification => notification.id));
+            this.JoinedSubClass<PaymentNotification>("PaymentNotificationID", paymentNotification => paymentNotification.Map(notification => notification.id));
         }
      
 
