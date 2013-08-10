@@ -62,7 +62,9 @@ namespace Services
             this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
             {
                 user.registerPurchase(purchase);
-                this.userRepository.Update(user);
+
+                //Para que actualice las notificaciones
+                purchase.debtors.ToList().ForEach(oneUser => this.userRepository.Update(oneUser));
             });
         }
 

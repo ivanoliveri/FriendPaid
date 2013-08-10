@@ -35,10 +35,31 @@ namespace Web.Controllers
 
             var currentGroup = groupService.GetByName(viewModel.groupName);
 
+            var currentDebtors = currentGroup.members;
+            currentDebtors.Add(currentGroup.administrator);
+
+            var index = 0;
+            var found = false;
+
+            foreach (var currentDebtor in currentDebtors)
+            {
+                if (found == false)
+                {
+                    if (currentDebtor.username.Equals(currentBuyer.username))
+                    {
+                        found = true;
+                    }else{
+                        index++;
+                    }
+                }
+            }
+
+            currentDebtors.RemoveAt(index);
+
             var newPurchase = new Purchase()
             {
                 buyer = currentBuyer,
-                debtors = currentGroup.members,
+                debtors = currentDebtors,
                 description = viewModel.description,
                 group = currentGroup,
                 totalAmount = viewModel.totalAmount

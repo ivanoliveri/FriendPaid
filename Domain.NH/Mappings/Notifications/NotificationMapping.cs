@@ -12,7 +12,7 @@ namespace Domain.NH.Mappings
         public NotificationMapping()
         {
             this.Id(notification => notification.id).GeneratedBy.Identity(); 
-            this.Map(notification => notification.message).Not.Nullable().Length(50).Not.LazyLoad();
+            this.Map(notification => notification.message).Not.Nullable().Length(200).Not.LazyLoad();
             this.Map(notification => notification.status).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(notification => notification.date).Not.Nullable().Length(50).Not.LazyLoad();
             this.JoinedSubClass<PurchaseNotification>("PurchaseNotificationID", purchaseNotification => purchaseNotification.Map(notification => notification.id));
