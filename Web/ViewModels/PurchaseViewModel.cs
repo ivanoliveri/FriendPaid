@@ -12,6 +12,8 @@ namespace Web.ViewModels
 
         public override IList<ValidationFailure> errors { get; set; }
 
+        public override string message { get; set; }
+
         public string description { get; set; }
 
         public float totalAmount { get; set; }

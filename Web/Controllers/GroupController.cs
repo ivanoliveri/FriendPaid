@@ -60,7 +60,7 @@ namespace Web.Controllers
             if (validationResult.IsValid)
             {
                 groupService.Create(newGroup);
-
+                viewModel.message = "Se ha creado satisfactoriamente el grupo.";
             }else{
 
                 viewModel.errors = validationResult.Errors;

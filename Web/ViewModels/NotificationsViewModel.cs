@@ -17,6 +17,8 @@ namespace Web.ViewModels
 
         public override IList<ValidationFailure> errors { get; set; }
 
+        public override string message { get; set; }
+
         public IEnumerable<Notification> unreadNotifications { get; set; }
 
         public IEnumerable<ContactRequest> pendingContactRequest { get; set; }

@@ -15,6 +15,8 @@ namespace Web.ViewModels
 
         public override IList<ValidationFailure> errors { get; set; }
 
+        public override string message { get; set; }
+
         public List<FacebookContact> facebookContacts { get; set; }
 
         public List<string> contacts { get; set; }

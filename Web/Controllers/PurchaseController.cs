@@ -67,7 +67,7 @@ namespace Web.Controllers
 
             userService.RegisterPurchase(currentBuyer, newPurchase);
 
-            return View("Index",new PurchaseViewModel(){username=viewModel.username});
+            return View("Index", new PurchaseViewModel() { username = viewModel.username, message = "Se ha registrado satisfactoriamente la compra."});
         }
 
     }

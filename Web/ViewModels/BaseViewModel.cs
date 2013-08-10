@@ -15,5 +15,7 @@ namespace Web.ViewModels
 
         public abstract IList<ValidationFailure> errors { get; set; }
 
+        public abstract string message { set; get; }
+
     }
 }

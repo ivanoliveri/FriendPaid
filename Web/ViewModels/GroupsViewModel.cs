@@ -14,7 +14,9 @@ namespace Web.ViewModels
         public override string groupName { get; set; }
 
         public override IList<ValidationFailure> errors { get; set; }
-        
+
+        public override string message { get; set; }
+
         public List<Group> groups { get; set; }
 
         public GroupsViewModel()

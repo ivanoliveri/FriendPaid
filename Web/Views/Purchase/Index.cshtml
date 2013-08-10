@@ -9,6 +9,11 @@
     <h1>RegistrarCompra</h1>
 </div>
 
+@if(@Model.message!=null)
+{
+    <div class="alert alert-success">@Model.message</div>
+}
+
 @if(@Model.errors!=null)
 {
     <div class="alert alert-block alert-error fade in">
