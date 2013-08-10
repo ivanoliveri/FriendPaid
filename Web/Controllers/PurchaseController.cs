@@ -53,7 +53,7 @@ namespace Web.Controllers
                     }
                 }
             }
-
+             
             currentDebtors.RemoveAt(index);
 
             var newPurchase = new Purchase()
