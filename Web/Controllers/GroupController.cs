@@ -16,7 +16,7 @@ namespace Web.Controllers
         private readonly IGroupService groupService;
 
         private readonly IUserService userService;
-
+        
         public GroupController(IGroupService groupService, IUserService userService)
         {
             this.groupService = groupService;
@@ -53,9 +53,9 @@ namespace Web.Controllers
 
             newGroup.administrator = userService.GetByUsername(viewModel.username);
 
-            CreateGroupValidator createGroupValidator = new CreateGroupValidator();
+            var createGroupValidator = new CreateGroupValidator(groupService);
 
-            ValidationResult validationResult = createGroupValidator.Validate(newGroup);
+            var validationResult = createGroupValidator.Validate(newGroup);
 
             if (validationResult.IsValid)
             {

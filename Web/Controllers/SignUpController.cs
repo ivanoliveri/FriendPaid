@@ -37,20 +37,23 @@ namespace Web.Controllers
 
             newUser.email = loginViewModel.email;
 
-            SignUpValidator signUpValidator = new SignUpValidator();
-            ValidationResult validationResult = signUpValidator.Validate(newUser);
+            var signUpValidator = new SignUpValidator(userService);
+            
+            var validationResult = signUpValidator.Validate(newUser);
+
+            loginViewModel= new LoginViewModel();
 
             if (validationResult.IsValid)
             {
                 newUser.password = PasswordHash.CreateHash(newUser.password);
-                var num = newUser.password.Length;
                 userService.Create(newUser);
-            }
-            else
-            {
+                loginViewModel.message = "Se ha creado satisfactoriamente el usuario.";
+            }else{
                 loginViewModel = new LoginViewModel();
                 loginViewModel.errors = validationResult.Errors;
             }
+
+            ModelState.Clear();
 
             return View("~/Views/Login/Index.cshtml", loginViewModel);
         }
