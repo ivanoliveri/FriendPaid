@@ -14,6 +14,8 @@ namespace Services
 
         void Create(User user);
 
+        void CreateGroup(User user, string groupname);
+
         void JoinGroup(User user,Group group);
 
         void RegisterPurchase(User user , Purchase purchase );

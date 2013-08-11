@@ -6,20 +6,20 @@ using Domain;
 using Domain.Exceptions;
 using FluentValidation;
 using Services;
+using Web.ViewModels;
 
 namespace Web.Validators
 {
-    public class CreateGroupValidator : AbstractValidator<Group>
+    public class CreateGroupValidator : AbstractValidator<CreateGroupViewModel>
     {
         
         public CreateGroupValidator(){}
 
         public CreateGroupValidator(IGroupService groupService)
         {
-            RuleFor(group => group.administrator).NotEmpty().WithMessage("No has ingresado el nombre del administrador.");
-            RuleFor(group => group.name).NotEmpty().WithMessage("No has ingresado el nombre del grupo.");
-            RuleFor(group => group.name).Must((group, groupname) => GroupnameIsFree(groupname,groupService))
-                                        .WithMessage("El nombre de grupo que ingresaste no esta disponible.");
+            RuleFor(group => group.groupName).NotEmpty().WithMessage("No has ingresado el nombre del grupo.");
+            RuleFor(group => group.groupName).Must((group, groupname) => GroupnameIsFree(groupname,groupService))
+                                             .WithMessage("El nombre de grupo que ingresaste no esta disponible.");
         }
 
         public bool GroupnameIsFree(string groupname,IGroupService groupService)

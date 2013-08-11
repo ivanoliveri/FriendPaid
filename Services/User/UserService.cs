@@ -9,11 +9,13 @@ namespace Services
 {
     public class UserService:IUserService
     {
-         private readonly IUserRepository userRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IGroupRepository groupRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IGroupRepository groupRepository)
         {
             this.userRepository = userRepository;
+            this.groupRepository = groupRepository;
         }
 
         public IList<User> GetAll()
@@ -48,6 +50,15 @@ namespace Services
             });
         }
 
+        public void CreateGroup(User user,string groupname)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                var group = user.createGroup(groupname);
+                this.groupRepository.Add(group);
+                this.userRepository.Update(user);
+            });
+        }
 
         public void JoinGroup(User user,Group group){
             this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>

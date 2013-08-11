@@ -6,10 +6,11 @@ using Domain;
 using Domain.Exceptions;
 using FluentValidation;
 using Services;
+using Web.ViewModels;
 
 namespace Web.Validators
 {
-    public class SignUpValidator: AbstractValidator<User>
+    public class SignUpValidator: AbstractValidator<LoginViewModel>
     {
         public SignUpValidator(IUserService userService)
         {

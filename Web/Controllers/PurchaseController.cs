@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain;
 using Services;
+using Web.Validators;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -31,43 +32,56 @@ namespace Web.Controllers
 
         public ActionResult Create(PurchaseViewModel viewModel)
         {
-            var currentBuyer = userService.GetByUsername(viewModel.username);
+            var registerPurchaseValidator = new RegisterPurchaseValidator(userService);
+            var validationResult = registerPurchaseValidator.Validate(viewModel);
 
-            var currentGroup = groupService.GetByName(viewModel.groupName);
+            if (validationResult.IsValid){
 
-            var currentDebtors = currentGroup.members;
-            currentDebtors.Add(currentGroup.administrator);
+                var currentBuyer = userService.GetByUsername(viewModel.username);
 
-            var index = 0;
-            var found = false;
+                var currentGroup = groupService.GetByName(viewModel.groupName);
 
-            foreach (var currentDebtor in currentDebtors)
-            {
-                if (found == false)
+                var currentDebtors = currentGroup.members;
+
+                var index = 0;
+                var found = false;
+
+                foreach (var currentDebtor in currentDebtors)
                 {
-                    if (currentDebtor.username.Equals(currentBuyer.username))
+                    if (found == false)
                     {
-                        found = true;
-                    }else{
-                        index++;
+                        if (currentDebtor.username.Equals(currentBuyer.username))
+                        {
+                            found = true;
+                        }
+                        else
+                        {
+                            index++;
+                        }
                     }
                 }
+
+                currentDebtors.RemoveAt(index);
+
+                var newPurchase = new Purchase()
+                {
+                    buyer = currentBuyer,
+                    debtors = currentDebtors,
+                    description = viewModel.description,
+                    group = currentGroup,
+                    totalAmount = viewModel.totalAmount
+                };
+
+                userService.RegisterPurchase(currentBuyer, newPurchase);
+
+                viewModel.message = "Se ha registrado satisfactoriamente la compra.";
+            }else{
+                viewModel.errors = validationResult.Errors;
             }
-             
-            currentDebtors.RemoveAt(index);
 
-            var newPurchase = new Purchase()
-            {
-                buyer = currentBuyer,
-                debtors = currentDebtors,
-                description = viewModel.description,
-                group = currentGroup,
-                totalAmount = viewModel.totalAmount
-            };
+            ModelState.Clear();
 
-            userService.RegisterPurchase(currentBuyer, newPurchase);
-
-            return View("Index", new PurchaseViewModel() { username = viewModel.username, message = "Se ha registrado satisfactoriamente la compra."});
+            return View("Index", viewModel);
         }
 
     }

@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\CreateGroupValidator.cs" />
+    <Compile Include="Validators\RegisterPurchaseValidator.cs" />
     <Compile Include="Validators\SignUpValidator.cs" />
     <Compile Include="ViewModelsBuilders\ContactsViewModelBuilder.cs" />
     <Compile Include="ViewModelsBuilders\CreateGroupViewModelBuilder.cs" />

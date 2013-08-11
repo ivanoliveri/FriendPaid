@@ -49,17 +49,14 @@ namespace Web.Controllers
 
         public ActionResult Create(CreateGroupViewModel viewModel)
         {
-            var newGroup = CreateGroupViewModelBuilder.Convert(viewModel);
-
-            newGroup.administrator = userService.GetByUsername(viewModel.username);
-
             var createGroupValidator = new CreateGroupValidator(groupService);
 
-            var validationResult = createGroupValidator.Validate(newGroup);
+            var validationResult = createGroupValidator.Validate(viewModel);
 
-            if (validationResult.IsValid)
-            {
-                groupService.Create(newGroup);
+            var user = userService.GetByUsername(viewModel.username);
+
+            if (validationResult.IsValid){
+                userService.CreateGroup(user,viewModel.groupName);
                 viewModel.message = "Se ha creado satisfactoriamente el grupo.";
             }else{
 

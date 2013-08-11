@@ -39,7 +39,7 @@ namespace Web.Controllers
 
             var signUpValidator = new SignUpValidator(userService);
             
-            var validationResult = signUpValidator.Validate(newUser);
+            var validationResult = signUpValidator.Validate(loginViewModel);
 
             loginViewModel= new LoginViewModel();
 
