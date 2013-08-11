@@ -154,7 +154,10 @@ namespace Web.Controllers
             }catch(UserNotFoundException)
             {
                 viewModel.errors = new List<ValidationFailure>() { new ValidationFailure(null, "Combinación incorrecta de usuario/contraseña") };
-                return View("Index", viewModel);
+                
+                ModelState.Clear();
+
+                return View("Index", new LoginViewModel());
             }
             return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
         }
