@@ -10,6 +10,7 @@ namespace Services
     public class UserService:IUserService
     {
         private readonly IUserRepository userRepository;
+
         private readonly IGroupRepository groupRepository;
 
         public UserService(IUserRepository userRepository, IGroupRepository groupRepository)

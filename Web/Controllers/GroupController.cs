@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Domain.Exceptions;
 using FluentValidation.Results;
 using Services;
 using Web.Validators;
@@ -70,7 +71,11 @@ namespace Web.Controllers
         {
             var viewModel = new GroupsViewModel();
             viewModel.username = username;
-            viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(groupName).ToList();
+            try{
+                viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(groupName).ToList();
+            }catch(GroupNotFoundException){
+                viewModel.errors = new List<ValidationFailure>() {new ValidationFailure("", "No se han encontrado grupos.")};
+            }
             return View("IndexSearchGroups", viewModel);
         }
 
