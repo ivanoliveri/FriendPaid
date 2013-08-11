@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -69,13 +70,10 @@ namespace Web.Controllers
         {
             string clientID;
             string clientSecret;
-            #if DEBUG
-                clientID = "362220377221811";
-                clientSecret = "123b37e872674232efe4fb292ca48582";
-            #else
-                clientID = "427510220681184";
-                clientSecret = "cb51bda21a82a578c944524b5438e71b";    
-            #endif
+
+            clientID = ConfigurationManager.AppSettings["clientID"];
+
+            clientSecret = ConfigurationManager.AppSettings["clientSecret"];
 
             var fb = new FacebookClient();
 
