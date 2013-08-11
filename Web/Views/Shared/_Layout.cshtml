@@ -4,9 +4,6 @@
 <html>
     <head>
     
-        <title>Inicio | FriendPaid</title>
-
-
         <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-responsive.css">
      
@@ -30,27 +27,27 @@
                 </a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li>
+                        <li id="Inicio">
                             <a href="@Url.Action("Index", "Notifications", new { username = @Model.username }, null)">      
                                 <h6 style="text-align:center">Inicio</h6>
                             </a>
                         </li>
-                        <li>
+                        <li id="RegistrarCompra">
                             <a href="@Url.Action("Index", "Purchase", new { username = @Model.username }, null)">     
                                 <h6>RegistrarCompra</h6>
                             </a>
                         </li>
-                        <li>
+                        <li id="CrearGrupo">
                             <a href="@Url.Action("IndexCreateGroup", "Group", new { username = @Model.username }, null)">       
                                 <h6 style="text-align:center">CrearGrupo</h6>
                             </a>
                         </li>
-                        <li>
+                        <li id="Grupos">
                             <a href="@Url.Action("IndexGroups", "Group", new { username = @Model.username }, null)">       
                                 <h6 style="text-align:center">Grupos</h6>
                             </a>
                         </li>
-                        <li>
+                        <li id="Contactos">
                             <a href="@Url.Action("Index", "Contacts", new { username = @Model.username }, null)">   
                                 <h6 style="text-align:center">Contactos</h6>
                             </a>  
@@ -95,6 +92,27 @@
     <script type="text/javascript"  src="../../Content/js/Group/IndexGroups.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            var title = $(this).attr('title').toString();
+
+            
+            switch (title) {
+                case "Inicio | FriendPaid":
+                    $('#Inicio').addClass('active');
+                    break;
+                case "Contactos | FriendPaid":
+                    $('#Contactos').addClass('active');
+                    break;
+                case "Registrar Compra | FriendPaid":
+                    $('#RegistrarCompra').addClass('active');
+                    break;
+                case "Grupos | FriendPaid":
+                    $('#Grupos').addClass('active');
+                    break;
+                case "Crear Grupo | FriendPaid":
+                    $('#CrearGrupo').addClass('active');
+                    break;
+            }
 
             $('#registrarCompraContainer').css('cursor', 'pointer');
             $('#verGruposContainer').css('cursor', 'pointer');
