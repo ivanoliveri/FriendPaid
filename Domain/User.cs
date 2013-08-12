@@ -104,15 +104,35 @@ namespace Domain
 
         public virtual void leaveGroup(Group group)
         {
-            if (group.administrator.Equals(this))
+            if (group.administrator.username.Equals(this.username))
                 throw new AdministratorCantLeaveGroupException();
 
-            if (!group.members.Contains(this))
-                throw new NotJoinedException();
+            var found = false;
+            var index = 0;
 
-            this.groups.Remove(group);
+            foreach (var oneGroup in groups){
+                if(oneGroup.name!=group.name){
+                    index++;
+                }else{
+                    found = true;
+                }
+            }
 
-            group.members.Remove(this);
+            this.groups.RemoveAt(index);
+
+            found = false;
+            index = 0;
+
+            foreach (var oneMember in group.members)
+            {
+                if (oneMember.username != this.username){
+                    index++;
+                }else{
+                    found = true;
+                }
+            }
+
+            group.members.RemoveAt(index);
 
         }
 

@@ -18,6 +18,8 @@ namespace Services
 
         void JoinGroup(User user,Group group);
 
+        void LeaveGroup(User user, Group group);
+
         void RegisterPurchase(User user , Purchase purchase );
 
         User GetByUsernameAndPassword(string username, string password);

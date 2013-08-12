@@ -81,13 +81,47 @@ namespace Web.Controllers
 
         public ActionResult Join(string username,string groupname)
         {
+            var viewModel = new GroupsViewModel() {username = username};
+
             var currentUser = userService.GetByUsername(username);
 
             var currentGroup = groupService.GetByName(groupname);
 
             userService.JoinGroup(currentUser, currentGroup);
 
-            return View("IndexGroups", new GroupsViewModel(){username = username});
+            var groupsNamesJoined = new List<string>();
+
+            currentUser.groups.ToList().ForEach(group => groupsNamesJoined.Add(group.name));
+
+            viewModel.groups = groupService.GetAll().Where(group => group.administrator.username.Equals(username) || groupsNamesJoined.Contains(group.name)).ToList();
+            
+            return View("IndexGroups",viewModel);
         }
+        public ActionResult Leave(string username,string groupname)
+        {
+
+            var viewModel = new GroupsViewModel() {username = username};
+
+            var currentUser = userService.GetByUsername(username);
+
+            var currentGroup = groupService.GetByName(groupname);
+
+            //TODO: El administrador podria abandonar el grupo si solo si es el unico miembro, entonces deberia borrarse el grupo.
+            try{
+                userService.LeaveGroup(currentUser, currentGroup);
+                viewModel.message = "Has abandonado el grupo satisfactoriamente.";
+            }catch(AdministratorCantLeaveGroupException){
+                viewModel.errors= new List<ValidationFailure>(){new ValidationFailure("","El administrador no puede abandonar el grupo.")};
+            }
+
+            var groupsNamesJoined = new List<string>();
+
+            currentUser.groups.ToList().ForEach(group => groupsNamesJoined.Add(group.name));
+
+            viewModel.groups = groupService.GetAll().Where(group => group.administrator.username.Equals(username) || groupsNamesJoined.Contains(group.name) ).ToList();
+
+            return View("IndexGroups", viewModel);
+        }
+
     }
 }

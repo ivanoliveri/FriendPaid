@@ -69,6 +69,16 @@ namespace Services
             }); 
         }
 
+        public void LeaveGroup(User user, Group group)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                user.leaveGroup(group);
+                this.userRepository.Update(user);
+                this.groupRepository.Update(group);
+            });
+        }
+
         public void RegisterPurchase(User user, Purchase purchase)
         {
             this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>

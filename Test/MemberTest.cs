@@ -168,22 +168,7 @@ namespace Test
             Assert.AreEqual(0, newGroup.members.Count);
 
         }
-
-        [Test]
-        [ExpectedException(typeof(NotJoinedException))]
-        public void test_one_unjoined_member_tries_to_leave_group()
-        {
-
-            var administrator = new User();
-
-            var memberOne = new User();
-
-            var newGroup = administrator.createGroup("GroupOne");
-
-            memberOne.leaveGroup(newGroup);
-
-        }
-
+        
         [Test]
         public void test_one_member_register_purchase()
         {
