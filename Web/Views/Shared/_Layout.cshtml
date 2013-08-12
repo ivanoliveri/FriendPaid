@@ -19,9 +19,9 @@
     </head>
 <body>
     
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div id="top-info" class="container">
+    <div class="navbar" style="height:60px;">
+        <div class="navbar-inner" style="height:60px;">
+            <div id="top-info" class="container" style="height:60px;">
                 <a class="brand" href="#" style="padding-top:20px;">
                     <span style="font-family: Prime;font-size:35px;font-weight:bold">Friend<span style="font-weight: normal;color:yellowgreen">Paid</span></span>
                 </a>
@@ -56,10 +56,23 @@
 
                     <ul class="nav pull-right">
                         <li>
-                            @using (Html.BeginForm("SearchByName", "Group", FormMethod.Post, new { @class = "navbar-search pull-left", @style = "padding-top:15px;" }))
+                            
+                            @using (Html.BeginForm("SearchByGroupnameAndUsername", "Search", FormMethod.Post, new {@style="padding-top:15px;"}))
                             {
                                 @Html.HiddenFor(model => model.username)
-                                @Html.TextBoxFor(model => model.groupName, new { @class = "search-query span2", @placeholder = "Buscar Grupos" })
+                                <div class="input-prepend">
+                                  <div class="btn-group">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                      Buscar
+                                      <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a id="searchGroups">Buscar Grupos</a></li>
+                                        <li><a id="searchUsers">Buscar Usuarios</a></li>                       
+                                    </ul>
+                                  </div>
+                                  @Html.TextBoxFor(model => model.groupName, new { @id = "prependedDropdownButton", @name = "textToSearch", @style = "height:30px;", @class = "span2", @placeholder = "Grupos o Usuarios" })
+                                </div>
                             }    
                         </li>
                         <li>
@@ -93,9 +106,20 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            $('#searchGroups').click(function() {
+                var link = "@Url.Action("SearchByGroupname", "Search", new { username = @Model.username })";
+                link = link + '&textToSearch='+ $('#prependedDropdownButton').val();
+                location.href =link;
+            });
+            
+            $('#searchUsers').click(function() {
+                var link = "@Url.Action("SearchByUsername", "Search", new { username = @Model.username})";
+                link = link + '&textToSearch='+ $('#prependedDropdownButton').val();
+                location.href =link;
+            });
+
             var title = $(this).attr('title').toString();
 
-            
             switch (title) {
                 case "Inicio | FriendPaid":
                     $('#Inicio').addClass('active');

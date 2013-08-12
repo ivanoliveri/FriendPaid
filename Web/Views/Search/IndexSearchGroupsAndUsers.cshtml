@@ -1,16 +1,16 @@
 ﻿@using Domain
 @using FluentValidation.Results
-@model Web.ViewModels.GroupsViewModel
+@model Web.ViewModels.GroupsAndUsersViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<title>Buscar Grupo | FriendPaid</title>
+<title>Buscar Usuarios | FriendPaid</title>
 
 <div id="gruposContainer">
     <div class="page-header" style="padding-top: 20px">
-        <h1>Buscar Grupos</h1>
+        <h1>Buscar Usuarios</h1>
     </div>
 
     @if (@Model.errors != null)
@@ -23,16 +23,15 @@
         </div>
     }
     
-    @foreach (Group @group in Model.groups)
+    @foreach (string @entity in Model.names)
     {
 
         <div id="grupoContainer" class="portlet span3">
-            <div class="portlet-header">@group.name</div>
+            <div class="portlet-header">@entity</div>
             <div class="portlet-content">
-                Administrador: @group.administrator.username
                 <div class="btn-group">
                     <button class="btn span1">Ver</button>
-                    <button class="btn span2" onclick='location.href="@Url.Action("Join", "Group", new { username = @Model.username , groupname = @group.name})"'>Unirse</button>
+                    <button class="btn span2">Invitar</button>
                 </div>
             </div>
         </div>

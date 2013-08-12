@@ -67,18 +67,6 @@ namespace Web.Controllers
             return View("IndexCreateGroup", viewModel);
         }
 
-        public ActionResult SearchByName(string groupName, string username)
-        {
-            var viewModel = new GroupsViewModel();
-            viewModel.username = username;
-            try{
-                viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(groupName).ToList();
-            }catch(GroupNotFoundException){
-                viewModel.errors = new List<ValidationFailure>() {new ValidationFailure("", "No se han encontrado grupos.")};
-            }
-            return View("IndexSearchGroups", viewModel);
-        }
-
         public ActionResult Join(string username,string groupname)
         {
             var viewModel = new GroupsViewModel() {username = username};

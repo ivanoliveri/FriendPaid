@@ -6,32 +6,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<title>Grupos | FriendPaid</title>
-
-
-@if(@Model.message!=null)
-{
-    <div class="alert alert-success">@Model.message</div>
-}
-
-@if (@Model.errors != null)
-{
-    <div class="alert alert-block alert-error fade in">
-    @foreach (ValidationFailure @error in @Model.errors)
-    {
-        <p>@error.ErrorMessage</p>
-    }
-    </div>
-}
+<title>Buscar Grupo | FriendPaid</title>
 
 <div id="gruposContainer">
     <div class="page-header" style="padding-top: 20px">
-        <h1>Grupos</h1>
+        <h1>Buscar Grupos</h1>
     </div>
+
+    @if (@Model.errors != null)
+    {
+        <div class="alert alert-block alert-error fade in">
+        @foreach (ValidationFailure @error in @Model.errors)
+        {
+            <p>@error.ErrorMessage</p>
+        }
+        </div>
+    }
+    
     <ul class="thumbnails">
+				
         @foreach (Group @group in Model.groups)
         {
-  <li class="span3">
+            <li class="span3">
                 <div class="span1"></div>
                 <div class="thumbnail" style="margin-left:15px;">
                     <img alt="200x200" src="~/Content/img/group.png" />
@@ -47,7 +43,7 @@
                         </p>
                         <p>
                             <a class="btn btn-primary" href="#">Ver</a> 
-                            <a class="btn"  onclick='location.href="@Url.Action("Leave", "Group", new { username = @Model.username, groupname = @group.name })"'>Abandonar</a>
+                            <a class="btn"  onclick='location.href="@Url.Action("Join", "Group", new { username = @Model.username, groupname = @group.name })"'>Unirse</a>
                         </p>
                     </div>
                 </div>

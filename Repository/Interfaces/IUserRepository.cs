@@ -12,6 +12,8 @@ namespace Repository.Interfaces
 
         User GetByUsername(string username);
 
+        IList<User> GetUsersWhoseNamesBeginWith(string username);
+
         string GetHashPasswordFromUser(string username);
     }
 }

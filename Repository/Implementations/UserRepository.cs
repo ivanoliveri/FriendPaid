@@ -28,6 +28,16 @@ namespace Repository.Implementations
             return result.ElementAt(0);
         }
 
+        public IList<User> GetUsersWhoseNamesBeginWith(string username){
+            var result = this.GetSessionFactory().GetSession().CreateCriteria<User>()
+                .Add(Restrictions.Like("username", username, MatchMode.Start)).List<User>();
+
+            if (result.Count.Equals(0))
+                throw new UserNotFoundException();
+
+            return result;
+        }
+
         public User GetByUsername(string username)
         {
             var result = this.GetSessionFactory().GetSession().CreateCriteria<User>()

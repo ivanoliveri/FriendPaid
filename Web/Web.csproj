@@ -130,6 +130,7 @@
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Encryption\PasswordHash.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,11 +147,13 @@
     <Compile Include="ViewModelsBuilders\PurchaseViewModelBuilder.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
+    <Compile Include="ViewModels\GroupAndUsersViewModel.cs" />
     <Compile Include="ViewModels\CreateGroupViewModel.cs" />
     <Compile Include="ViewModels\GroupsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\PurchaseViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -162,6 +165,8 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\img\glyphicons-halflings-white.png" />
     <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\img\group.png" />
+    <Content Include="Content\img\user.png" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\Contacts\Index.js" />
@@ -214,7 +219,7 @@
     <Content Include="Views\Purchase\Index.cshtml" />
     <Content Include="Views\Group\IndexGroups.cshtml" />
     <Content Include="Views\Group\IndexCreateGroup.cshtml" />
-    <Content Include="Views\Group\IndexSearchGroups.cshtml" />
+    <Content Include="Views\Search\IndexSearchGroups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
@@ -229,6 +234,12 @@
       <Project>{A1F89907-CE4B-48AA-A3F5-888631DBC9E8}</Project>
       <Name>Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\IndexSearchUsers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\IndexSearchGroupsAndUsers.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

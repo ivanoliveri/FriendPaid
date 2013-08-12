@@ -24,6 +24,8 @@ namespace Services
 
         User GetByUsernameAndPassword(string username, string password);
 
+        IList<User> GetUsersWhoseNamesBeginWith(string username);
+
         User GetByUsername(string username);
 
         string GetHashPasswordFromUser(string username);

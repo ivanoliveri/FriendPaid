@@ -102,6 +102,18 @@ namespace Services
             return result;
         }
 
+        public IList<User> GetUsersWhoseNamesBeginWith(string username)
+        {
+            IList<User> result = null;
+
+            this.userRepository.GetSessionFactory().SessionInterceptor(() =>
+            {
+                result = this.userRepository.GetUsersWhoseNamesBeginWith(username);
+            });
+
+            return result; 
+        }
+
         public User GetByUsername(string username)
         {
             User result = null;
