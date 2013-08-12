@@ -149,25 +149,6 @@ namespace Test
 
         }
 
-        [Test]
-        public void test_one_member_leaves_group()
-        {
-
-            var administrator = new User();
-
-            var memberOne = new User();
-
-            var newGroup = administrator.createGroup("GroupOne");
-
-            memberOne.joinGroup(newGroup);
-
-            memberOne.leaveGroup(newGroup);
-
-            Assert.AreEqual(0, memberOne.groups.Count);
-
-            Assert.AreEqual(0, newGroup.members.Count);
-
-        }
         
         [Test]
         public void test_one_member_register_purchase()
