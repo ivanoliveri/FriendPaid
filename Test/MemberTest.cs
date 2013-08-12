@@ -148,8 +148,7 @@ namespace Test
             administrator.joinGroup(newGroup);
 
         }
-
-        
+      
         [Test]
         public void test_one_member_register_purchase()
         {

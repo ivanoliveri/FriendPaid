@@ -26,7 +26,30 @@ namespace Web.Controllers
         public ActionResult Index(string username)
         {
             var newViewModel = new PurchaseViewModel();
+
+            var currentUser = userService.GetByUsername(username);
+
+            var groups = currentUser.groups;
+
+            newViewModel.groups = "[";
+
+            var count = 0;
+
+            foreach (var group in groups)
+            {
+                count++;
+                if (!count.Equals(groups.Count))
+                {
+                    newViewModel.groups = newViewModel.groups + "\"" + group.name + "\",";
+                }else{
+                    newViewModel.groups = newViewModel.groups + "\"" + group.name + "\"";
+                }
+            }
+
+            newViewModel.groups += "]";
+
             newViewModel.username = username;
+
             return View(newViewModel);
         }
 

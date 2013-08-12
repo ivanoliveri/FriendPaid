@@ -20,11 +20,7 @@ namespace Web.ViewModels
 
         public override string groupName { get; set; }
 
-        public List<string> groups { get; set; }
+        public string groups { get; set; }
 
-        public PurchaseViewModel()
-        {
-            groups = new List<string>();
-        }
     }
 }
