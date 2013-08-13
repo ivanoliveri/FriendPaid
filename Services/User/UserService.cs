@@ -126,6 +126,26 @@ namespace Services
             return result;
         }
 
+        public void Invite(User user, User userToInvite)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                user.addContact(userToInvite);
+                this.userRepository.Update(user);
+                this.userRepository.Update(userToInvite);
+            });
+        }
+
+        public void Delete(User user, User userToDelete)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                user.removeContact(userToDelete);
+                this.userRepository.Update(user);
+                this.userRepository.Update(userToDelete);
+            });
+        }
+
         public string GetHashPasswordFromUser(string username)
         {
             string result = null;

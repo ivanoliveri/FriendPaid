@@ -10,14 +10,34 @@
 <div class="page-header" style="padding-top: 20px">
     <h1>Contactos</h1>
 </div>
-
 <div class="container-fluid metro">
-    <div class="span8">
-        <ul id="sortable">
-           
-        </ul> 
+    <div class="span9">
+        <ul class="thumbnails">
+            @foreach(string @contact in @Model.contacts)
+            {
+                <li class="span3">
+                    <div class="span1"></div>
+                    <div class="thumbnail" style="margin-left:15px;">
+                        <img alt="200x200" src="~/Content/img/user.png" />
+                        <div class="caption">
+                            <h3>
+                                @contact
+                            </h3>
+                            <p>
+                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                            </p>
+                            <p>
+                                <a class="btn btn-primary" href="#">Ver</a> 
+                                <a class="btn" href='@Url.Action("Delete", "Contacts", new { username = @Model.username, usernameToDelete =@contact})'>Eliminar</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+
     </div>
-    <div class="span4" style="float:right;">
+    <div class="span3" style="float:right;">
         @if (@Model.facebookContacts.Count!=0)
         {
             <h2>Invitá a tus amigos de Facebook</h2>

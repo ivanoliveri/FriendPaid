@@ -28,6 +28,10 @@ namespace Services
 
         User GetByUsername(string username);
 
+        void Invite(User user, User userToInvite);
+
+        void Delete(User user, User userToDelete);
+
         string GetHashPasswordFromUser(string username);
 
         //  void Update(int id, Realty realty, string addres, string details);

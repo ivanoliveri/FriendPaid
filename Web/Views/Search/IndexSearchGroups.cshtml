@@ -43,7 +43,12 @@
                         </p>
                         <p>
                             <a class="btn btn-primary" href="#">Ver</a> 
-                            <a class="btn"  onclick='location.href="@Url.Action("Join", "Group", new { username = @Model.username, groupname = @group.name })"'>Unirse</a>
+                            @if (@group.members.Count(member => member.username.Equals(@Model.username))!=0 || @group.administrator.username.Equals(@Model.username))
+                            {
+                                <a class="btn"  onclick='location.href="@Url.Action("Leave", "Group", new { username = @Model.username, groupname = @group.name })"'>Abandonar</a>
+                            }else{
+                                <a class="btn"  onclick='location.href="@Url.Action("Join", "Group", new { username = @Model.username, groupname = @group.name })"'>Unirse</a>
+                            }
                         </p>
                     </div>
                 </div>

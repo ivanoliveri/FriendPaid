@@ -70,9 +70,42 @@ namespace Domain
             return total;
         }
 
-        public virtual void invite(User user)
+        public virtual void addContact(User user)
         {
-            throw new NotImplementedException();
+            this.contacts.Add(user);
+            user.contacts.Add(this);
+        }
+
+        public virtual void removeContact(User user)
+        {
+            var found = false;
+            var index = 0;
+
+            foreach (var oneUser in this.contacts)
+            {
+                if (oneUser.username != user.username)
+                {
+                    index++;
+                }else{
+                    found = true;
+                }
+            }
+
+            this.contacts.RemoveAt(index);
+            
+            found = false;
+            index = 0;
+
+            foreach (var oneUser in user.contacts)
+            {
+                if (oneUser.username != this.username){
+                    index++;
+                }else{
+                    found = true;
+                }
+            }
+
+            user.contacts.RemoveAt(index);
         }
 
         public virtual bool hasDebts()
