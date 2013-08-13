@@ -111,25 +111,29 @@ namespace Web.Controllers
                 newUser.username = me.username;
                 newUser.email = me.email;
                 
-                JObject facebookContacts = JObject.Parse(me.friends.ToString());
-
-                foreach (var facebookContact in facebookContacts["data"].Children())
-                {
-                    Int64 facebookContactId = Int64.Parse(facebookContact["id"].ToString().Replace("\"", ""));
-                
-                    string facebookContacName = facebookContact["name"].ToString().Replace("\"", "");
-                
-                    var newFacebookContact = new FacebookContact()
-                                                 {
-                                                     name = facebookContacName,
-                                                     facebookId = facebookContactId
-                                                 };
-
-                    //facebookContactService.Create(newFacebookContact);
-                }
-
                 userService.Create(newUser);
             }
+
+            JObject facebookContacts = JObject.Parse(me.friends.ToString());
+
+            var allFacebookContacts = new List<FacebookContact>();
+            foreach (var facebookContact in facebookContacts["data"].Children())
+            {
+                Int64 facebookContactId = Int64.Parse(facebookContact["id"].ToString().Replace("\"", ""));
+
+                string facebookContacName = facebookContact["name"].ToString().Replace("\"", "");
+
+                var newFacebookContact = new FacebookContact()
+                {
+                    name = facebookContacName,
+                    facebookId = facebookContactId
+                };
+
+                allFacebookContacts.Add(newFacebookContact);
+
+            }
+
+            Session["facebookContacts"] = allFacebookContacts;
 
             return RedirectToAction("Index", "Notifications", new { username = me.username });
         }
@@ -156,6 +160,9 @@ namespace Web.Controllers
 
                 return View("Index", new LoginViewModel());
             }
+
+            Session["facebookContacts"] = null;
+
             return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
         }
 

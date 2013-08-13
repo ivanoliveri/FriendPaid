@@ -82,7 +82,9 @@ namespace Web.Controllers
             currentUser.groups.ToList().ForEach(group => groupsNamesJoined.Add(group.name));
 
             viewModel.groups = groupService.GetAll().Where(group => group.administrator.username.Equals(username) || groupsNamesJoined.Contains(group.name)).ToList();
-            
+
+            viewModel.message = "Te has unido satisfactoriamente al grupo.";
+
             return View("IndexGroups",viewModel);
         }
         public ActionResult Leave(string username,string groupname)
