@@ -26,13 +26,14 @@ namespace Web.Controllers
         {
             var viewModel = new GroupsViewModel();
             viewModel.username = username;
-            try
-            {
-                viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(textToSearch).ToList();
-            }
-            catch (GroupNotFoundException)
-            {
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
+            if(textToSearch.Trim().Equals("")){
+                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se ha ingresado un criterio de búsqueda.") };
+            }else{
+                try{
+                    viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(textToSearch).ToList();
+                }catch (GroupNotFoundException){
+                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
+                }
             }
             return View("IndexSearchGroups", viewModel);
         }
@@ -40,14 +41,16 @@ namespace Web.Controllers
         {
             var viewModel = new UsersViewModel();
             viewModel.username = username;
-            try
-            {
-                viewModel.users = userService.GetUsersWhoseNamesBeginWith(textToSearch).ToList();
+            if(textToSearch.Trim().Equals("")){
+                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se ha ingresado un criterio de búsqueda.") };
+            }else{
+                try{
+                    viewModel.users = userService.GetUsersWhoseNamesBeginWith(textToSearch).ToList();
+                }catch (UserNotFoundException){
+                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado usuarios.") };
+                }
             }
-            catch (UserNotFoundException)
-            {
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado usuarios.") };
-            }
+           
             return View("IndexSearchUsers", viewModel);
         }
         public ActionResult SearchByGroupnameAndUsername(BaseViewModel baseViewModel)

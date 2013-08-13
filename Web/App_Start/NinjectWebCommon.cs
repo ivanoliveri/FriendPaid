@@ -63,8 +63,6 @@ namespace Web.App_Start
             kernel.Bind<IGroupRepository>().To<GroupRepository>().InSingletonScope().WithConstructorArgument("groupRepository", kernel.GetService(typeof(IGroupRepository)));
             kernel.Bind<IUserService>().To<UserService>().InSingletonScope().WithConstructorArgument("userService", kernel.GetService(typeof(IUserService)));
             kernel.Bind<IGroupService>().To<GroupService>().InSingletonScope().WithConstructorArgument("groupService", kernel.GetService(typeof(IGroupService)));
-            kernel.Bind<IFacebookContactRepository>().To<FacebookContactRepository>().InSingletonScope().WithConstructorArgument("facebookContactRepository", kernel.GetService(typeof(IFacebookContactRepository)));
-            kernel.Bind<IFacebookContactService>().To<FacebookContactService>().InSingletonScope().WithConstructorArgument("facebookContactService", kernel.GetService(typeof(IFacebookContactService)));
         }        
     }
 }

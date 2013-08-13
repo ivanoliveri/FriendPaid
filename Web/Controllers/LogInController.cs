@@ -22,12 +22,10 @@ namespace Web.Controllers
     public class LogInController : Controller
     {        
         private readonly IUserService userService;
-        private readonly IFacebookContactService facebookContactService;
 
-        public LogInController(IUserService userService,FacebookContactService facebookContactService)
+        public LogInController(IUserService userService)
         {
             this.userService = userService;
-            this.facebookContactService = facebookContactService;
         }
 
         private Uri RedirectUri

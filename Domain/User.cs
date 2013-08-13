@@ -31,8 +31,6 @@ namespace Domain
 
         public virtual IList<ContactRequest> contactRequests { set; get; }
 
-        public virtual IList<FacebookContact> facebookContacts { set; get; }
-
         public virtual IList<Group> groups { set; get; }
 
         public virtual IList<Payment> payments { set; get; }
@@ -57,7 +55,6 @@ namespace Domain
 
             purchases = new List<Purchase>();
 
-            facebookContacts = new List<FacebookContact>();
         }
 
         public virtual float getOwedAmount()

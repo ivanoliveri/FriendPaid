@@ -19,7 +19,6 @@ namespace Domain.NH.Mappings
             this.HasManyToMany(user => user.contacts).Table("ContactsPerUser").ParentKeyColumn("id_user").ChildKeyColumn("id_user_contact").AsBag();
             this.HasMany(user => user.notifications).KeyColumn("id_notification").Cascade.All().Not.LazyLoad();
             this.HasMany(user => user.contactRequests).KeyColumn("id_contact_request").Not.LazyLoad();
-            this.HasMany(user => user.facebookContacts).KeyColumn("id_facebook_contact").Not.LazyLoad();
             this.HasManyToMany(user => user.groups).Table("MemberPerGroup").ParentKeyColumn("id_user").ChildKeyColumn("id_group").Not.LazyLoad();
             this.HasMany(user => user.payments).KeyColumn("id_payment").Cascade.All().Not.LazyLoad();   
             this.HasManyToMany(user => user.purchases).Table("MemberPerPurchase").ParentKeyColumn("id_user").ChildKeyColumn("id_purchase").Not.LazyLoad();    

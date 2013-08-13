@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\FacebookContactMapping.cs" />
     <Compile Include="Mappings\GroupMapping.cs" />
     <Compile Include="Mappings\Notifications\NotificationMapping.cs" />
     <Compile Include="Mappings\PaymentMapping.cs" />
