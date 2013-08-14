@@ -37,6 +37,8 @@ namespace Services
 
         void DeleteContactRequest(ContactRequest request);
 
+        void RejectContactRequest(ContactRequest request);
+
         string GetHashPasswordFromUser(string username);
 
         //  void Update(int id, Realty realty, string addres, string details);

@@ -57,12 +57,24 @@ namespace Web.Controllers
             return View("../Search/IndexSearchUsers", viewModel);
         }
 
-        public ActionResult AceptContactRequest(string username, string usernameToInvite)
+        public ActionResult RejectContactRequest(string usernameReceiver, string usernameSender)
         {
-            var receiver = userService.GetByUsername(username);
-            var sender = userService.GetByUsername(usernameToInvite);
+            var user = userService.GetByUsername(usernameReceiver);
+            var userToDeleteRequest = userService.GetByUsername(usernameSender);
+            var request = user.getContactPendingRequestFrom(userToDeleteRequest);
+            userService.RejectContactRequest(request);
+            var viewModel = new NotificationsViewModel();
+            viewModel.username = usernameReceiver;
+            viewModel.message = "Se ha rechazado la solicitud de contacto satisfactoriamente.";
+            return View("../Notifications/Index", viewModel);
+        }
+
+        public ActionResult AceptContactRequest(string usernameReceiver, string usernameSender)
+        {
+            var receiver = userService.GetByUsername(usernameReceiver);
+            var sender = userService.GetByUsername(usernameSender);
             userService.AceptContactRequest(receiver.getContactPendingRequestFrom(sender));
-            return RedirectToAction("Index","Notifications",new{username=username});
+            return RedirectToAction("Index", "Notifications", new { username = usernameReceiver });
         }
 
         public ActionResult DeleteContact(string username, string usernameToDelete)

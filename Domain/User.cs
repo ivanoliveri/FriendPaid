@@ -201,6 +201,11 @@ namespace Domain
             contactRequest.status=RequestStatus.Cancelled;
         }
 
+        public virtual void rejectContactRequest(ContactRequest contactRequest)
+        {
+            contactRequest.status = RequestStatus.Rejected;
+        }
+
         public virtual ContactRequest getContactPendingRequestFrom(User sender)
         {
             foreach (var contactRequest in contactRequests)

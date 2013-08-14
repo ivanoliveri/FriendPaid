@@ -155,6 +155,15 @@ namespace Services
             });
         }
 
+        public void RejectContactRequest(ContactRequest request)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                request.receiver.rejectContactRequest(request);
+                this.userRepository.Update(request.receiver);
+            });
+        }
+
         public void DeleteContact(User user, User userToDelete)
         {
             this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>

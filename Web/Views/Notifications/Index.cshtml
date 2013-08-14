@@ -44,8 +44,8 @@
                                             <em>@contactRequest.message</em>
                                         </p>
                                         <p>
-                                            <a class="btn btn-primary" href="@Url.Action("AceptContactRequest", "Contacts", new { username = @Model.username, usernameToInvite = @contactRequest.sender.username })">Aceptar</a>
-                                            <a class="btn" href="@Url.Action("DeleteContactRequest", "Contacts", new { username = @Model.username, usernameToDeleteRequest = @contactRequest.sender.username })">Rechazar</a>
+                                            <a class="btn btn-primary" href="@Url.Action("AceptContactRequest", "Contacts", new { usernameReceiver = @Model.username, usernameSender = @contactRequest.sender.username })">Aceptar</a>
+                                            <a class="btn" href="@Url.Action("RejectContactRequest", "Contacts", new { usernameReceiver = @Model.username, usernameSender = @contactRequest.sender.username })">Rechazar</a>
                                         </p>
                                     </div>
                                 </div>
