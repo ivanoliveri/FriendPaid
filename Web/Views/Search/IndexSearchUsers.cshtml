@@ -1,4 +1,5 @@
 ﻿@using Domain
+@using Domain.Utils
 @using FluentValidation.Results
 @model Web.ViewModels.UsersViewModel
 
@@ -41,7 +42,7 @@
                             @if(@user.contacts.Count(oneContact=>oneContact.username.Equals(@Model.username))!=0){
                                 <a class="btn" href='@Url.Action("DeleteContact", "Contacts", new { username = @Model.username, usernameToDelete =@user.username})'>Eliminar</a>
                             }else{
-                                if (@user.contactRequests.Count(oneContactRequest => oneContactRequest.sender.username.Equals(@Model.username)) != 0)
+                                if (@user.contactRequests.Count(oneContactRequest => oneContactRequest.sender.username.Equals(@Model.username) && oneContactRequest.status==RequestStatus.Pending) != 0)
                                 {
                                      <a class="btn" href="@Url.Action("DeleteContactRequest", "Contacts", new { username = @Model.username, usernameToDeleteRequest = @user.username })">Eliminar Solicitud</a>
                                 }else{

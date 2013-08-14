@@ -198,28 +198,14 @@ namespace Domain
 
         public virtual void deleteContactRequest(ContactRequest contactRequest)
         {
-            var found = false;
-            var index = 0;
-
-            foreach (var oneContactRequest in this.contactRequests)
-            {
-                if (oneContactRequest.id != contactRequest.id)
-                {
-                    index++;
-                }else{
-                    found = true;
-                }
-            }
-
-            this.contactRequests.RemoveAt(index);
-
+            contactRequest.status=RequestStatus.Cancelled;
         }
 
-        public virtual ContactRequest getContactRequestFrom(User sender)
+        public virtual ContactRequest getContactPendingRequestFrom(User sender)
         {
             foreach (var contactRequest in contactRequests)
             {
-                if (contactRequest.sender.username.Equals(sender.username))
+                if (contactRequest.sender.username.Equals(sender.username) && contactRequest.status.Equals(RequestStatus.Pending))
                     return contactRequest;
             }
             return null;

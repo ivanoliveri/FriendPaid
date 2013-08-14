@@ -35,7 +35,7 @@ namespace Services
 
         void SendContactRequest(User user , User userToSendContactRequest);
 
-        void DeleteContactRequest(User user, ContactRequest request);
+        void DeleteContactRequest(ContactRequest request);
 
         string GetHashPasswordFromUser(string username);
 

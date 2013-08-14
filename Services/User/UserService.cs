@@ -146,12 +146,12 @@ namespace Services
             });    
         }
 
-        public void DeleteContactRequest(User user, ContactRequest request)
+        public void DeleteContactRequest(ContactRequest request)
         {
             this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
             {
                 request.receiver.deleteContactRequest(request);
-                this.userRepository.Update(user);
+                this.userRepository.Update(request.receiver);
             });
         }
 

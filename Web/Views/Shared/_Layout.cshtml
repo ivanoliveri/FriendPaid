@@ -10,6 +10,13 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"/>
         
         <style type="text/css">
+            .sidebar-nav-fixed {
+                position: fixed; 
+                overflow: auto; 
+                top:61px;
+                width:100%;
+                float:left;
+            }
             @@font-face {
                 font-family: Prime;
                 src: url("../../Content/font/PrimeRegular.otf");
@@ -138,6 +145,11 @@
                     $('#CrearGrupo').addClass('active');
                     break;
             }
+            
+            height = $(window).height();
+            $(".well").css({'height': (height - 61) + 'px'});
+
+
 
             $('#registrarCompraContainer').css('cursor', 'pointer');
             $('#verGruposContainer').css('cursor', 'pointer');

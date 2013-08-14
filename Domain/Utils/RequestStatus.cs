@@ -5,6 +5,7 @@
     {
         Accepted,
         Rejected,
+        Cancelled,
         Pending
     };
 

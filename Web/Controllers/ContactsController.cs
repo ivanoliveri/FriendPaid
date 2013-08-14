@@ -48,8 +48,8 @@ namespace Web.Controllers
         {
             var user = userService.GetByUsername(username);
             var userToDeleteRequest = userService.GetByUsername(usernameToDeleteRequest);
-            var request = userToDeleteRequest.getContactRequestFrom(user);
-            userService.DeleteContactRequest(user,request);
+            var request = userToDeleteRequest.getContactPendingRequestFrom(user);
+            userService.DeleteContactRequest(request);
             return RedirectToAction("Index", "Notifications", new { username = username });
         }
 
@@ -57,7 +57,7 @@ namespace Web.Controllers
         {
             var receiver = userService.GetByUsername(username);
             var sender = userService.GetByUsername(usernameToInvite);
-            userService.AceptContactRequest(receiver.getContactRequestFrom(sender));
+            userService.AceptContactRequest(receiver.getContactPendingRequestFrom(sender));
             return RedirectToAction("Index","Notifications",new{username=username});
         }
 

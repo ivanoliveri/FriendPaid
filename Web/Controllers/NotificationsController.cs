@@ -25,7 +25,7 @@ namespace Web.Controllers
             notificationsViewModel.username = username;
             notificationsViewModel.unreadNotifications = user.notifications.Where(oneNotification => 
                                                          oneNotification.status.Equals(NotificationStatus.Unread)).ToList();
-            notificationsViewModel.pendingContactRequest = user.contactRequests.Where(oneContactRequest => oneContactRequest.status.Equals(RequestStatus.Pending));
+            notificationsViewModel.pendingContactRequest = user.contactRequests.Where(oneContactRequest => oneContactRequest.status.Equals(RequestStatus.Pending)).ToList();
             return View(notificationsViewModel);
         }
 
