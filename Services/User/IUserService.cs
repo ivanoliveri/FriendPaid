@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Domain;
+using Domain.Requests;
 
 namespace Services
 {
@@ -28,9 +29,13 @@ namespace Services
 
         User GetByUsername(string username);
 
-        void Invite(User user, User userToInvite);
+        void AceptContactRequest(ContactRequest contactRequest);
 
-        void Delete(User user, User userToDelete);
+        void DeleteContact(User user, User userToDelete);
+
+        void SendContactRequest(User user , User userToSendContactRequest);
+
+        void DeleteContactRequest(User user, ContactRequest request);
 
         string GetHashPasswordFromUser(string username);
 

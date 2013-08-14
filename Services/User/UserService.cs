@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Domain;
+using Domain.Requests;
 using Repository.Interfaces;
 
 namespace Services
@@ -126,17 +127,35 @@ namespace Services
             return result;
         }
 
-        public void Invite(User user, User userToInvite)
+        public void AceptContactRequest(ContactRequest contactRequest)
         {
             this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
             {
-                user.addContact(userToInvite);
-                this.userRepository.Update(user);
-                this.userRepository.Update(userToInvite);
+                contactRequest.receiver.aceptContactRequest(contactRequest);
+                this.userRepository.Update(contactRequest.sender);
+                this.userRepository.Update(contactRequest.receiver);
             });
         }
 
-        public void Delete(User user, User userToDelete)
+        public void SendContactRequest(User user, User userToSendContactRequest)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                user.sendContactRequest(userToSendContactRequest);
+                this.userRepository.Update(userToSendContactRequest);
+            });    
+        }
+
+        public void DeleteContactRequest(User user, ContactRequest request)
+        {
+            this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
+            {
+                request.receiver.deleteContactRequest(request);
+                this.userRepository.Update(user);
+            });
+        }
+
+        public void DeleteContact(User user, User userToDelete)
         {
             this.userRepository.GetSessionFactory().TransactionalInterceptor(() =>
             {

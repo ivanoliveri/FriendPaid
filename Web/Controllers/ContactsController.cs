@@ -32,19 +32,40 @@ namespace Web.Controllers
             return View(newViewModel);
         }
 
-        public ActionResult Invite(string username, string usernameToInvite)
+        public ActionResult SendContactRequest(string username,string usernameToInvite)
         {
             var user = userService.GetByUsername(username);
-            var userToInvite = userService.GetByUsername(usernameToInvite);
-            userService.Invite(user, userToInvite);
-            return RedirectToAction("Index",new{username=username});
+            var userToSendContactRequest = userService.GetByUsername(usernameToInvite);
+            userService.SendContactRequest(user, userToSendContactRequest);
+            var viewModel = new UsersViewModel();
+            viewModel.username = username;
+            viewModel.message = "Se ha enviado la solicitud de contacto satisfactoriamente.";
+            viewModel.users.Add(userToSendContactRequest);
+            return View("../Search/IndexSearchUsers", viewModel);
         }
 
-        public ActionResult Delete(string username, string usernameToDelete)
+        public ActionResult DeleteContactRequest(string username, string usernameToDeleteRequest)
+        {
+            var user = userService.GetByUsername(username);
+            var userToDeleteRequest = userService.GetByUsername(usernameToDeleteRequest);
+            var request = userToDeleteRequest.getContactRequestFrom(user);
+            userService.DeleteContactRequest(user,request);
+            return RedirectToAction("Index", "Notifications", new { username = username });
+        }
+
+        public ActionResult AceptContactRequest(string username, string usernameToInvite)
+        {
+            var receiver = userService.GetByUsername(username);
+            var sender = userService.GetByUsername(usernameToInvite);
+            userService.AceptContactRequest(receiver.getContactRequestFrom(sender));
+            return RedirectToAction("Index","Notifications",new{username=username});
+        }
+
+        public ActionResult DeleteContact(string username, string usernameToDelete)
         {
             var user = userService.GetByUsername(username);
             var userToDelete = userService.GetByUsername(usernameToDelete);
-            userService.Delete(user, userToDelete);
+            userService.DeleteContact(user, userToDelete);
             return RedirectToAction("Index", new { username = username });
         }
 

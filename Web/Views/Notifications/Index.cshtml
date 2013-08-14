@@ -12,58 +12,46 @@
 <div class="page-header" style="padding-top: 20px">
     <h1>Inicio</h1>
 </div>
-<div class="span12">
-    <div class="span3" id="accordion">
-        <h3>SolicitudesDeContacto</h3>
-        <div>
-            <ul>
-                @foreach (ContactRequest @contactRequest in Model.pendingContactRequest)
-                {
-                    <li id="@contactRequest.sender.username">
-                        @contactRequest.message 
-                        <div class="btn-group">
-                            <button id="AceptarSolicitudContacto" class="btn btn-success">Aceptar</button>
-                            <button id="RechazarSolicitudDeContacto" class="btn btn-danger">Cancelar</button>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+                <div class="span8">
+                    <h3>Notificaciones</h3>
+                    @foreach (Notification @notification in @Model.unreadNotifications)
+                    {
+                        <div class="alert alert-block alert-error fade in">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4>@notification.date</h4>
+                            <p>@notification.message</p>
                         </div>
-                    </li>
-                }
-            </ul>
-        </div>
-        <h3>PagosPendientes</h3>
-        <div>
-            <ul>
-                @foreach (Payment @payment in @Model.unpaidPayments)
-                {
-                    <li>
-                        <span>@payment.description</span>
-                        <div class="btn-group">
-                            <button id="PagarPagoPendiente" class="btn btn-success">Pagar</button>
+                    }
+                </div>
+                <div class="span4">
+                    <center>
+                        <h3>Solicitudes</h3>
+                    </center>
+                    @foreach(ContactRequest @contactRequest in @Model.pendingContactRequest)
+                    {
+            
+                        <div class="popover right" style="float:right">
+                            <div class="arrow"></div>
+                            <h3 class="popover-title"><strong>Tienes una nueva solicitud de contacto.</strong></h3>
+                            <div class="popover-content">
+                                <p>
+                                    <em>@contactRequest.message</em>
+                                </p>
+                                <p>
+                                    <a class="btn btn-primary" href="@Url.Action("AceptContactRequest", "Contacts", new { username = @Model.username, usernameToInvite = @contactRequest.sender.username })">Aceptar</a>
+                                    <a class="btn" href="@Url.Action("DeleteContactRequest", "Contacts", new { username = @Model.username, usernameToDeleteRequest = @contactRequest.sender.username })">Rechazar</a>
+                                </p>
+                            </div>
                         </div>
-                    </li>
-                }
-            </ul>
-        </div>
-        <h3>PagosRealizados</h3>
-        <div>
-            <ul>
-                @foreach (Payment @payment in @Model.paidPayments)
-                {
-                        <li>
-                            @payment.description
-                        </li>
-                }
-            </ul>
-        </div>
-    </div>
-    <div class="span7">
-        
-        @foreach (Notification @notification in @Model.unreadNotifications)
-        {
-            <div class="alert alert-block alert-error fade in">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4>@notification.date</h4>
-                <p>@notification.message</p>
-            </div>
-        }
-    </div>
+
+                    }
+                </div>
+			</div>
+		</div>
+	</div>
 </div>

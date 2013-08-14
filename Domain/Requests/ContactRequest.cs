@@ -12,6 +12,11 @@ namespace Domain.Requests
             status = RequestStatus.Pending;
         }
 
+        public virtual void generateMessage()
+        {
+            message = "El usuario " + sender.username + " te ha enviado una solicitud de contacto.";
+        }
+
         public override void accept()
         {
             status = RequestStatus.Accepted;

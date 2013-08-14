@@ -21,10 +21,11 @@ namespace Web.Controllers
         public ActionResult Index(string username)
         {
             var notificationsViewModel = new NotificationsViewModel();
+            var user = userService.GetByUsername(username);
             notificationsViewModel.username = username;
-            notificationsViewModel.unreadNotifications =
-                userService.GetByUsername(username).notifications.Where(
-                    oneNotification => oneNotification.status.Equals(NotificationStatus.Unread)).ToList();
+            notificationsViewModel.unreadNotifications = user.notifications.Where(oneNotification => 
+                                                         oneNotification.status.Equals(NotificationStatus.Unread)).ToList();
+            notificationsViewModel.pendingContactRequest = user.contactRequests.Where(oneContactRequest => oneContactRequest.status.Equals(RequestStatus.Pending));
             return View(notificationsViewModel);
         }
 

@@ -39,9 +39,15 @@
                         <p>
                             <a class="btn btn-primary" href="#">Ver</a> 
                             @if(@user.contacts.Count(oneContact=>oneContact.username.Equals(@Model.username))!=0){
-                                <a class="btn" href='@Url.Action("Delete", "Contacts", new { username = @Model.username, usernameToDelete =@user.username})'>Eliminar</a>
+                                <a class="btn" href='@Url.Action("DeleteContact", "Contacts", new { username = @Model.username, usernameToDelete =@user.username})'>Eliminar</a>
                             }else{
-                                <a class="btn" href="@Url.Action("Invite","Contacts",new{username=@Model.username, usernameToInvite=@user.username})">Invitar</a>
+                                if (@user.contactRequests.Count(oneContactRequest => oneContactRequest.sender.username.Equals(@Model.username)) != 0)
+                                {
+                                     <a class="btn" href="@Url.Action("DeleteContactRequest", "Contacts", new { username = @Model.username, usernameToDeleteRequest = @user.username })">Eliminar Solicitud</a>
+                                }else{
+                                     <a class="btn" href="@Url.Action("SendContactRequest", "Contacts", new { username = @Model.username, usernameToInvite = @user.username })">Invitar</a>
+                                }
+                                
                             }
                             
                         </p>

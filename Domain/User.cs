@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Domain.Exceptions;
 using Domain.Facebook;
 using Domain.Notifications;
@@ -173,6 +174,55 @@ namespace Domain
 
             purchase.group.createPaymentsAfterPurchase(purchase);
 
+        }
+
+        public virtual void sendContactRequest(User receiver)
+        {
+            var newContactRequest = new ContactRequest()
+                                        {
+                                            receiver = receiver,
+                                            sender = this
+                                        };
+
+            newContactRequest.generateMessage();
+
+            receiver.contactRequests.Add(newContactRequest);
+        }
+
+        public virtual void aceptContactRequest(ContactRequest contactRequest)
+        {
+            this.addContact(contactRequest.sender);
+
+            contactRequest.accept();
+        }
+
+        public virtual void deleteContactRequest(ContactRequest contactRequest)
+        {
+            var found = false;
+            var index = 0;
+
+            foreach (var oneContactRequest in this.contactRequests)
+            {
+                if (oneContactRequest.id != contactRequest.id)
+                {
+                    index++;
+                }else{
+                    found = true;
+                }
+            }
+
+            this.contactRequests.RemoveAt(index);
+
+        }
+
+        public virtual ContactRequest getContactRequestFrom(User sender)
+        {
+            foreach (var contactRequest in contactRequests)
+            {
+                if (contactRequest.sender.username.Equals(sender.username))
+                    return contactRequest;
+            }
+            return null;
         }
 
         public virtual void registerDebtPayment(Payment payment, Group group)
