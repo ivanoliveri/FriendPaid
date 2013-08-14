@@ -13,6 +13,11 @@
     <div class="page-header" style="padding-top: 20px">
         <h1>Buscar Usuarios</h1>
     </div>
+    
+    @if(@Model.message!=null)
+    {
+        <div class="alert alert-success">@Model.message</div>
+    }
 
     @if (@Model.errors != null)
     {

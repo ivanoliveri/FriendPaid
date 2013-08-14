@@ -50,7 +50,11 @@ namespace Web.Controllers
             var userToDeleteRequest = userService.GetByUsername(usernameToDeleteRequest);
             var request = userToDeleteRequest.getContactPendingRequestFrom(user);
             userService.DeleteContactRequest(request);
-            return RedirectToAction("Index", "Notifications", new { username = username });
+            var viewModel = new UsersViewModel();
+            viewModel.username = username;
+            viewModel.message = "Se ha eliminado la solicitud de contacto satisfactoriamente.";
+            viewModel.users.Add(userToDeleteRequest);
+            return View("../Search/IndexSearchUsers", viewModel);
         }
 
         public ActionResult AceptContactRequest(string username, string usernameToInvite)
