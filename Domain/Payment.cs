@@ -10,6 +10,8 @@ namespace Domain
 
         public virtual int id { set; get; }
 
+        public virtual float originalAmount { set; get; }
+        
         public virtual float amount { set; get; }
 
         public virtual string description { set; get; }

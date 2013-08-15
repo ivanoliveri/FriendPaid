@@ -50,30 +50,30 @@ namespace Domain
 
             var debtorsAndBuyer = new List<User>();
 
-            purchase.debtors.ToList().ForEach(user=> debtorsAndBuyer.Add(user));
-           
+            purchase.debtors.ToList().ForEach(user => debtorsAndBuyer.Add(user));
+
             debtorsAndBuyer.Add(purchase.buyer);
 
             foreach (var member in debtorsAndBuyer)
             {
                 var newPayment = new Payment()
-                                     {
-                                         amount = purchase.calculateAmountPerMember(),
-                                         buyer = purchase.buyer,
-                                         debtor = member,
-                                         description = purchase.description,
-                                         group = this,
-                                         status = PaymentStatus.Unpaid
-                                     };
+                {
+                    amount = purchase.calculateAmountPerMember(),
+                    originalAmount = purchase.calculateAmountPerMember(),
+                    buyer = purchase.buyer,
+                    debtor = member,
+                    description = purchase.description,
+                    group = this,
+                    status = PaymentStatus.Unpaid
+                };
 
-                member.payments.Add(newPayment);
+                member.addDebt(newPayment);
 
             }
 
-            debtorsAndBuyer.Find(member => member.Equals(purchase.buyer)).payments.ElementAt(0).status= PaymentStatus.Paid;
-       
-        }
+            purchase.buyer.payments.ElementAt(purchase.buyer.payments.Count - 1).status = PaymentStatus.Paid;
 
+        }
         #endregion
 
     }

@@ -47,6 +47,8 @@
     <Compile Include="Exceptions\NotJoinedException.cs" />
     <Compile Include="Facebook\FacebookContact.cs" />
     <Compile Include="Group.cs" />
+    <Compile Include="Notifications\CrossDebtsNotification.cs" />
+    <Compile Include="Notifications\CrossDebtsNotificationBuilder.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Notifications\PaymentNotification.cs" />

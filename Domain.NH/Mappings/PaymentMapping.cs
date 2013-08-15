@@ -11,6 +11,7 @@ namespace Domain.NH.Mappings
         public PaymentMapping()
         {
             this.Id(payment => payment.id).GeneratedBy.Identity();
+            this.Map(payment => payment.originalAmount).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(payment => payment.amount).Not.Nullable().Length(50).Not.LazyLoad();
             this.Map(payment => payment.description).Not.Nullable().Length(50).Not.LazyLoad();
             this.References(payment => payment.debtor).Not.Nullable().Not.LazyLoad();

@@ -138,6 +138,9 @@ namespace Domain
             if (group.administrator.username.Equals(this.username))
                 throw new AdministratorCantLeaveGroupException();
 
+            if(group.members.Count(oneMember=>oneMember.username.Equals(this.username)).Equals(0))
+                throw new NotJoinedException();
+
             var found = false;
             var index = 0;
 
@@ -219,6 +222,53 @@ namespace Domain
         public virtual void registerDebtPayment(Payment payment, Group group)
         {
             throw new NotImplementedException();
+        }
+
+        public virtual void addDebt(Payment debt)
+        {
+            //filtra una lista en la que solo esten los pagos pendientes del comprador al deudor
+            List<Payment> filteredList = debt.buyer.payments.Where(x => x.status.Equals(PaymentStatus.Unpaid) && x.buyer.id.Equals(this.id)).ToList();
+            if (filteredList.Count == 0)
+            {
+                payments.Add(debt);
+                return;
+            }
+
+            CrossDebtsNotificationBuilder crossDebts = new CrossDebtsNotificationBuilder(debt);
+
+            foreach (Payment payment in filteredList)
+            {
+                if (debt.amount >= payment.amount)
+                {
+                    //si la nueva deuda es mayor que la deuda cruzada, le resto el valor y vuelvo a iterar
+                    payment.status = PaymentStatus.Paid;
+                    crossDebts.simplifiedPayments.Add(payment);
+                    debt.amount -= payment.amount;
+                    if (debt.amount.Equals(0))
+                    {//si la nueva deuda resulta en 0 se anularon entre si las deudas, termina el ciclo
+                        debt.status = PaymentStatus.Paid;
+                        break;
+                    }
+                }
+                else
+                {
+                    payment.amount -= debt.amount;
+                    debt.status = PaymentStatus.Paid;
+                    crossDebts.finalPayment = payment;
+                    payments.Add(debt);
+                    crossDebts.sendNotifications();
+                    return;
+                }
+            }
+
+            //si terminado el ciclo sigue habiendo deuda a pagar, se la agrega a la lista de deudas
+            if (debt.amount > 0)
+            {
+                crossDebts.finalPayment = debt;
+                payments.Add(debt);
+            }
+
+            crossDebts.sendNotifications();
         }
 
         #endregion

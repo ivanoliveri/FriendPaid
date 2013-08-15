@@ -1,15 +1,17 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Domain;
 using Domain.Exceptions;
+using Domain.Notifications;
 using Domain.Utils;
 using NUnit.Framework;
+
 
 namespace Test
 {
     [TestFixture]
     public class MemberTest
     {
-
         [Test]
         public void test_new_member_calculate_owed_amounts()
         {
@@ -74,7 +76,6 @@ namespace Test
         [Test]
         public void test_one_member_joins_a_group()
         {
-
             var administrator = new User();
 
             var memberOne = new User() { name = "Walter", lastName = "Placona" };
@@ -94,7 +95,6 @@ namespace Test
         [Test]
         public void test_one_member_joins_two_groups()
         {
-
             var administrator = new User();
 
             var memberOne = new User() { name = "Walter", lastName = "Placona" };
@@ -123,7 +123,6 @@ namespace Test
         [ExpectedException(typeof(AlreadyJoinedException))]
         public void test_one_member_tries_to_join_twice_one_group()
         {
-
             var administrator = new User();
 
             var memberOne = new User();
@@ -140,7 +139,6 @@ namespace Test
         [ExpectedException(typeof(AlreadyJoinedException))]
         public void test_one_administrator_tries_to_join_group()
         {
-
             var administrator = new User();
 
             var newGroup = administrator.createGroup("GroupOne");
@@ -148,11 +146,43 @@ namespace Test
             administrator.joinGroup(newGroup);
 
         }
-      
+
+        [Test]
+        public void test_one_member_leaves_group()
+        {
+            var administrator = new User(){username = "administrator"};
+
+            var memberOne = new User(){username = "memberOne"};
+
+            var newGroup = administrator.createGroup("GroupOne");
+
+            memberOne.joinGroup(newGroup);
+
+            memberOne.leaveGroup(newGroup);
+
+            Assert.AreEqual(0, memberOne.groups.Count);
+
+            Assert.AreEqual(0, newGroup.members.Count);
+
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotJoinedException))]
+        public void test_one_unjoined_member_tries_to_leave_group()
+        {
+            var administrator = new User(){username = "administrator"};
+
+            var memberOne = new User(){username = "memberOne"};
+
+            var newGroup = administrator.createGroup("GroupOne");
+
+            memberOne.leaveGroup(newGroup);
+
+        }
+
         [Test]
         public void test_one_member_register_purchase()
         {
-
             var administrator = new User();
 
             var memberOne = new User();
@@ -185,6 +215,74 @@ namespace Test
             Assert.AreEqual(PaymentStatus.Unpaid, memberOne.payments.ElementAt(0).status);
 
             Assert.AreEqual(PaymentStatus.Unpaid, memberTwo.payments.ElementAt(0).status);
+
+        }
+
+        [Test]
+        public void test_cancel_cross_debts()
+        {
+            #region users
+            var administrator = new User();
+            administrator.name = "admin";
+
+            var memberOne = new User();
+            memberOne.name = "mem1";
+            memberOne.id = 1;
+
+            var memberTwo = new User();
+            memberTwo.name = "mem2";
+            memberTwo.id = 2;
+            #endregion users
+
+            var debtorslist1 = new List<User>();
+            debtorslist1.Add(administrator);
+            debtorslist1.Add(memberTwo);
+
+            var newGroup = administrator.createGroup("GroupOne");
+
+            memberOne.joinGroup(newGroup);
+
+            memberTwo.joinGroup(newGroup);
+            #region compras
+            Purchase newPurchase = new Purchase()
+            {
+                buyer = administrator,
+                debtors = newGroup.members,
+                description = "Pelota",
+                group = newGroup,
+                totalAmount = 120f
+            };
+
+            Purchase newPurchase2 = new Purchase()
+            {
+                buyer = memberOne,
+                debtors = debtorslist1,
+                description = "Sombrero",
+                group = newGroup,
+                totalAmount = 60f
+            };
+
+            Purchase newPurchase3 = new Purchase()
+            {
+                buyer = administrator,
+                debtors = newGroup.members,
+                description = "Remera",
+                group = newGroup,
+                totalAmount = 70f
+            };
+
+            #endregion
+
+            administrator.registerPurchase(newPurchase);
+            Assert.AreEqual(memberTwo.payments.ElementAt(0).amount, 120f / 3);
+            Assert.AreEqual(memberOne.payments.ElementAt(0).amount, 120f / 3);
+            Assert.AreEqual(administrator.payments.ElementAt(0).status, PaymentStatus.Paid);
+
+            memberOne.registerPurchase(newPurchase2);
+
+            Assert.IsInstanceOf<CrossDebtsNotification>(memberOne.notifications[1]);
+
+            //Assert.AreEqual(memberOne.payments.ElementAt());
 
         }
 
