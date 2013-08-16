@@ -120,6 +120,18 @@ namespace Test
         }
 
         [Test]
+        public void test_one_member_joins_and_leave_the_same_group()
+        {
+            var administrator = new User() {username = "administrator"};
+            var userOne = new User() {username = "userOne"};
+            var currentGroup = administrator.createGroup("groupOne");
+            userOne.joinGroup(currentGroup);
+            userOne.leaveGroup(currentGroup);
+            Assert.AreEqual(0,userOne.groups.Count);
+            Assert.AreEqual(0,currentGroup.members.Count);
+        }
+
+        [Test]
         [ExpectedException(typeof(AlreadyJoinedException))]
         public void test_one_member_tries_to_join_twice_one_group()
         {
@@ -137,7 +149,7 @@ namespace Test
 
         [Test]
         [ExpectedException(typeof(AlreadyJoinedException))]
-        public void test_one_administrator_tries_to_join_group()
+        public void test_one_administrator_tries_to_rejoin_group()
         {
             var administrator = new User();
 
@@ -167,6 +179,15 @@ namespace Test
         }
 
         [Test]
+        [ExpectedException(typeof(AdministratorCantLeaveGroupException))]
+        public void administrator_tries_to_leave_the_group()
+        {
+            var administrator = new User() { username = "administrator" };
+            var currentGroup = administrator.createGroup("OliOne");
+            administrator.leaveGroup(currentGroup);
+        }
+
+        [Test]
         [ExpectedException(typeof(NotJoinedException))]
         public void test_one_unjoined_member_tries_to_leave_group()
         {
@@ -181,7 +202,26 @@ namespace Test
         }
 
         [Test]
-        public void test_one_member_register_purchase()
+        [ExpectedException(typeof(CantRegisterPurchaseBecauseThereAreNoMembersException))]
+        public void test_administrator_register_purchase_without_members()
+        {
+            var administrator = new User() { username = "administrator" };
+            var currentGroup = administrator.createGroup("OliOne");
+
+            var newPurchase = new Purchase()
+            {
+                buyer = administrator,
+                debtors = new List<User>(),
+                description = "Pelota",
+                group = currentGroup,
+                totalAmount = 120f
+            };
+
+            administrator.registerPurchase(newPurchase);
+        }
+
+        [Test]
+        public void test_administrator_register_purchase_with_two_members()
         {
             var administrator = new User();
 
@@ -219,9 +259,46 @@ namespace Test
         }
 
         [Test]
+        public void test_member_register_purchase()
+        {
+            var administrator = new User();
+
+            var memberOne = new User();
+
+            var memberTwo = new User();
+
+            var newGroup = administrator.createGroup("GroupOne");
+
+            memberOne.joinGroup(newGroup);
+
+            memberTwo.joinGroup(newGroup);
+
+            var newPurchase = new Purchase()
+            {
+                buyer = memberOne,
+                debtors = new List<User>(){memberTwo,administrator},
+                description = "Pelota",
+                group = newGroup,
+                totalAmount = 120f
+            };
+
+            administrator.registerPurchase(newPurchase);
+
+            Assert.AreEqual(40f, administrator.payments.ElementAt(0).amount);
+
+            Assert.AreEqual(40f, memberTwo.payments.ElementAt(0).amount);
+
+            Assert.AreEqual(PaymentStatus.Paid, memberOne.payments.ElementAt(0).status);
+
+            Assert.AreEqual(PaymentStatus.Unpaid, memberTwo.payments.ElementAt(0).status);
+
+            Assert.AreEqual(PaymentStatus.Unpaid, administrator.payments.ElementAt(0).status);
+
+        }
+
+        [Test]
         public void test_cancel_cross_debts()
         {
-            #region users
             var administrator = new User();
             administrator.name = "admin";
 
@@ -232,7 +309,6 @@ namespace Test
             var memberTwo = new User();
             memberTwo.name = "mem2";
             memberTwo.id = 2;
-            #endregion users
 
             var debtorslist1 = new List<User>();
             debtorslist1.Add(administrator);
@@ -243,7 +319,7 @@ namespace Test
             memberOne.joinGroup(newGroup);
 
             memberTwo.joinGroup(newGroup);
-            #region compras
+
             Purchase newPurchase = new Purchase()
             {
                 buyer = administrator,
@@ -270,8 +346,6 @@ namespace Test
                 group = newGroup,
                 totalAmount = 70f
             };
-
-            #endregion
 
             administrator.registerPurchase(newPurchase);
             Assert.AreEqual(memberTwo.payments.ElementAt(0).amount, 120f / 3);

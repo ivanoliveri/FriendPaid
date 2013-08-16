@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Domain;
+using FluentValidation.Results;
 using Services;
 using Web.Validators;
 using Web.ViewModels;
@@ -56,13 +57,14 @@ namespace Web.Controllers
         public ActionResult Create(PurchaseViewModel viewModel)
         {
             var registerPurchaseValidator = new RegisterPurchaseValidator(userService);
+
             var validationResult = registerPurchaseValidator.Validate(viewModel);
 
             if (validationResult.IsValid){
 
-                var currentBuyer = userService.GetByUsername(viewModel.username);
-
                 var currentGroup = groupService.GetByName(viewModel.groupName);
+
+                var currentBuyer = userService.GetByUsername(viewModel.username);
 
                 var currentDebtors = currentGroup.members;
 
@@ -94,10 +96,12 @@ namespace Web.Controllers
                     group = currentGroup,
                     totalAmount = viewModel.totalAmount
                 };
-
-                userService.RegisterPurchase(currentBuyer, newPurchase);
-
-                viewModel.message = "Se ha registrado satisfactoriamente la compra.";
+                try{
+                    userService.RegisterPurchase(currentBuyer, newPurchase);
+                    viewModel.message = "Se ha registrado satisfactoriamente la compra.";
+                }catch{
+                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "El grupo ingresado no contiene miembros.") };
+                }
             }else{
                 viewModel.errors = validationResult.Errors;
             }

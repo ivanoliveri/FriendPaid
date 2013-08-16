@@ -172,6 +172,8 @@ namespace Domain
 
         public virtual void registerPurchase(Purchase purchase)
         {
+            if (purchase.debtors.Count.Equals(0))
+                throw new CantRegisterPurchaseBecauseThereAreNoMembersException();
 
             purchase.group.createPurchaseNotifications(purchase);
 

@@ -15,8 +15,8 @@ namespace Web.Validators
 
         public RegisterPurchaseValidator(IUserService userService)
         {
-            RuleFor(purchase => purchase.groupName).NotNull().WithMessage("No has ingresado el nombre del grupo.");
-            RuleFor(purchase => purchase.groupName).Must((purchase, groupname) => AlreadyJoinedGroup(groupname, purchase.username, userService))
+            RuleFor(purchase => purchase.groupName).NotNull().WithMessage("No has ingresado el nombre del grupo.")
+                                                   .Must((purchase, groupname) => AlreadyJoinedGroup(groupname, purchase.username, userService))
                                                    .WithMessage("No estas unido al grupo ingresado.");
             RuleFor(purchase => purchase.description).NotNull().WithMessage("No has ingresado la descripcion.");
             RuleFor(purchase => purchase.totalAmount).NotEqual(0).WithMessage("No has ingresado el monto."); 
