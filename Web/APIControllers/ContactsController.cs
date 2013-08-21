@@ -18,7 +18,7 @@ namespace Web.APIControllers
             this.userService = userService;
         }
        
-
+        [HttpGet]
         public UsersViewModel SendContactRequest(string username,string usernameToInvite)
         {
             var user = userService.GetByUsername(username);
@@ -31,6 +31,7 @@ namespace Web.APIControllers
             return viewModel;
         }
 
+        [HttpGet]
         public UsersViewModel DeleteContactRequest(string username, string usernameToDeleteRequest)
         {
             var user = userService.GetByUsername(username);
@@ -44,6 +45,7 @@ namespace Web.APIControllers
             return viewModel;
         }
 
+        [HttpGet]
         public NotificationsViewModel RejectContactRequest(string usernameReceiver, string usernameSender)
         {
             var user = userService.GetByUsername(usernameReceiver);
@@ -56,6 +58,7 @@ namespace Web.APIControllers
             return viewModel;
         }
 
+        [HttpGet]
         public string AceptContactRequest(string usernameReceiver, string usernameSender)
         {
             var receiver = userService.GetByUsername(usernameReceiver);
@@ -64,6 +67,7 @@ namespace Web.APIControllers
             return usernameReceiver;
         }
 
+        [HttpGet]
         public string DeleteContact(string username, string usernameToDelete)
         {
             var user = userService.GetByUsername(username);
