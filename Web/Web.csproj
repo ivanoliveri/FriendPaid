@@ -124,6 +124,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIControllers\ContactsController.cs" />
+    <Compile Include="APIControllers\GroupController.cs" />
+    <Compile Include="APIControllers\LogInController.cs" />
+    <Compile Include="APIControllers\NotificationsController.cs" />
+    <Compile Include="APIControllers\PurchaseController.cs" />
+    <Compile Include="APIControllers\SearchController.cs" />
+    <Compile Include="APIControllers\SignUpController.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
