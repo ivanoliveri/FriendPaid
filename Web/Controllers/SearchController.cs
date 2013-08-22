@@ -24,60 +24,17 @@ namespace Web.Controllers
 
         public ActionResult SearchByGroupname(string username,string textToSearch)
         {
-            var viewModel = new GroupsViewModel();
-            viewModel.username = username;
-            if(textToSearch.Trim().Equals("")){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se ha ingresado un criterio de búsqueda.") };
-            }else{
-                try{
-                    viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(textToSearch).ToList();
-                }catch (GroupNotFoundException){
-                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
-                }
-            }
-            return View("IndexSearchGroups", viewModel);
+            return View("IndexSearchGroups", Url.RouteUrl("localhost:8080/api/Search/SearchByGroupname/", new { username = username, textToSearch = textToSearch }));
         }
+
         public ActionResult SearchByUsername(string username,string textToSearch)
         {
-            var viewModel = new UsersViewModel();
-            viewModel.username = username;
-            if(textToSearch.Trim().Equals("")){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se ha ingresado un criterio de búsqueda.") };
-            }else{
-                try{
-                    viewModel.users = userService.GetUsersWhoseNamesBeginWith(textToSearch).ToList();
-                }catch (UserNotFoundException){
-                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado usuarios.") };
-                }
-            }
-           
-            return View("IndexSearchUsers", viewModel);
+           return View("IndexSearchUsers", Url.RouteUrl("localhost:8080/api/Search/SearchByUsername/", new { username = username, textToSearch = textToSearch }));
         }
+        
         public ActionResult SearchByGroupnameAndUsername(BaseViewModel baseViewModel)
         {
-            var viewModel = new GroupsAndUsersViewModel();
-            viewModel.username = baseViewModel.username;
-            try{
-                var usersList = userService.GetUsersWhoseNamesBeginWith(baseViewModel.groupName).ToList();
-                foreach (var user in usersList)
-                {
-                    viewModel.names.Add(user.username);
-                }
-            }catch (GroupNotFoundException){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
-            }
-
-            try{
-                var groupsList = groupService.GetGroupsWhichNamesBeginWith(baseViewModel.groupName).ToList();
-                foreach (var group in groupsList)
-                {
-                    viewModel.names.Add(group.name);
-                }
-            }catch (GroupNotFoundException){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
-            }
-
-            return View("IndexSearchGroupsAndUsers", viewModel);
+            return View("IndexSearchGroupsAndUsers", Url.RouteUrl("localhost:8080/api/Search/SearchByGroupnameAndUsername/", new { baseViewModel = baseViewModel }));
         }
     }
 }

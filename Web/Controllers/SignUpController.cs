@@ -25,37 +25,7 @@ namespace Web.Controllers
 
         public ActionResult SignUp(LoginViewModel loginViewModel)
         {
-            var newUser = new User();
-
-            newUser.username = loginViewModel.username;
-
-            newUser.password = loginViewModel.password;
-
-            newUser.name = loginViewModel.name;
-
-            newUser.lastName = loginViewModel.lastName;
-
-            newUser.email = loginViewModel.email;
-
-            var signUpValidator = new SignUpValidator(userService);
-            
-            var validationResult = signUpValidator.Validate(loginViewModel);
-
-            loginViewModel= new LoginViewModel();
-
-            if (validationResult.IsValid)
-            {
-                newUser.password = PasswordHash.CreateHash(newUser.password);
-                userService.Create(newUser);
-                loginViewModel.message = "Se ha creado satisfactoriamente el usuario.";
-            }else{
-                loginViewModel = new LoginViewModel();
-                loginViewModel.errors = validationResult.Errors;
-            }
-
-            ModelState.Clear();
-
-            return View("~/Views/Login/Index.cshtml", loginViewModel);
+            return View("~/Views/Login/Index.cshtml", Url.RouteUrl("localhost:8080/api/SignUp/SignUp/", new { loginViewModel = loginViewModel }));
         }
     }
 }
