@@ -50,65 +50,20 @@ namespace Web.Controllers
 
         public ActionResult Create(CreateGroupViewModel viewModel)
         {
-            var createGroupValidator = new CreateGroupValidator(groupService);
+            var newViewModel = Url.RouteUrl("localhost:8080/api/Group/Create/", new { viewModel = viewModel });
 
-            var validationResult = createGroupValidator.Validate(viewModel);
-
-            var user = userService.GetByUsername(viewModel.username);
-
-            if (validationResult.IsValid){
-                userService.CreateGroup(user,viewModel.groupName);
-                viewModel.message = "Se ha creado satisfactoriamente el grupo.";
-            }else{
-
-                viewModel.errors = validationResult.Errors;
-
-            }
-            return View("IndexCreateGroup", viewModel);
+            return View("IndexCreateGroup", newViewModel);
         }
 
         public ActionResult Join(string username,string groupname)
         {
-            var viewModel = new GroupsViewModel() {username = username};
-
-            var currentUser = userService.GetByUsername(username);
-
-            var currentGroup = groupService.GetByName(groupname);
-
-            userService.JoinGroup(currentUser, currentGroup);
-
-            var groupsNamesJoined = new List<string>();
-
-            currentUser.groups.ToList().ForEach(group => groupsNamesJoined.Add(group.name));
-
-            viewModel.groups = groupService.GetAll().Where(group => group.administrator.username.Equals(username) || groupsNamesJoined.Contains(group.name)).ToList();
-
-            viewModel.message = "Te has unido satisfactoriamente al grupo.";
-
+            var viewModel = Url.RouteUrl("localhost:8080/api/Group/Join/", new { username = username, groupname = groupname });
+            
             return View("IndexGroups",viewModel);
         }
         public ActionResult Leave(string username,string groupname)
         {
-
-            var viewModel = new GroupsViewModel() {username = username};
-
-            var currentUser = userService.GetByUsername(username);
-
-            var currentGroup = groupService.GetByName(groupname);
-
-            //TODO: El administrador podria abandonar el grupo si solo si es el unico miembro, entonces deberia borrarse el grupo.
-            try{
-                userService.LeaveGroup(currentUser, currentGroup);
-                viewModel.message = "Has abandonado el grupo satisfactoriamente.";
-            }catch(AdministratorCantLeaveGroupException){
-                viewModel.errors= new List<ValidationFailure>(){new ValidationFailure("","El administrador no puede abandonar el grupo.")};
-            }
-
-            var groupsNamesJoined = new List<string>();
-
-            currentUser.groups.ToList().ForEach(group => groupsNamesJoined.Add(group.name));
-
-            viewModel.groups = groupService.GetAll().Where(group => group.administrator.username.Equals(username) || groupsNamesJoined.Contains(group.name) ).ToList();
+            var viewModel = Url.RouteUrl("localhost:8080/api/Group/Leave/", new {username=username, groupname=groupname} );
 
             return View("IndexGroups", viewModel);
         }

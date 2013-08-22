@@ -34,55 +34,37 @@ namespace Web.Controllers
 
         public ActionResult SendContactRequest(string username,string usernameToInvite)
         {
-            var user = userService.GetByUsername(username);
-            var userToSendContactRequest = userService.GetByUsername(usernameToInvite);
-            userService.SendContactRequest(user, userToSendContactRequest);
-            var viewModel = new UsersViewModel();
-            viewModel.username = username;
-            viewModel.message = "Se ha enviado la solicitud de contacto satisfactoriamente.";
-            viewModel.users.Add(userToSendContactRequest);
+            var viewModel = Url.RouteUrl("localhost:8080/api/Contacts/SendContactRequest/", new { username = username, usernameToInvite = usernameToInvite });
+
             return View("../Search/IndexSearchUsers", viewModel);
         }
 
         public ActionResult DeleteContactRequest(string username, string usernameToDeleteRequest)
         {
-            var user = userService.GetByUsername(username);
-            var userToDeleteRequest = userService.GetByUsername(usernameToDeleteRequest);
-            var request = userToDeleteRequest.getContactPendingRequestFrom(user);
-            userService.DeleteContactRequest(request);
-            var viewModel = new UsersViewModel();
-            viewModel.username = username;
-            viewModel.message = "Se ha eliminado la solicitud de contacto satisfactoriamente.";
-            viewModel.users.Add(userToDeleteRequest);
+            var viewModel = Url.RouteUrl("localhost:8080/api/Contacts/DeleteContactRequest/", new { username = username, usernameToDeleteRequest = usernameToDeleteRequest });
+
             return View("../Search/IndexSearchUsers", viewModel);
         }
 
         public ActionResult RejectContactRequest(string usernameReceiver, string usernameSender)
         {
-            var user = userService.GetByUsername(usernameReceiver);
-            var userToDeleteRequest = userService.GetByUsername(usernameSender);
-            var request = user.getContactPendingRequestFrom(userToDeleteRequest);
-            userService.RejectContactRequest(request);
-            var viewModel = new NotificationsViewModel();
-            viewModel.username = usernameReceiver;
-            viewModel.message = "Se ha rechazado la solicitud de contacto satisfactoriamente.";
+            var viewModel = Url.RouteUrl("localhost:8080/api/Contacts/RejectContactRequest/", new { usernameReceiver = usernameReceiver, usernameSender = usernameSender });
+
             return View("../Notifications/Index", viewModel);
         }
 
         public ActionResult AceptContactRequest(string usernameReceiver, string usernameSender)
         {
-            var receiver = userService.GetByUsername(usernameReceiver);
-            var sender = userService.GetByUsername(usernameSender);
-            userService.AceptContactRequest(receiver.getContactPendingRequestFrom(sender));
-            return RedirectToAction("Index", "Notifications", new { username = usernameReceiver });
+            var username = Url.RouteUrl("localhost:8080/api/Contacts/AceptContactRequest/", new { usernameReceiver = usernameReceiver, usernameSender = usernameSender });
+
+            return RedirectToAction("Index", "Notifications", new { username = username });
         }
 
         public ActionResult DeleteContact(string username, string usernameToDelete)
         {
-            var user = userService.GetByUsername(username);
-            var userToDelete = userService.GetByUsername(usernameToDelete);
-            userService.DeleteContact(user, userToDelete);
-            return RedirectToAction("Index", new { username = username });
+            var newUsername = Url.RouteUrl("localhost:8080/api/Contacts/DeleteContact/", new { username = username, usernameToDelete = usernameToDelete });
+
+            return RedirectToAction("Index", new { username = newUsername });
         }
 
     }

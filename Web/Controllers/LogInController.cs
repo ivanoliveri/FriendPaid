@@ -143,25 +143,23 @@ namespace Web.Controllers
         
         public ActionResult SignIn(LoginViewModel viewModel)
         {
-            try
+            if (Url.RouteUrl("localhost:8080/api/LogIn/SignIn/", new { username = viewModel.username }) == null)
             {
-                string hashPass = userService.GetHashPasswordFromUser(viewModel.username); //trae de la db la pass original(si no la encuentra es porque no existe user, tira excepcion)
+                viewModel.errors = new List<ValidationFailure>()
+                                       {new ValidationFailure(null, "Combinación incorrecta de usuario/contraseña")};
 
-                if(! PasswordHash.ValidatePassword(viewModel.password, hashPass)) throw new UserNotFoundException();
-
-                
-            }catch(UserNotFoundException)
-            {
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure(null, "Combinación incorrecta de usuario/contraseña") };
-                
                 ModelState.Clear();
 
                 return View("Index", new LoginViewModel());
+
+            }else{
+
+                return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
+
             }
 
-            Session["facebookContacts"] = null;
 
-            return RedirectToAction("Index", "Notifications", new { username = viewModel.username });
+            
         }
 
 
