@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using Domain;
 using Services;
 using Web.Encryption;
@@ -22,7 +21,7 @@ namespace Web.APIControllers
             this.userService = userService;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public LoginViewModel SignUp(LoginViewModel loginViewModel)
         {
             var newUser = new User();

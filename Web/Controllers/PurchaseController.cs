@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,14 +25,16 @@ namespace Web.Controllers
             this.groupService = groupService;
         }
 
+        [HttpPost]
         public ActionResult Index(string username)
         {
-            return View(Url.RouteUrl("localhost:8080/api/Purchase/Index/", new { username = username }));
+            return View(Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "Purchase/Index/", new { username = username }));
         }
 
+        [HttpPost]
         public ActionResult Create(PurchaseViewModel viewModel)
         {
-            return View("Index", Url.RouteUrl("localhost:8080/api/Purchase/Create/", new { viewModel = viewModel }));
+            return View("Index", Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "Purchase/Create/", new { viewModel = viewModel }));
         }
 
     }

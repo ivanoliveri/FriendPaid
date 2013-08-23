@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,9 +24,10 @@ namespace Web.Controllers
             this.userService = userService;
         }
 
+        [HttpPost]
         public ActionResult SignUp(LoginViewModel loginViewModel)
         {
-            return View("~/Views/Login/Index.cshtml", Url.RouteUrl("localhost:8080/api/SignUp/SignUp/", new { loginViewModel = loginViewModel }));
+            return View("~/Views/Login/Index.cshtml", Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "SignUp/SignUp/", new { loginViewModel = loginViewModel }));
         }
     }
 }

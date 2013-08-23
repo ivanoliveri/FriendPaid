@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,9 +19,10 @@ namespace Web.Controllers
             this.userService = userService;
         }
 
+        [HttpPost]
         public ActionResult Index(string username)
         {
-            return View(Url.RouteUrl("localhost:8080/api/Notifications/Index/", new { username = username }));
+            return View(Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "Notifications/Index/", new { username = username }));
         }
 
     }

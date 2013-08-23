@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using Domain.Utils;
 using Services;
 using Web.ViewModels;
@@ -20,7 +18,7 @@ namespace Web.APIControllers
             this.userService = userService;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public NotificationsViewModel Index(string username)
         {
             var notificationsViewModel = new NotificationsViewModel();

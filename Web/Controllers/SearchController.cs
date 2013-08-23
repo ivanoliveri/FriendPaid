@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,19 +23,22 @@ namespace Web.Controllers
             this.userService = userService;
         }
 
+        [HttpPost]
         public ActionResult SearchByGroupname(string username,string textToSearch)
         {
-            return View("IndexSearchGroups", Url.RouteUrl("localhost:8080/api/Search/SearchByGroupname/", new { username = username, textToSearch = textToSearch }));
+            return View("IndexSearchGroups", Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] +"Search/SearchByGroupname/", new { username = username, textToSearch = textToSearch }));
         }
 
+        [HttpPost]
         public ActionResult SearchByUsername(string username,string textToSearch)
         {
-           return View("IndexSearchUsers", Url.RouteUrl("localhost:8080/api/Search/SearchByUsername/", new { username = username, textToSearch = textToSearch }));
+           return View("IndexSearchUsers", Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] +"Search/SearchByUsername/", new { username = username, textToSearch = textToSearch }));
         }
-        
+
+        [HttpPost]
         public ActionResult SearchByGroupnameAndUsername(BaseViewModel baseViewModel)
         {
-            return View("IndexSearchGroupsAndUsers", Url.RouteUrl("localhost:8080/api/Search/SearchByGroupnameAndUsername/", new { baseViewModel = baseViewModel }));
+            return View("IndexSearchGroupsAndUsers", Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] +"Search/SearchByGroupnameAndUsername/", new { baseViewModel = baseViewModel }));
         }
     }
 }

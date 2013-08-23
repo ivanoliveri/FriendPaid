@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using Domain.Exceptions;
 using FluentValidation.Results;
 using Services;
@@ -24,7 +23,7 @@ namespace Web.APIControllers
             this.userService = userService;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public GroupsViewModel SearchByGroupname(string username, string textToSearch)
         {
             var viewModel = new GroupsViewModel();
@@ -47,7 +46,7 @@ namespace Web.APIControllers
             return viewModel;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public UsersViewModel SearchByUsername(string username, string textToSearch)
         {
             var viewModel = new UsersViewModel();
@@ -71,7 +70,7 @@ namespace Web.APIControllers
             return viewModel;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public GroupsAndUsersViewModel SearchByGroupnameAndUsername(BaseViewModel baseViewModel)
         {
             var viewModel = new GroupsAndUsersViewModel();

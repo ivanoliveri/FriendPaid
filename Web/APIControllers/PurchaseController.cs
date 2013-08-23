@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using Domain;
 using FluentValidation.Results;
 using Services;
@@ -26,7 +25,7 @@ namespace Web.APIControllers
             this.groupService = groupService;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public PurchaseViewModel Index(string username)
         {
             var newViewModel = new PurchaseViewModel();
@@ -59,7 +58,7 @@ namespace Web.APIControllers
             return newViewModel;
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public PurchaseViewModel Create(PurchaseViewModel viewModel)
         {
             var registerPurchaseValidator = new RegisterPurchaseValidator(userService);

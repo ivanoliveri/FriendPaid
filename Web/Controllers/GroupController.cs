@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,6 +25,7 @@ namespace Web.Controllers
             this.userService = userService;
         }
 
+        [HttpPost]
         public ActionResult IndexGroups(string username)
         {
             var newViewModel = new GroupsViewModel();
@@ -41,6 +43,7 @@ namespace Web.Controllers
             return View(newViewModel);
         }
 
+        [HttpPost]
         public ActionResult IndexCreateGroup(string username)
         {
             var newViewModel = new CreateGroupViewModel();
@@ -48,22 +51,26 @@ namespace Web.Controllers
             return View(newViewModel);
         }
 
+        [HttpPost]
         public ActionResult Create(CreateGroupViewModel viewModel)
         {
-            var newViewModel = Url.RouteUrl("localhost:8080/api/Group/Create/", new { viewModel = viewModel });
+            var newViewModel = Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "Group/Create/", new { viewModel = viewModel });
 
             return View("IndexCreateGroup", newViewModel);
         }
 
+        [HttpPost]
         public ActionResult Join(string username,string groupname)
         {
-            var viewModel = Url.RouteUrl("localhost:8080/api/Group/Join/", new { username = username, groupname = groupname });
+            var viewModel = Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "Group/Join/", new { username = username, groupname = groupname });
             
             return View("IndexGroups",viewModel);
         }
+
+        [HttpPost]
         public ActionResult Leave(string username,string groupname)
         {
-            var viewModel = Url.RouteUrl("localhost:8080/api/Group/Leave/", new {username=username, groupname=groupname} );
+            var viewModel = Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "Group/Leave/", new {username=username, groupname=groupname} );
 
             return View("IndexGroups", viewModel);
         }

@@ -143,7 +143,7 @@ namespace Web.Controllers
         
         public ActionResult SignIn(LoginViewModel viewModel)
         {
-            if (Url.RouteUrl("localhost:8080/api/LogIn/SignIn/", new { username = viewModel.username }) == null)
+            if (Url.RouteUrl(ConfigurationManager.AppSettings["apiURL"] + "LogIn/SignIn/", new { username = viewModel.username }) == null)
             {
                 viewModel.errors = new List<ValidationFailure>()
                                        {new ValidationFailure(null, "Combinación incorrecta de usuario/contraseña")};
