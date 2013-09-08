@@ -43,6 +43,7 @@
     <Compile Include="Exceptions\AlreadyJoinedException.cs" />
     <Compile Include="Exceptions\AdministratorCantLeaveGroupException.cs" />
     <Compile Include="Exceptions\CantRegisterPurchaseBecauseThereAreNoMembersException.cs" />
+    <Compile Include="Exceptions\ContactNotFoundException.cs" />
     <Compile Include="Exceptions\GroupNotFoundException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Exceptions\NotJoinedException.cs" />

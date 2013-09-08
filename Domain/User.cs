@@ -58,6 +58,11 @@ namespace Domain
 
         }
 
+        public virtual bool equals(User user)
+        {
+            return this.username == user.username;
+        }
+
         public virtual float getOwedAmount()
         {
             float total=0f;
@@ -79,34 +84,26 @@ namespace Domain
 
         public virtual void removeContact(User user)
         {
-            var found = false;
-            var index = 0;
+            contacts.RemoveAt(getContactPosition(user));
+            user.contacts.RemoveAt(user.getContactPosition(this));
+        }
 
-            foreach (var oneUser in this.contacts)
+        public virtual int getContactPosition(User user)
+        {
+            for(int i = 0;i<contacts.Count;i++)
             {
-                if (oneUser.username != user.username)
-                {
-                    index++;
-                }else{
-                    found = true;
-                }
+                if (contacts[i].equals(user)) return i;
             }
+            throw new ContactNotFoundException();
+        }
 
-            this.contacts.RemoveAt(index);
-            
-            found = false;
-            index = 0;
-
-            foreach (var oneUser in user.contacts)
+        public virtual int getGroupPosition(Group group)
+        {
+            for (int i = 0; i < groups.Count; i++)
             {
-                if (oneUser.username != this.username){
-                    index++;
-                }else{
-                    found = true;
-                }
+                if (groups[i].equals(group)) return i;
             }
-
-            user.contacts.RemoveAt(index);
+            throw new GroupNotFoundException();
         }
 
         public virtual bool hasDebts()
@@ -141,32 +138,9 @@ namespace Domain
             if(group.members.Count(oneMember=>oneMember.username.Equals(this.username)).Equals(0))
                 throw new NotJoinedException();
 
-            var found = false;
-            var index = 0;
+            this.groups.RemoveAt(getGroupPosition(group));
 
-            foreach (var oneGroup in groups){
-                if(oneGroup.name!=group.name){
-                    index++;
-                }else{
-                    found = true;
-                }
-            }
-
-            this.groups.RemoveAt(index);
-
-            found = false;
-            index = 0;
-
-            foreach (var oneMember in group.members)
-            {
-                if (oneMember.username != this.username){
-                    index++;
-                }else{
-                    found = true;
-                }
-            }
-
-            group.members.RemoveAt(index);
+            group.removeMember(this);
 
         }
 

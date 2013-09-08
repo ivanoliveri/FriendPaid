@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Exceptions;
 using Domain.Notifications;
 using Domain.Utils;
 
@@ -74,6 +75,26 @@ namespace Domain
             purchase.buyer.payments.ElementAt(purchase.buyer.payments.Count - 1).status = PaymentStatus.Paid;
 
         }
+
+        public virtual bool equals(Group group)
+        {
+            return this.name.Equals(group.name);
+        }
+
+        public virtual int getMemberPosition(User user)
+        {
+            for (int i = 0; i < members.Count; i++)
+            {
+                if (members[i].equals(user)) return i;
+            }
+            throw new NotJoinedException();
+        }
+
+        public virtual void removeMember(User user)
+        {
+            members.RemoveAt(getMemberPosition(user));
+        }
+
         #endregion
 
     }

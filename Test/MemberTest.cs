@@ -360,5 +360,71 @@ namespace Test
 
         }
 
+        [Test]
+        public void test_add_contact()
+        {
+            var memberOne = new User();
+
+            var memberTwo = new User();
+
+            var memberThree = new User();
+
+            memberOne.addContact(memberTwo);
+            memberOne.addContact(memberThree);
+
+            Assert.IsTrue(memberOne.contacts.Contains(memberTwo));
+            Assert.IsTrue(memberOne.contacts.Contains(memberThree));
+            Assert.IsFalse(memberOne.contacts.Contains(memberOne));
+
+            Assert.IsTrue(memberTwo.contacts.Contains(memberOne));
+            Assert.IsFalse(memberTwo.contacts.Contains(memberTwo));
+            Assert.IsFalse(memberTwo.contacts.Contains(memberThree));
+
+            Assert.IsTrue(memberThree.contacts.Contains(memberOne));
+            Assert.IsFalse(memberThree.contacts.Contains(memberTwo));
+            Assert.IsFalse(memberThree.contacts.Contains(memberThree));
+        }
+
+        [Test]
+        public void test_remove_contact()
+        {
+            var memberOne = new User();
+
+            var memberTwo = new User();
+
+            var memberThree = new User();
+
+            var mem2 = memberTwo;
+            var mem3 = memberThree;
+            //cambio las referencias para testear que no afecte
+
+            memberOne.addContact(mem2);
+            memberOne.addContact(mem3);
+
+            memberOne.removeContact(memberTwo);
+            
+            Assert.IsFalse(memberOne.contacts.Contains(memberTwo));
+            Assert.IsTrue(memberOne.contacts.Contains(memberThree));
+
+            Assert.IsFalse(memberTwo.contacts.Contains(memberOne));
+
+            Assert.IsTrue(memberThree.contacts.Contains(memberOne));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ContactNotFoundException))]
+        public void test_try_to_remove_not_added_contact()
+        {
+            var memberOne = new User();
+
+            var memberTwo = new User();
+
+            var memberThree = new User();
+
+            memberOne.addContact(memberTwo);
+
+            memberOne.removeContact(memberThree);
+        }
+
     }
 }
