@@ -100,10 +100,12 @@ namespace Web.Controllers
                     userService.RegisterPurchase(currentBuyer, newPurchase);
                     viewModel.message = "Se ha registrado satisfactoriamente la compra.";
                 }catch{
-                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "El grupo ingresado no contiene miembros.") };
+                    viewModel.errors = new List<string>() { "El grupo ingresado no contiene miembros."};
                 }
             }else{
-                viewModel.errors = validationResult.Errors;
+                var stringErrors = new List<string>();
+                validationResult.Errors.ToList().ForEach(oneError => stringErrors.Add(oneError.ErrorMessage));
+                viewModel.errors = stringErrors;
             }
 
             ModelState.Clear();

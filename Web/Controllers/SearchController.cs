@@ -27,12 +27,12 @@ namespace Web.Controllers
             var viewModel = new GroupsViewModel();
             viewModel.username = username;
             if(textToSearch.Trim().Equals("")){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se ha ingresado un criterio de búsqueda.") };
+                viewModel.errors = new List<string>() {"No se ha ingresado un criterio de búsqueda."};
             }else{
                 try{
                     viewModel.groups = groupService.GetGroupsWhichNamesBeginWith(textToSearch).ToList();
                 }catch (GroupNotFoundException){
-                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
+                    viewModel.errors = new List<string>() {"No se han encontrado grupos."};
                 }
             }
             return View("IndexSearchGroups", viewModel);
@@ -42,12 +42,12 @@ namespace Web.Controllers
             var viewModel = new UsersViewModel();
             viewModel.username = username;
             if(textToSearch.Trim().Equals("")){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se ha ingresado un criterio de búsqueda.") };
+                viewModel.errors = new List<string>() {"No se ha ingresado un criterio de búsqueda."};
             }else{
                 try{
                     viewModel.users = userService.GetUsersWhoseNamesBeginWith(textToSearch).ToList();
                 }catch (UserNotFoundException){
-                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado usuarios.") };
+                    viewModel.errors = new List<string>() {"No se han encontrado usuarios."};
                 }
             }
            
@@ -64,7 +64,7 @@ namespace Web.Controllers
                     viewModel.names.Add(user.username);
                 }
             }catch (GroupNotFoundException){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
+                viewModel.errors = new List<string>() {"No se han encontrado grupos."};
             }
 
             try{
@@ -74,7 +74,7 @@ namespace Web.Controllers
                     viewModel.names.Add(group.name);
                 }
             }catch (GroupNotFoundException){
-                viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "No se han encontrado grupos.") };
+                viewModel.errors = new List<string>() {"No se han encontrado grupos."};
             }
 
             return View("IndexSearchGroupsAndUsers", viewModel);

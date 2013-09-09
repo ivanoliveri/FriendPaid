@@ -50,7 +50,9 @@ namespace Web.Controllers
                 loginViewModel.message = "Se ha creado satisfactoriamente el usuario.";
             }else{
                 loginViewModel = new LoginViewModel();
-                loginViewModel.errors = validationResult.Errors;
+                var stringErrors = new List<string>();
+                validationResult.Errors.ToList().ForEach(oneError => stringErrors.Add(oneError.ErrorMessage));
+                loginViewModel.errors = stringErrors;
             }
 
             ModelState.Clear();
