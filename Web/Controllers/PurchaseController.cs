@@ -69,22 +69,11 @@ namespace Web.Controllers
                 var currentDebtors = currentGroup.members;
 
                 var index = 0;
-                var found = false;
 
-                foreach (var currentDebtor in currentDebtors)
-                {
-                    if (found == false)
-                    {
-                        if (currentDebtor.username.Equals(currentBuyer.username))
-                        {
-                            found = true;
-                        }
-                        else
-                        {
-                            index++;
-                        }
-                    }
-                }
+                for (index = 0; index < currentDebtors.Count; index++)                
+                    if (currentDebtors[index].equals(currentBuyer)) 
+                        break;
+                
 
                 currentDebtors.RemoveAt(index);
 
