@@ -13,7 +13,7 @@ namespace Web.ViewModels
 
         public abstract string groupName { get; set; }
 
-        public abstract IList<ValidationFailure> errors { get; set; }
+        public abstract IList<string> errors { get; set; }
 
         public abstract string message { set; get; }
 

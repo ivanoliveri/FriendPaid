@@ -69,22 +69,11 @@ namespace Web.Controllers
                 var currentDebtors = currentGroup.members;
 
                 var index = 0;
-                var found = false;
 
-                foreach (var currentDebtor in currentDebtors)
-                {
-                    if (found == false)
-                    {
-                        if (currentDebtor.username.Equals(currentBuyer.username))
-                        {
-                            found = true;
-                        }
-                        else
-                        {
-                            index++;
-                        }
-                    }
-                }
+                for (index = 0; index < currentDebtors.Count; index++)                
+                    if (currentDebtors[index].equals(currentBuyer)) 
+                        break;
+                
 
                 currentDebtors.RemoveAt(index);
 
@@ -100,10 +89,12 @@ namespace Web.Controllers
                     userService.RegisterPurchase(currentBuyer, newPurchase);
                     viewModel.message = "Se ha registrado satisfactoriamente la compra.";
                 }catch{
-                    viewModel.errors = new List<ValidationFailure>() { new ValidationFailure("", "El grupo ingresado no contiene miembros.") };
+                    viewModel.errors = new List<string>() { "El grupo ingresado no contiene miembros."};
                 }
             }else{
-                viewModel.errors = validationResult.Errors;
+                var stringErrors = new List<string>();
+                validationResult.Errors.ToList().ForEach(oneError => stringErrors.Add(oneError.ErrorMessage));
+                viewModel.errors = stringErrors;
             }
 
             ModelState.Clear();

@@ -90,10 +90,10 @@ namespace Domain
 
         public virtual int getContactPosition(User user)
         {
-            for(int i = 0;i<contacts.Count;i++)
-            {
-                if (contacts[i].equals(user)) return i;
-            }
+            for(int i = 0;i<contacts.Count;i++)            
+                if (contacts[i].equals(user)) 
+                    return i;
+            
             throw new ContactNotFoundException();
         }
 

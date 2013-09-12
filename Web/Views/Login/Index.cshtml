@@ -78,9 +78,9 @@
         @if (@Model.errors != null)
         {
             <div class="alert alert-block alert-error fade in">
-                @foreach (ValidationFailure @error in @Model.errors)
+                @foreach (string @error in @Model.errors)
                 {
-                    <p>@error.ErrorMessage</p>
+                    <p>@error</p>
                 }
             </div>
         }

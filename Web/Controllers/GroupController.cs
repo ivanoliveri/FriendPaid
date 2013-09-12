@@ -61,7 +61,9 @@ namespace Web.Controllers
                 viewModel.message = "Se ha creado satisfactoriamente el grupo.";
             }else{
 
-                viewModel.errors = validationResult.Errors;
+                var stringErrors = new List<string>();
+                validationResult.Errors.ToList().ForEach(oneError => stringErrors.Add(oneError.ErrorMessage));
+                viewModel.errors = stringErrors;
 
             }
             return View("IndexCreateGroup", viewModel);
@@ -101,7 +103,8 @@ namespace Web.Controllers
                 userService.LeaveGroup(currentUser, currentGroup);
                 viewModel.message = "Has abandonado el grupo satisfactoriamente.";
             }catch(AdministratorCantLeaveGroupException){
-                viewModel.errors= new List<ValidationFailure>(){new ValidationFailure("","El administrador no puede abandonar el grupo.")};
+
+                viewModel.errors= new List<string>(){"El administrador no puede abandonar el grupo."};
             }
 
             var groupsNamesJoined = new List<string>();

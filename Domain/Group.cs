@@ -83,10 +83,10 @@ namespace Domain
 
         public virtual int getMemberPosition(User user)
         {
-            for (int i = 0; i < members.Count; i++)
-            {
-                if (members[i].equals(user)) return i;
-            }
+            for (int i = 0; i < members.Count; i++)            
+                if (members[i].equals(user)) 
+                    return i;
+            
             throw new NotJoinedException();
         }
 
