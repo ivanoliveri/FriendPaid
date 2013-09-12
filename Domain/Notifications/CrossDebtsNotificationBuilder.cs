@@ -53,7 +53,7 @@ namespace Domain.Notifications
 
             StringBuilder unMensaje = new StringBuilder("El miembro ");
             unMensaje.Append(buyer.name)
-                .Append(" ha registrado una compra y te corresponde pagarle $").Append(initialPayment.amount)
+                .Append(" ha registrado una compra y te corresponde pagarle $").Append(initialPayment.originalAmount)
                 .Append(". Se le ha descontado $" + calculateAmountDifference().ToString())
                 .Append(" por la deuda que tenia contigo en relacion a la compra de ")
                 .Append(purchasesListToString()).Append(". Actualmente ");
@@ -82,7 +82,7 @@ namespace Domain.Notifications
              */
             StringBuilder unMensaje = new StringBuilder("El miembro ");
             unMensaje.Append(debtor.name)
-                .Append(" registra una deuda contigo por $").Append(initialPayment.amount).Append(" por la compra que has registrado.")
+                .Append(" tiene una deuda contigo por $").Append(initialPayment.originalAmount).Append(" por la compra que has registrado.")
                 .Append(" Se te ha descontado $" + calculateAmountDifference().ToString())
                 .Append(" por la deuda que tenias con él en relacion a la compra de ")
                 .Append(purchasesListToString()).Append(". Actualmente ");
@@ -112,7 +112,9 @@ namespace Domain.Notifications
         private string purchasesListToString()
         {
             string result = simplifiedPayments.Aggregate("", (current, payment) => current + (payment.description + ", "));
-            if (!finalPayment.buyer.Equals(initialPayment.buyer)) result += finalPayment.description + ", ";
+            if(finalPayment!=null)
+                if (!initialPayment.buyer.Equals(finalPayment.buyer)) 
+                    result += finalPayment.description + ", ";
             return result.Substring(0, result.Length - 2);
         }
         #endregion

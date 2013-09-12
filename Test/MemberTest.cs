@@ -355,9 +355,126 @@ namespace Test
             memberOne.registerPurchase(newPurchase2);
 
             Assert.IsInstanceOf<CrossDebtsNotification>(memberOne.notifications[1]);
+        }
 
-            //Assert.AreEqual(memberOne.payments.ElementAt());
+        [Test]
+        public void test_cancel_cross_debts2()
+        {
+            var administrator = new User();
+            administrator.name = "admin";
+            administrator.id = 0;
 
+            var memberOne = new User();
+            memberOne.name = "mem1";
+            memberOne.id = 1;
+
+            var memberTwo = new User();
+            memberTwo.name = "mem2";
+            memberTwo.id = 2;
+
+            var debtorslist1 = new List<User>();
+            debtorslist1.Add(administrator);
+            debtorslist1.Add(memberTwo);
+
+            var newGroup = administrator.createGroup("GroupOne");
+
+            memberOne.joinGroup(newGroup);
+
+            memberTwo.joinGroup(newGroup);
+
+            Purchase newPurchase = new Purchase()
+            {
+                buyer = administrator,
+                debtors = newGroup.members,
+                description = "Pelota",
+                group = newGroup,
+                totalAmount = 60f
+            };
+
+            Purchase newPurchase2 = new Purchase()
+            {
+                buyer = memberOne,
+                debtors = debtorslist1,
+                description = "Sombrero",
+                group = newGroup,
+                totalAmount = 120f
+            };
+
+            Purchase newPurchase3 = new Purchase()
+            {
+                buyer = memberOne,
+                debtors = newGroup.members,
+                description = "Remera",
+                group = newGroup,
+                totalAmount = 70f
+            };
+
+            administrator.registerPurchase(newPurchase);
+            memberOne.registerPurchase(newPurchase2);
+
+            Assert.IsInstanceOf<CrossDebtsNotification>(memberOne.notifications[1]);
+        }
+
+        [Test]
+        public void test_cancel_all_cross_debts()
+        {
+            var administrator = new User();
+            administrator.name = "admin";
+            administrator.id = 3;
+
+            var memberOne = new User();
+            memberOne.name = "mem1";
+            memberOne.id = 1;
+
+            var memberTwo = new User();
+            memberTwo.name = "mem2";
+            memberTwo.id = 2;
+
+            var debtorslist1 = new List<User>();
+            debtorslist1.Add(administrator);
+            debtorslist1.Add(memberTwo);
+
+            var newGroup = administrator.createGroup("GroupOne");
+
+            memberOne.joinGroup(newGroup);
+
+            memberTwo.joinGroup(newGroup);
+
+            Purchase newPurchase = new Purchase()
+            {
+                buyer = administrator,
+                debtors = newGroup.members,
+                description = "Pelota",
+                group = newGroup,
+                totalAmount = 120f
+            };
+
+            Purchase newPurchase2 = new Purchase()
+            {
+                buyer = memberOne,
+                debtors = debtorslist1,
+                description = "Sombrero",
+                group = newGroup,
+                totalAmount = 120f
+            };
+
+            Purchase newPurchase3 = new Purchase()
+            {
+                buyer = administrator,
+                debtors = newGroup.members,
+                description = "Remera",
+                group = newGroup,
+                totalAmount = 70f
+            };
+
+            administrator.registerPurchase(newPurchase);
+            Assert.AreEqual(memberTwo.payments.ElementAt(0).amount, 120f / 3);
+            Assert.AreEqual(memberOne.payments.ElementAt(0).amount, 120f / 3);
+            Assert.AreEqual(administrator.payments.ElementAt(0).status, PaymentStatus.Paid);
+
+            memberOne.registerPurchase(newPurchase2);
+
+            Assert.IsInstanceOf<CrossDebtsNotification>(memberOne.notifications[1]);
         }
 
         [Test]
